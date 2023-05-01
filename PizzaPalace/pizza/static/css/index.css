@@ -1,3 +1,72 @@
-h1{
-    color: red;
-};
+:root {
+    --black: black;
+    --white: white;
+    --SecondaryColor: #C31E1A;
+}
+body {
+    margin: 0;
+    background-image:url(../images/PizzaBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--white);
+    background-color: var(--black);
+    margin: 0;
+    font-size: 2em;
+    align-items: center;
+    border-bottom: 0.2em solid;
+    border-color: var(--SecondaryColor);
+}
+header > * {
+    display: flex;
+    align-items: center;
+}
+.HeaderLeft > * {
+    padding-left: 1em;
+}
+.HeaderRight > * {
+    padding-right: 1em;
+}
+#ShoppingCart {
+    width: 3em;
+}
+
+#ProfileIcon {
+    width: 4em;
+}
+
+#Logo {
+    width: 4em;
+}
+
+
+
+footer {
+    min-height: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--white);
+    background-color: var(--black);
+    margin: 0;
+    font-size: 2em;
+    align-items: center;
+    border-top: 0.2em solid;
+    border-color: var(--SecondaryColor);
+}
+
+footer ul {
+    list-style: none;
+}
+footer > * {
+    display: flex;
+    text-align: center;
+}
+footer > * > h2 {
+    align-self: center;
+}
