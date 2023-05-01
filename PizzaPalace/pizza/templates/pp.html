@@ -22,22 +22,23 @@
             <a href=""><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
         </div>
     </header>
-    <!-- Block bitch ?!-->
-    <div id="MainBlock"></div>
+    {% block content % }
+    {% end block % }
     
     <footer>
         <div class="FooterLeft">
             <h2>Menu</h2>
             <ul>
-                <li><p>Monday - Thursday: 11:00</p></li>
-                <li><p>Friday - Sunday: 11:00</p></li>
+                <li><p>Monday - Thursday: <span class="FotterColorText">11:00-21:00</span></p></li>
+                <li><p>Friday - Sunday: <span class="FotterColorText">11:00-21:00</span></p></li>
             </ul>
         </div>
         <div class="FooterMiddle">
             <h2>Menu</h2>
             <ul>
-                <li><p>Monday - Thursday: 11:00</p></li>
-                <li><p>Friday - Sunday: 11:00</p></li>
+                <li><span class="FotterColorText">Skeifan 17 108 Reykjavík</span></p></li>
+                <li><p><span class="FotterColorText">UndirHlíð 2 600 Akureyri</span></p></li>
+                <li><p><span class="FotterColorText">Eyravegur 2 200 Selfossi</span></p></li>
             </ul>
         </div>
         <div class="FooterRight">

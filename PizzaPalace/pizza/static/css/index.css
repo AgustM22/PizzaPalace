@@ -1,6 +1,7 @@
 :root {
     --black: black;
     --white: white;
+    --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
 }
 
@@ -56,14 +57,14 @@ footer {
     bottom: 0;
     width: 100%;
     position: absolute;
-    min-height: 200px;
+    min-height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     color: var(--white);
     background-color: var(--black);
     margin: 0;
-    font-size: 2em;
+    font-size: 1em;
     align-items: center;
     border-top: 0.2em solid;
     border-color: var(--SecondaryColor);
@@ -80,4 +81,8 @@ footer > * {
 
 footer > * > h2 {
     align-self: center;
+}
+.FotterColorText {
+    color: var(--PrimaryColor);
+    text-decoration: underline;
 }
