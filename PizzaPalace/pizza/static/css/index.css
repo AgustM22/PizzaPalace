@@ -81,3 +81,26 @@ footer > * {
 footer > * > h2 {
     align-self: center;
 }
+
+
+#MainBlock {
+    padding-top: 2em;
+    width: 80%;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+#SearchBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--white);
+    background-color: var(--black);
+    align-items: center;
+}
+
+#SearchBar > * {
+    margin: 1em;
+    border-radius: 15px;
+}
