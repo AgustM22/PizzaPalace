@@ -1,6 +1,7 @@
 :root {
     --black: black;
     --white: white;
+    --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
 }
 
@@ -80,4 +81,8 @@ footer > * {
 
 footer > * > h2 {
     align-self: center;
+}
+.FotterColorText {
+    color: var(--PrimaryColor);
+    text-decoration: underline;
 }
