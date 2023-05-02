@@ -82,7 +82,7 @@ const Menu = () => {
     
     Search.setAttribute("id", "search")
     Search.setAttribute("placeholder", "Search...")
-    Search.addEventListener("oninput", SearchFilter)
+    Search.addEventListener("oninput", SearchFilter())
     PizzaText.innerText = "Pizza"
     Sliders.setAttribute("alt", "Settings")
     Sliders.setAttribute("src", "/static/images/sliders.svg")
@@ -115,7 +115,6 @@ const SearchFilter = () => {
         PopulatePizzaBox(pizza)
     })
 }
-	
 
 const PopulatePizzaBox = (pizza) => {
     const PizzaBox = document.getElementById("PizzaBox")
@@ -123,7 +122,7 @@ const PopulatePizzaBox = (pizza) => {
     const pizzaElement = document.createElement("div")
     pizzaElement.setAttribute("class", "pizzaElement")
     
-    const pizzaName = document.createElement("p")
+    const pizzaName = document.createElement("h1")
     const pizzaIngredients = document.createElement("p")
     const pizzaImg = document.createElement("img")
     pizzaName.innerText = pizza.name
@@ -141,4 +140,3 @@ const PopulatePizzaBox = (pizza) => {
 }
 
 Menu()
-console.log("hi")
