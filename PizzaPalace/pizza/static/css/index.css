@@ -82,6 +82,7 @@ footer > * {
 footer > * > h2 {
     align-self: center;
 }
+
 .FotterColorText {
     color: var(--PrimaryColor);
     text-decoration: underline;
