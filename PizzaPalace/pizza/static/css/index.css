@@ -1,8 +1,19 @@
 :root {
+    /* colors */
     --black: black;
     --white: white;
     --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
+
+    /* sizes */
+    --Large-font: 2rem;
+
+    --card-width: 400px;
+	--card-height: 600px;
+
+	--card-border: 2px solid var(--SecondaryColor);
+	--card-border-radius: 50px;
+    --card-transition-duration: 500ms;
 }
 
 body {
@@ -20,7 +31,7 @@ header {
     color: var(--white);
     background-color: var(--black);
     margin: 0;
-    font-size: 2em;
+    font-size: var(--Large-font);
     align-items: center;
     border-bottom: 0.2em solid;
     border-color: var(--SecondaryColor);
@@ -85,4 +96,61 @@ footer > * > h2 {
 .FotterColorText {
     color: var(--PrimaryColor);
     text-decoration: underline;
+}
+
+/* Homepage body */
+
+.HomePageBody {
+    display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+    height: 80vh;
+    flex-direction: row;
+}
+
+.HomePageBody .Card {
+    /* This design comes from here: https://codepen.io/msandonini/pen/abaGKOa.
+        I have made my personal modifications to it. -Hermann Helgi
+    */
+    width: var(--card-width);
+	height: var(--card-height);
+
+	box-sizing: border-box;
+
+	border: var(--card-border);
+	border-radius: var(--card-border-radius);
+
+    background-color: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    transition-property: transform, background-image;
+	transition-duration: var(--card-transition-duration);
+	transition-timing-function: ease;
+
+}
+
+.HomePageBody .Card h2{
+    margin-bottom: 2em;
+}
+
+.HomePageBody .Card img{
+    width: 300px;
+    height: 300px;
+}
+
+.HomePageBody .Card h3{
+    margin-bottom: 5em;
+}
+
+.HomePageBody a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: var(--Large-font);
+}
+
+.HomePageBody .Card:hover {
+    transform: scale(1.05);
 }

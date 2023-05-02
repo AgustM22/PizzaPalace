@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="BodyContent">
+<section class="HomePageBody">
+    {% load static %}
+    <a href="/offermenu">
+        <div class="Card" id="Offer">
+            <h2>Offer</h2>
+            <img src="{% static 'images/offericon'%}" alt="MenuIcon" id="OfferIcon">
+        </div>
+    </a>
+    <a href="/menu">
+        <div class="Card" id="Menu">
+            <h2>Menu</h2>
+            <img src="{% static 'images/menuicon'%}" alt="MenuIcon" id="MenuIcon">
+        </div>
+    </a>
+    
 </section>
+
 {% endblock %}
