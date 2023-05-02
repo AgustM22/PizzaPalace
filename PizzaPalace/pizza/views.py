@@ -4,5 +4,4 @@ from django.template import loader
 
 
 def main(request):
-    template = loader.get_template('pp.html')
-    return HttpResponse(template.render())
+    return render(request, "Homepage.html")
