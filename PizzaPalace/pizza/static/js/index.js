@@ -78,12 +78,12 @@ const Menu = () => {
 
     SearchBar.setAttribute("id", "SearchBar")
     PizzaBox.setAttribute("id", "PizzaBox")
-
-    Search.setAttribute("placeholder", "Search...")
-    Search.setAttribute("oninput", "SearchFilter()")
-    Search.setAttribute("id", "search")
-    PizzaText.innerText = "Pizza"
     Sliders.setAttribute("id", "SliderSettings")
+    
+    Search.setAttribute("id", "search")
+    Search.setAttribute("placeholder", "Search...")
+    Search.addEventListener("oninput", SearchFilter)
+    PizzaText.innerText = "Pizza"
     Sliders.setAttribute("alt", "Settings")
     Sliders.setAttribute("src", "/static/images/sliders.svg")
 
@@ -141,3 +141,4 @@ const PopulatePizzaBox = (pizza) => {
 }
 
 Menu()
+console.log("hi")
