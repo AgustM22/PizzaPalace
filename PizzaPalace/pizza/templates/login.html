@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="" method="get" class="RegisterForm">
-    <label for="Email">Email</label>
-    <input type="text" id="Email" name="Email" placeholder="Email">
-    <label for="Password">Password</label>
-    <input type="password" name="Password" id="Password" placeholder="Password">
-    <input type="submit" name="submit" id="SubmitButton">
-    <a href="/signup">
-        signup
+<div class="RegisterForm">
+    {% load static %}
+    <a href="/homepage">
+        <img src="{% static 'images/Logo'%}" alt="Logo" id="Logo">
     </a>
-</form>
+    <h1>Welcome to Pizza Palace</h1>    
+    <form action="" method="get">
+        <div class="FormInput">
+            <label for="Email" >Email</label>
+            <input type="text" name="Email" placeholder="Email">
+        </div>
+        <div class="FormInput">
+            <label for="Password">Password</label>
+            <input type="password" id="Password" placeholder="Password">
+        </div>
+        <div class="FormButtons">
+            <a href="/signup" id="SignupButton">
+                <button>Sign up</button>
+            </a>
+            <button type="submit" id="LoginButton">Log in</button>
+        </div>
+    </form>
+</div>
+
 {% endblock %}
