@@ -1,4 +1,4 @@
-const seed = [
+seed = [
     {
         "name": "Margharita",
         "ingredients": "Cheese, Sauce",
@@ -64,43 +64,13 @@ const seed = [
             "large": "1.800kr"
         }
     }
-] // Will have to change this to database
+]
 
-const Menu = () => {
-    const Main = document.getElementById("MainBlock")
-    Main.innerHTML = ""
-
-    const SearchBar = document.createElement("div")
-    const PizzaBox = document.createElement("div")
-    const Search = document.createElement("input")
-    const PizzaText = document.createElement("p")
-    const Sliders = document.createElement("img")
-
-    SearchBar.setAttribute("id", "SearchBar")
-    PizzaBox.setAttribute("id", "PizzaBox")
-    Sliders.setAttribute("id", "SliderSettings")
-    
-    Search.setAttribute("id", "search")
-    Search.setAttribute("placeholder", "Search...")
-    Search.addEventListener("oninput", SearchFilter())
-    PizzaText.innerText = "Pizza"
-    Sliders.setAttribute("alt", "Settings")
-    Sliders.setAttribute("src", "/static/images/sliders.svg")
-
-    SearchBar.appendChild(Search)
-    SearchBar.appendChild(PizzaText)
-    SearchBar.appendChild(Sliders)
-    Main.appendChild(SearchBar)
-    Main.appendChild(PizzaBox)
-
-    const pizzas = [...seed];
-
-    pizzas.forEach((pizza) => {
-        PopulatePizzaBox(pizza)
-    })
-}
 
 const SearchFilter = () => {
+    const Main = document.getElementById("PizzaBox")
+    Main.innerHTML = ""
+
 	const SearchText = document.getElementById("search").value
     const pizzas = [...seed];
     const PizzaArray = []
@@ -120,23 +90,21 @@ const PopulatePizzaBox = (pizza) => {
     const PizzaBox = document.getElementById("PizzaBox")
 
     const pizzaElement = document.createElement("div")
-    pizzaElement.setAttribute("class", "pizzaElement")
+    pizzaElement.setAttribute("class", "PizzaElement")
     
     const pizzaName = document.createElement("h1")
     const pizzaIngredients = document.createElement("p")
     const pizzaImg = document.createElement("img")
     pizzaName.innerText = pizza.name
-    pizzaName.setAttribute("class", "pizzaName")
+    pizzaName.setAttribute("class", "PizzaName")
     pizzaIngredients.innerText = pizza.ingredients
-    pizzaIngredients.setAttribute("class", "pizzaIngredients")
+    pizzaIngredients.setAttribute("class", "PizzaIngredients")
     pizzaImg.setAttribute("src", pizza.picture)
-    pizzaImg.setAttribute("class", "pizzaImg")
-    pizzaImg.setAttribute("alt", "pizzaImg")
+    pizzaImg.setAttribute("class", "PizzaImg")
+    pizzaImg.setAttribute("alt", "PizzaImg")
 
     pizzaElement.appendChild(pizzaImg)
     pizzaElement.appendChild(pizzaName)
     pizzaElement.appendChild(pizzaIngredients)
     PizzaBox.appendChild(pizzaElement)
 }
-
-Menu()

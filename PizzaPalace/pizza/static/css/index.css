@@ -56,7 +56,7 @@ header > * {
 footer {
     bottom: 0;
     width: 100%;
-    position: fixed;
+    position: absolute;
     min-height: 100px;
     display: flex;
     flex-direction: row;
@@ -123,7 +123,7 @@ footer > * > h2 {
     padding-bottom: 10em;
 }
 
-.pizzaElement {
+.PizzaElement {
     background-color: var(--black);
     color: var(--white);
     display: flex;
@@ -135,7 +135,7 @@ footer > * > h2 {
     border-radius: 25px;
 }
 
-.pizzaImg {
+.PizzaImg {
     border-radius: 25px 0px 0px 25px;
     max-width: 10em;
 }
