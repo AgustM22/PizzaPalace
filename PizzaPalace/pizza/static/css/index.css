@@ -47,6 +47,9 @@ header > * {
 
 
 footer {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
     min-height: 200px;
     display: flex;
     flex-direction: row;
