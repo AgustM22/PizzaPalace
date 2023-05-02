@@ -22,6 +22,11 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 header {
@@ -35,6 +40,7 @@ header {
     align-items: center;
     border-bottom: 0.2em solid;
     border-color: var(--SecondaryColor);
+    width: 100%;
 }
 
 header > * {
@@ -154,4 +160,20 @@ footer > * > h2 {
 
 .HomePageBody .Card:hover {
     transform: scale(1.05);
+}
+
+/* Login & Signup Form */
+
+.RegisterForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width:50%;
+
+    background-color: var(--black);
+    
+    border-color: var(--SecondaryColor);
+    border-style: 2em solid;
 }
