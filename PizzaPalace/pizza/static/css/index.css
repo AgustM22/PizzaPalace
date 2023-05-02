@@ -1,6 +1,7 @@
 :root {
     --black: black;
     --white: white;
+    --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
 }
 
@@ -55,18 +56,19 @@ header > * {
 footer {
     bottom: 0;
     width: 100%;
-    position: absolute;
-    min-height: 200px;
+    position: fixed;
+    min-height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     color: var(--white);
     background-color: var(--black);
     margin: 0;
-    font-size: 2em;
+    font-size: 1em;
     align-items: center;
     border-top: 0.2em solid;
     border-color: var(--SecondaryColor);
+    background-attachment: scroll;
 }
 
 footer ul {
@@ -80,6 +82,11 @@ footer > * {
 
 footer > * > h2 {
     align-self: center;
+}
+
+.FotterColorText {
+    color: var(--PrimaryColor);
+    text-decoration: underline;
 }
 
 
@@ -98,9 +105,37 @@ footer > * > h2 {
     color: var(--white);
     background-color: var(--black);
     align-items: center;
+    border-radius: 15px;
+    font-size: 2em;
+    max-height: 2em;
 }
 
 #SearchBar > * {
     margin: 1em;
     border-radius: 15px;
+}
+
+#SliderSettings {
+    width: 1.7em;
+}
+
+#PizzaBox {
+    padding-bottom: 10em;
+}
+
+.pizzaElement {
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 2em;
+    align-items: center;
+    margin-top: 1em;
+    border-radius: 25px;
+}
+
+.pizzaImg {
+    border-radius: 25px 0px 0px 25px;
+    max-width: 10em;
 }
