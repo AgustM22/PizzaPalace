@@ -57,11 +57,7 @@ footer {
     bottom: 0;
     width: 100%;
     position: absolute;
-<<<<<<< HEAD
-    min-height: 200px;
-=======
     min-height: 100px;
->>>>>>> main
     display: flex;
     flex-direction: row;
     justify-content: space-between;
