@@ -54,9 +54,10 @@ header > * {
 
 
 footer {
+    position: fixed;
     bottom: 0;
     width: 100%;
-    position: absolute;
+    margin-top: 100%;
     min-height: 100px;
     display: flex;
     flex-direction: row;
@@ -68,7 +69,6 @@ footer {
     align-items: center;
     border-top: 0.2em solid;
     border-color: var(--SecondaryColor);
-    background-attachment: scroll;
 }
 
 footer ul {
@@ -88,7 +88,6 @@ footer > * > h2 {
     color: var(--PrimaryColor);
     text-decoration: underline;
 }
-
 
 #MainBlock {
     padding-top: 2em;
