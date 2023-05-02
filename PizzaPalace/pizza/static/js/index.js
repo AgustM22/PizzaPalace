@@ -90,21 +90,42 @@ const PopulatePizzaBox = (pizza) => {
     const PizzaBox = document.getElementById("PizzaBox")
 
     const pizzaElement = document.createElement("div")
+    const pizzaText = document.createElement("div")
+    const pizzaPrices = document.createElement("div")
     pizzaElement.setAttribute("class", "PizzaElement")
+    pizzaText.setAttribute("class", "PizzaText")
+    pizzaPrices.setAttribute("class", "PizzaPrices")
     
     const pizzaName = document.createElement("h1")
     const pizzaIngredients = document.createElement("p")
     const pizzaImg = document.createElement("img")
+
+    const priceSmall = document.createElement("p")
+    const priceMedium = document.createElement("p")
+    const PriceLarge = document.createElement("p")
+    priceSmall.innerText = "Small: " + pizza.price.small
+    priceMedium.innerText = "Medium: " + pizza.price.medium
+    PriceLarge.innerText = "Large: " + pizza.price.large
+    
     pizzaName.innerText = pizza.name
     pizzaName.setAttribute("class", "PizzaName")
     pizzaIngredients.innerText = pizza.ingredients
     pizzaIngredients.setAttribute("class", "PizzaIngredients")
+
     pizzaImg.setAttribute("src", pizza.picture)
     pizzaImg.setAttribute("class", "PizzaImg")
     pizzaImg.setAttribute("alt", "PizzaImg")
 
     pizzaElement.appendChild(pizzaImg)
-    pizzaElement.appendChild(pizzaName)
-    pizzaElement.appendChild(pizzaIngredients)
+
+    pizzaText.appendChild(pizzaName)
+    pizzaText.appendChild(pizzaIngredients)
+    pizzaElement.appendChild(pizzaText)
+
+    pizzaPrices.appendChild(priceSmall)
+    pizzaPrices.appendChild(priceMedium)
+    pizzaPrices.appendChild(PriceLarge)
+    pizzaElement.appendChild(pizzaPrices)
+
     PizzaBox.appendChild(pizzaElement)
 }

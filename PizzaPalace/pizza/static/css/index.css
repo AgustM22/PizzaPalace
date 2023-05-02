@@ -123,6 +123,7 @@ footer > * > h2 {
 }
 
 .PizzaElement {
+    position: relative;
     background-color: var(--black);
     color: var(--white);
     display: flex;
@@ -157,4 +158,5 @@ footer > * > h2 {
 .PizzaPrices {
     position: absolute;
     right: 2%;
+    bottom: -0.4em;
 }
