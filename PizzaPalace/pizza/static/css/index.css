@@ -279,6 +279,8 @@ footer > * > h2 {
     border-style: var(--border-style);
     overflow-y: scroll;
     color: var(--TextColor);
+    display: flex;
+    flex-direction: column;
 }
 
 .CartProduct {
@@ -332,7 +334,19 @@ footer > * > h2 {
     display: flex;
     flex-direction: column;
     width: 80%;
+    margin: auto;
 }
-.CreditCardInformation {
-
+.CreditCardSmallDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.CCSmallDetail{
+    display: flex;
+    flex-direction: column;
+}
+.CreditCardInformation input{
+    width: 100%;
+    padding: 10px;
+    height: 10px;
 }
