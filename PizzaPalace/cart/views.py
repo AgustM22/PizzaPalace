@@ -135,4 +135,4 @@ cart = [
 ]
 
 def main(request):
-    return render(request, "CartBase.html",context= {"cart":cart})
+    return render(request, "CartView.html",context= {"cart":cart})
