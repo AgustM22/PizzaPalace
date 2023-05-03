@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="MainBlock">
+    <div id="SearchBar">
+        <input type="text" id="search" placeholder="Search..." oninput="SearchFilter()"></input>
+        <p>Pizza</p>
+        <img src="/static/images/sliders.svg" alt="Settings" id="SliderSettings">
+    </div>
+    <div id="PizzaBox">
+        {% for pizza in seed %}
+            <div class="PizzaElement">
+                <img src="{{ pizza.picture }}" alt="PizzaImg" class="PizzaImg">
+                <div class="PizzaText">
+                    <h1 class="PizzaName">{{ pizza.name }}</h1>
+                    <p class="PizzaIngredients">{{ pizza.ingredients }}</p>
+                </div>
+                <div class="PizzaPrices">
+                    <p>Small: {{ pizza.price.small }}</p>
+                    <p>Medium: {{ pizza.price.medium }}</p>
+                    <p>Large: {{ pizza.price.large }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
