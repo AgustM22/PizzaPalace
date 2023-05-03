@@ -1,12 +1,13 @@
 :root {
     /* colors */
-    --black: black;
+    --BackgroundColor: black;
     --white: white;
     --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
 
     /* sizes */
     --Large-font: 2rem;
+    --MediumFont: 1.5rem;
 
     --card-width: 400px;
 	--card-height: 600px;
@@ -15,7 +16,7 @@
 	--card-border-radius: 50px;
     --card-transition-duration: 500ms;
 
-    --Font-Family: sans-serif;
+    --FontFamily: sans-serif;
 
     --border-thickness: .2em;
     --border-style: solid;
@@ -40,7 +41,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     color: var(--white);
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     margin: 0;
     font-size: var(--Large-font);
     align-items: center;
@@ -82,7 +83,7 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     color: var(--white);
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     margin: 0;
     font-size: 1em;
     align-items: center;
@@ -102,7 +103,7 @@ footer > * {
 
 footer > * > h2 {
     align-self: center;
-    font-family: var(--Font-Family);
+    font-family: var(--FontFamily);
 }
 
 .FotterColorText {
@@ -130,7 +131,7 @@ footer > * > h2 {
 	box-sizing: border-box;
 	border: var(--card-border);
 	border-radius: var(--card-border-radius);
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,7 +144,7 @@ footer > * > h2 {
 
 .HomePageBody .Card h2{
     margin-bottom: 2em;
-    font-family: var(--Font-Family);
+    font-family: var(--FontFamily);
 }
 
 .HomePageBody .Card img{
@@ -169,7 +170,7 @@ footer > * > h2 {
     justify-content: center;
     align-items: center;
     width:30%;
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     border-color: var(--SecondaryColor); 
     margin: auto;
     min-height: 60vh;
@@ -178,11 +179,11 @@ footer > * > h2 {
     border-style: var(--border-style);
     border-color: var(--SecondaryColor);
     color: var(--white);
-    font-family: var(--Font-Family);
+    font-family: var(--FontFamily);
 }
 
 
-.FormInput{
+.FormInput {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
@@ -190,14 +191,14 @@ footer > * > h2 {
 
 .FormInput label {
     color: var(--white);
-    font-family: var(--Font-Family);
+    font-family: var(--FontFamily);
 }
 
 .FormButtons {
     display:  flex;
     justify-content:space-between;
 }
-.FormButtons button{
+.FormButtons button {
     cursor: pointer;
     border: 0;
     border-radius: 4px;
@@ -207,7 +208,7 @@ footer > * > h2 {
     padding: 10px 0;
 }
 
-.FormInput input{
+.FormInput input {
     border-radius: var(--pilled-shape-radius);
     width: 100%;
     padding: 10px;
@@ -220,4 +221,66 @@ footer > * > h2 {
 .RegisterForm #Logo {
     width: 10em;
     margin: auto;
+}
+
+
+/* Cart */
+
+.CartBalance {
+
+    color: var(--white);
+    background-color: var(--BackgroundColor);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
+    width: var(--card-width);
+	height: var(--card-height);
+    font-family: var(--FontFamily);
+    font-size: var(--MediumFont);
+    padding: 20px;
+}
+.CartBalanceContents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.Cart {
+    display:  flex;
+    justify-content: center;
+    padding: 10px;
+}
+.CartBalance {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.CartBalanceTotal {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+#CheckoutButton {
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    width: 60%;
+    padding: 10px 0;
+}
+.ProductsQuantity {
+    text-align: center;
+}
+.ProductsPrice {
+    text-align: end;
+}
+
+.CartContents {
+    margin-right: 10px;
+    width: 50%;
+    background-color: var(--BackgroundColor);
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
 }
