@@ -15,16 +15,15 @@
             <h2>Offer</h2>
         </div>
         <div class="HeaderMiddle">
-            <a href=""><img src="{% static 'images/Logo'%}" alt="Logo" id="Logo"></a>
+            <a href="/homepage"><img src="{% static 'images/Logo'%}" alt="Logo" id="Logo"></a>
         </div>
         <div class="HeaderRight">
-            <a href=""><img src="{% static 'images/shopping-cart.svg'%}" alt="ShoppingCart" id="ShoppingCart"></a>
-            <a href=""><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
+            <a href="/cart"><img src="{% static 'images/shopping-cart.svg'%}" alt="ShoppingCart" id="ShoppingCart"></a>
+            <a href="/login"><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
         </div>
     </header>
-    {% block content % }
-    {% endblock % }
-    
+    {% block content %}
+    {% endblock %}
     <footer>
         <div class="FooterLeft">
             <h2>Menu</h2>

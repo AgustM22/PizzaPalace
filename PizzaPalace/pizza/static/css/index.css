@@ -1,8 +1,26 @@
 :root {
+    /* colors */
     --black: black;
     --white: white;
     --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
+
+    /* sizes */
+    --Large-font: 2rem;
+
+    --card-width: 400px;
+	--card-height: 600px;
+
+	--card-border: 2px solid var(--SecondaryColor);
+	--card-border-radius: 50px;
+    --card-transition-duration: 500ms;
+
+    --Font-Family: sans-serif;
+
+    --border-thickness: .2em;
+    --border-style: solid;
+
+    --pilled-shape-radius: 40px;
 }
 
 body {
@@ -11,6 +29,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 header {
@@ -20,10 +42,11 @@ header {
     color: var(--white);
     background-color: var(--black);
     margin: 0;
-    font-size: 2em;
+    font-size: var(--Large-font);
     align-items: center;
     border-bottom: 0.2em solid;
     border-color: var(--SecondaryColor);
+    width: 100%;
 }
 
 header > * {
@@ -54,9 +77,6 @@ header > * {
 
 
 footer {
-    bottom: 0;
-    width: 100%;
-    position: absolute;
     min-height: 100px;
     display: flex;
     flex-direction: row;
@@ -66,8 +86,9 @@ footer {
     margin: 0;
     font-size: 1em;
     align-items: center;
-    border-top: 0.2em solid;
+    border-top: var(--border-thickness) var(--border-style);
     border-color: var(--SecondaryColor);
+    width: 100%;
 }
 
 footer ul {
@@ -81,9 +102,122 @@ footer > * {
 
 footer > * > h2 {
     align-self: center;
+    font-family: var(--Font-Family);
 }
 
 .FotterColorText {
     color: var(--PrimaryColor);
     text-decoration: underline;
+}
+
+/* Homepage body */
+
+.HomePageBody {
+    display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+    height: 80vh;
+    flex-direction: row;
+    width: 100%;
+}
+
+.HomePageBody .Card {
+    /* This design comes from here: https://codepen.io/msandonini/pen/abaGKOa.
+        I have made my personal modifications to it. -Hermann Helgi
+    */
+    width: var(--card-width);
+	height: var(--card-height);
+	box-sizing: border-box;
+	border: var(--card-border);
+	border-radius: var(--card-border-radius);
+    background-color: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition-property: transform, background-image;
+	transition-duration: var(--card-transition-duration);
+	transition-timing-function: ease;
+
+}
+
+.HomePageBody .Card h2{
+    margin-bottom: 2em;
+    font-family: var(--Font-Family);
+}
+
+.HomePageBody .Card img{
+    width: 300px;
+    height: 300px;
+}
+
+.HomePageBody a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: var(--Large-font);
+}
+
+.HomePageBody .Card:hover {
+    transform: scale(1.05);
+}
+
+/* Login & Signup Form */
+
+.RegisterForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+    background-color: var(--black);
+    border-color: var(--SecondaryColor); 
+    margin: auto;
+    min-height: 60vh;
+    border-radius: 40px;
+    border: var(--border-thickness);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
+    color: var(--white);
+    font-family: var(--Font-Family);
+}
+
+
+.FormInput{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.FormInput label {
+    color: var(--white);
+    font-family: var(--Font-Family);
+}
+
+.FormButtons {
+    display:  flex;
+    justify-content:space-between;
+}
+.FormButtons button{
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 10px;
+    width: 200px;
+    padding: 10px 0;
+}
+
+.FormInput input{
+    border-radius: var(--pilled-shape-radius);
+    width: 100%;
+    padding: 10px;
+    height: 40px;
+}
+.FormInput label{
+    padding-left: 20px;
+}
+
+.RegisterForm #Logo {
+    width: 10em;
+    margin: auto;
 }
