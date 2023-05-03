@@ -187,11 +187,16 @@ footer > * > h2 {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    border-radius: var(--pilled-shape-radius);
+    width: 100%;
+    padding: 10px;
+    height: 40px;
 }
 
 .FormInput label {
     color: var(--TextColor);
     font-family: var(--FontFamily);
+    padding-left: 20px;
 }
 
 .FormButtons {
@@ -208,15 +213,6 @@ footer > * > h2 {
     padding: 10px 0;
 }
 
-.FormInput input {
-    border-radius: var(--pilled-shape-radius);
-    width: 100%;
-    padding: 10px;
-    height: 40px;
-}
-.FormInput label{
-    padding-left: 20px;
-}
 
 .RegisterForm #Logo {
     width: 10em;
@@ -282,6 +278,7 @@ footer > * > h2 {
     border-color: var(--SecondaryColor);
     border-style: var(--border-style);
     overflow-y: scroll;
+    color: var(--TextColor);
 }
 
 .CartProduct {
@@ -328,3 +325,14 @@ footer > * > h2 {
     display: inline-block;
     vertical-align: middle;
 } 
+
+/* Credit Card*/
+
+.CreditCardInformation {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.CreditCardInformation {
+
+}

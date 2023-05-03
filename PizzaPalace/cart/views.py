@@ -76,4 +76,4 @@ cart = [
 ]
 
 def main(request):
-    return render(request, "CartView.html",context= {"cart":cart})
+    return render(request, "CreditCardDetails.html",context= {"cart":cart})
