@@ -8,17 +8,17 @@
         <img src="/static/images/sliders.svg" alt="Settings" id="SliderSettings">
     </div>
     <div id="PizzaBox">
-        {% for pizza in seed %}
+        {% for pizza in pizzas %}
             <div class="PizzaElement">
-                <img src="{{ pizza.picture }}" alt="PizzaImg" class="PizzaImg">
+                <img src="{{ pizza.pic }}" alt="PizzaImg" class="PizzaImg">
                 <div class="PizzaText">
                     <h1 class="PizzaName">{{ pizza.name }}</h1>
-                    <p class="PizzaIngredients">{{ pizza.ingredients }}</p>
+                    <p class="PizzaIngredients">{{ pizza.toppings }}</p>
                 </div>
                 <div class="PizzaPrices">
-                    <p>Small: {{ pizza.price.small }}</p>
-                    <p>Medium: {{ pizza.price.medium }}</p>
-                    <p>Large: {{ pizza.price.large }}</p>
+                    <p>Small: {{ pizza.pricesmall }}</p>
+                    <p>Medium: {{ pizza.pricemedium }}</p>
+                    <p>Large: {{ pizza.pricelarge }}</p>
                 </div>
             </div>
         {% endfor %}
