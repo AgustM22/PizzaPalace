@@ -1,12 +1,12 @@
 :root {
     /* colors */
     --BackgroundColor: black;
-    --white: white;
+    --TextColor: white;
     --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
 
     /* sizes */
-    --Large-font: 2rem;
+    --LargeFont: 2rem;
     --MediumFont: 1.5rem;
 
     --card-width: 400px;
@@ -40,10 +40,10 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: var(--white);
+    color: var(--TextColor);
     background-color: var(--BackgroundColor);
     margin: 0;
-    font-size: var(--Large-font);
+    font-size: var(--LargeFont);
     align-items: center;
     border-bottom: 0.2em solid;
     border-color: var(--SecondaryColor);
@@ -82,7 +82,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: var(--white);
+    color: var(--TextColor);
     background-color: var(--BackgroundColor);
     margin: 0;
     font-size: 1em;
@@ -154,8 +154,8 @@ footer > * > h2 {
 
 .HomePageBody a {
     text-decoration: none;
-    color: var(--white);
-    font-size: var(--Large-font);
+    color: var(--TextColor);
+    font-size: var(--LargeFont);
 }
 
 .HomePageBody .Card:hover {
@@ -178,7 +178,7 @@ footer > * > h2 {
     border: var(--border-thickness);
     border-style: var(--border-style);
     border-color: var(--SecondaryColor);
-    color: var(--white);
+    color: var(--TextColor);
     font-family: var(--FontFamily);
 }
 
@@ -190,7 +190,7 @@ footer > * > h2 {
 }
 
 .FormInput label {
-    color: var(--white);
+    color: var(--TextColor);
     font-family: var(--FontFamily);
 }
 
@@ -227,8 +227,11 @@ footer > * > h2 {
 /* Cart */
 
 .CartBalance {
-
-    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--TextColor);
     background-color: var(--BackgroundColor);
     border-style: var(--border-style);
     border-color: var(--SecondaryColor);
@@ -236,7 +239,7 @@ footer > * > h2 {
 	height: var(--card-height);
     font-family: var(--FontFamily);
     font-size: var(--MediumFont);
-    padding: 20px;
+    max-height: 600px;
 }
 .CartBalanceContents {
     display: flex;
@@ -250,13 +253,7 @@ footer > * > h2 {
     display:  flex;
     justify-content: center;
     padding: 10px;
-}
-.CartBalance {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    max-height: 80vh;
 }
 .CartBalanceTotal {
     display: flex;
@@ -280,8 +277,54 @@ footer > * > h2 {
 .CartContents {
     margin-right: 10px;
     width: 50%;
+    max-height: 600px;
     background-color: var(--BackgroundColor);
     border-color: var(--SecondaryColor);
     border-style: var(--border-style);
+    overflow-y: scroll;
 }
 
+.CartProduct {
+    color: var(--TextColor);
+    display: flex;
+    width: 100%;
+    font-size: var(--LargeFont);
+    flex-direction: row;
+    gap: 20px;
+    border-bottom-color: var(--SecondaryColor);
+    border-bottom-style: var(--border-style);
+}
+.ProductImg {
+    width: 30%;
+}
+.ProductText {
+    margin-left: 20px;
+    width: 30%;
+}
+
+
+.ProductButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+.minus, .plus{
+    border-radius:4px;
+    padding:10px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.ProductButtons input{
+    height:34px;
+    width: 100px;
+    text-align: center;
+    font-size: 26px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    display: inline-block;
+    vertical-align: middle;
+} 
