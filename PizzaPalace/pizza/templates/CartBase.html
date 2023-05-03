@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <div class="CartBalanceInfo">
+            {% for pizza in cart %}
+                <div class="ProductsName">
+                    <p>Product</p>
+                    <p>{{ pizza.name }}</p>
+                </div>
+                <div class="ProductsQuantity">
+                    <p>Quantity</p>
+                    <p>{{ pizza.quantity }}</p>
+                </div>
+                <div class="ProductsPrice">
+                    <p>Price</p>
+                    <p>{{ pizza.price }}</p>
+                </div>
+                {% endfor %}
+                <!-- Line ?-->
+                <div class="CartBalanceTotalInfo">
+                    <p>Total</p>
+                    <p>test</p>
+                </div>
+
+        </div>
+    </section>
+    {% load static %}
+    <script src="{% static 'js/cart.js'%}"></script>
+{% endblock %}
