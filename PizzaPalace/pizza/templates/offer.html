@@ -4,22 +4,20 @@
 <div style="height: 80vh;"></div>
 <div id="MainBlock">
     <div id="SearchBar">
-        <input type="text" id="search" placeholder="Search..." oninput="SearchFilter()"></input>
-        <p>Pizza</p>
+        <input type="text" id="search" placeholder="Search..." oninput="SearchOfferFilter()"></input>
+        <p>Offers</p>
         <img src="/static/images/sliders.svg" alt="Settings" id="SliderSettings">
     </div>
     <div id="ProductBox">
-        {% for pizza in pizzas %}
+        {% for offer in offers %}
             <div class="ProductElement">
-                <img src="{{ pizza.pic }}" alt="PizzaImg" class="ProductImg">
+                <img src="{{ offer.pic }}" alt="OfferImg" class="ProductImg">
                 <div class="ProductText">
-                    <h1 class="ProductName">{{ pizza.name }}</h1>
-                    <p class="ProductIngredients">{{ pizza.toppings }}</p>
+                    <h1 class="ProductName">{{ offer.name }}</h1>
+                    <p class="ProductIngredients">{{ offer.description }}</p>
                 </div>
                 <div class="ProductPrices">
-                    <p>Small: {{ pizza.pricesmall }}</p>
-                    <p>Medium: {{ pizza.pricemedium }}</p>
-                    <p>Large: {{ pizza.pricelarge }}</p>
+                    <p>Price: {{ offer.price|stringformat:"d" }}</p>
                 </div>
             </div>
         {% endfor %}

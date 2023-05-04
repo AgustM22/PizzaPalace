@@ -28,3 +28,5 @@ INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(4, 3);
 
 INSERT INTO pizza_offer (name, description, price, pic) VALUES('Two for One', 'An exclusive deal where you get to buy two pizzas for the price of one!', 2000, 'https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?s=612x612&w=0&k=20&c=CFDDjavIC5l8Zska16UZRZDXDwd47fwmRsUNzY0Ym6o=');
 INSERT INTO pizza_offer (name, description, price, pic) VALUES('Hottest Pizzas', 'Buy the most popular pizzas at a discount', 1500, 'https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?s=612x612&w=0&k=20&c=CFDDjavIC5l8Zska16UZRZDXDwd47fwmRsUNzY0Ym6o=');
+
+INSERT INTO pizza_includes ("OID_id", "PID_id") VALUES(2, 2)

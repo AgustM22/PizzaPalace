@@ -1,133 +1,111 @@
-seed = [
-    {
-        "name": "Margharita",
-        "ingredients": "Cheese, Sauce",
-        "picture": "https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?b=1&s=170667a&w=0&k=20&c=_t83ocY59IayPnspluN99xOM_RQ5ytAMTfXQperbL_I=",
-        "tags": [
-            "vegetarian"
-        ],
-        "price": {
-            "small": "1.800kr",
-            "medium": "1.800kr",
-            "large": "1.800kr"
-        }
-    },
-    {
-        "name": "Margharita",
-        "ingredients": "Cheese, Sauce",
-        "picture": "https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?b=1&s=170667a&w=0&k=20&c=_t83ocY59IayPnspluN99xOM_RQ5ytAMTfXQperbL_I=",
-        "tags": [
-            "vegetarian"
-        ],
-        "price": {
-            "small": "1.800kr",
-            "medium": "1.800kr",
-            "large": "1.800kr"
-        }
-    },
-    {
-        "name": "Margharita",
-        "ingredients": "Cheese, Sauce",
-        "picture": "https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?b=1&s=170667a&w=0&k=20&c=_t83ocY59IayPnspluN99xOM_RQ5ytAMTfXQperbL_I=",
-        "tags": [
-            "vegetarian"
-        ],
-        "price": {
-            "small": "1.800kr",
-            "medium": "1.800kr",
-            "large": "1.800kr"
-        }
-    },
-    {
-        "name": "Hawaiian",
-        "ingredients": "Cheese, Sauce, pineapple",
-        "picture": "https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?b=1&s=170667a&w=0&k=20&c=_t83ocY59IayPnspluN99xOM_RQ5ytAMTfXQperbL_I=",
-        "tags": [
-            "vegetarian"
-        ],
-        "price": {
-            "small": "1.800kr",
-            "medium": "1.800kr",
-            "large": "1.800kr"
-        }
-    },
-    {
-        "name": "Clayo",
-        "ingredients": "Clay, Mayo",
-        "picture": "https://media.istockphoto.com/id/1280329631/photo/italian-pizza-margherita-with-tomatoes-and-mozzarella-cheese-on-wooden-cutting-board-close-up.jpg?b=1&s=170667a&w=0&k=20&c=_t83ocY59IayPnspluN99xOM_RQ5ytAMTfXQperbL_I=",
-        "tags": [
-            "vegetarian"
-        ],
-        "price": {
-            "small": "1.800kr",
-            "medium": "1.800kr",
-            "large": "1.800kr"
-        }
-    }
-]
-
-
-
 // Stuff for Menu
-const SearchFilter = () => {
-    const Main = document.getElementById("PizzaBox")
+const SearchFilter = async () => {
+    const Filter = document.getElementById("search").value
+    const response = await axios("/menu/filter", {params: {"filter": Filter}})
+
+    const Pizzadict = response.data
+
+    const Main = document.getElementById("ProductBox")
     Main.innerHTML = ""
 
-	const SearchText = document.getElementById("search").value
-    const pizzas = [...seed];
-    const PizzaArray = []
-	
-	pizzas.forEach((pizza) => {
-		if (pizza.name.toLowerCase().includes(SearchText.toLowerCase())) {
-			PizzaArray.push(pizza)
-		}
-	})
-
-    PizzaArray.forEach((pizza) => {
-        PopulatePizzaBox(pizza)
+    Pizzadict.forEach((pizza) => {
+        PopulateProd(pizza)
     })
 }
 
-const PopulatePizzaBox = (pizza) => {
-    const PizzaBox = document.getElementById("PizzaBox")
+const SearchOfferFilter = async () => {
+    const Filter = document.getElementById("search").value
+    const response = await axios("/offer/filter", {params: {"filter": Filter}})
 
-    const pizzaElement = document.createElement("div")
-    const pizzaText = document.createElement("div")
-    const pizzaPrices = document.createElement("div")
-    pizzaElement.setAttribute("class", "PizzaElement")
-    pizzaText.setAttribute("class", "PizzaText")
-    pizzaPrices.setAttribute("class", "PizzaPrices")
+    const Offerdict = response.data
+
+    const Main = document.getElementById("ProductBox")
+    Main.innerHTML = ""
+
+    Offerdict.forEach((offer) => {
+        PopulateOfferBox(offer)
+    })
+}
+
+const PopulateOfferBox = (pizza) => {
+    const ProductBox = document.getElementById("ProductBox")
+
+    const ProductElement = document.createElement("div")
+    const ProductText = document.createElement("div")
+    const ProductPrices = document.createElement("div")
+    ProductElement.setAttribute("class", "ProductElement")
+    ProductText.setAttribute("class", "ProductText")
+    ProductPrices.setAttribute("class", "ProductPrices")
     
-    const pizzaName = document.createElement("h1")
-    const pizzaIngredients = document.createElement("p")
-    const pizzaImg = document.createElement("img")
+    const ProductName = document.createElement("h1")
+    const ProductDesc = document.createElement("p")
+    const ProductImg = document.createElement("img")
+
+    const price = document.createElement("p")
+    price.innerText = "Price: " + pizza.price
+    
+    ProductName.innerText = pizza.name
+    ProductName.setAttribute("class", "ProductName")
+    ProductDesc.innerText = pizza.description
+    ProductDesc.setAttribute("class", "ProductIngredients")
+
+    ProductImg.setAttribute("src", pizza.pic)
+    ProductImg.setAttribute("class", "ProductImg")
+    ProductImg.setAttribute("alt", "ProductImg")
+
+    ProductElement.appendChild(ProductImg)
+
+    ProductText.appendChild(ProductName)
+    ProductText.appendChild(ProductDesc
+)
+    ProductElement.appendChild(ProductText)
+
+    ProductPrices.appendChild(price)
+    ProductElement.appendChild(ProductPrices)
+
+    ProductBox.appendChild(ProductElement)
+}
+
+const PopulateProd = (pizza) => {
+    const ProductBox = document.getElementById("ProductBox")
+
+    const ProductElement = document.createElement("div")
+    const ProductText = document.createElement("div")
+    const ProductPrices = document.createElement("div")
+    ProductElement.setAttribute("class", "ProductElement")
+    ProductText.setAttribute("class", "ProductText")
+    ProductPrices.setAttribute("class", "ProductPrices")
+    
+    const ProductName = document.createElement("h1")
+    const ProductIngredients = document.createElement("p")
+    const ProductImg = document.createElement("img")
 
     const priceSmall = document.createElement("p")
     const priceMedium = document.createElement("p")
     const PriceLarge = document.createElement("p")
-    priceSmall.innerText = "Small: " + pizza.price.small
-    priceMedium.innerText = "Medium: " + pizza.price.medium
-    PriceLarge.innerText = "Large: " + pizza.price.large
+    priceSmall.innerText = "Small: " + pizza.pricesmall
+    priceMedium.innerText = "Medium: " + pizza.pricemedium
+    PriceLarge.innerText = "Large: " + pizza.pricelarge
     
-    pizzaName.innerText = pizza.name
-    pizzaName.setAttribute("class", "PizzaName")
-    pizzaIngredients.innerText = pizza.ingredients
-    pizzaIngredients.setAttribute("class", "PizzaIngredients")
+    ProductName.innerText = pizza.name
+    ProductName.setAttribute("class", "ProductName")
+    ProductIngredients.innerText = pizza.toppings
+    ProductIngredients.setAttribute("class", "ProductIngredients")
 
-    pizzaImg.setAttribute("src", pizza.picture)
-    pizzaImg.setAttribute("class", "PizzaImg")
-    pizzaImg.setAttribute("alt", "PizzaImg")
+    ProductImg.setAttribute("src", pizza.pic)
+    ProductImg.setAttribute("class", "ProductImg")
+    ProductImg.setAttribute("alt", "ProductImg")
 
-    pizzaElement.appendChild(pizzaImg)
+    ProductElement.appendChild(ProductImg)
 
-    pizzaText.appendChild(pizzaName)
-    pizzaText.appendChild(pizzaIngredients)
-    pizzaElement.appendChild(pizzaText)
+    ProductText.appendChild(ProductName)
+    ProductText.appendChild(ProductIngredients)
+    ProductElement.appendChild(ProductText)
 
-    pizzaPrices.appendChild(priceSmall)
-    pizzaPrices.appendChild(priceMedium)
-    pizzaPrices.appendChild(PriceLarge)
-    pizzaElement.appendChild(pizzaPrices)
+    ProductPrices.appendChild(priceSmall)
+    ProductPrices.appendChild(priceMedium)
+    ProductPrices.appendChild(PriceLarge)
+    ProductElement.appendChild(ProductPrices)
 
-    PizzaBox.appendChild(pizzaElement)
+    ProductBox.appendChild(ProductElement)
 }
