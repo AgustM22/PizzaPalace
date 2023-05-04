@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="height: 80vh;"></div>
+<div id="MainBlock">
+    <div id="SearchBar">
+        <input type="text" id="search" placeholder="Search..." oninput="SearchFilter()"></input>
+        <p>Pizza</p>
+        <img src="/static/images/sliders.svg" alt="Settings" id="SliderSettings">
+    </div>
+    <div id="PizzaBox">
+        {% for pizza in pizzas %}
+            <div class="PizzaElement">
+                <img src="{{ pizza.pic }}" alt="PizzaImg" class="PizzaImg">
+                <div class="PizzaText">
+                    <h1 class="PizzaName">{{ pizza.name }}</h1>
+                    <p class="PizzaIngredients">{{ pizza.toppings }}</p>
+                </div>
+                <div class="PizzaPrices">
+                    <p>Small: {{ pizza.pricesmall }}</p>
+                    <p>Medium: {{ pizza.pricemedium }}</p>
+                    <p>Large: {{ pizza.pricelarge }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
