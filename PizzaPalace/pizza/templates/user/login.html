@@ -15,16 +15,12 @@
             <label for="Password">Password</label>
             <input type="password" id="Password" placeholder="Password">
         </div>
-        <div class="FormInput">
-            <label for="Password">Confirm</label>
-            <input type="password" id="Password" placeholder="Confirm Password">
-        </div>
         <div class="FormButtons">
-            <button type="submit" id="LoginButton">Create Account</button>
+            <button type="submit" id="LoginButton">Log in</button>
         </div>
     </form>
-    <a href="/login" id="SignupButton">
-        <button>Cancel</button> 
+    <a href="{% url 'signup' %}" id="SignupButton">
+        <button>Sign up</button>
     </a>
 </div>
 
