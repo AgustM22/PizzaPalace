@@ -12,7 +12,7 @@ def filter(request):
         context = Offer.objects.filter(name__icontains=filter)
         Offerlis = []
         for object in context:
-            templis = {"name": object.name, "description": object.description, "price": object.price, "pic": object.pic}
+            templis = {"id": object.id, "name": object.name, "description": object.description, "price": object.price, "pic": object.pic}
             Offerlis.append(templis)
 
         return JsonResponse(Offerlis, safe=False)

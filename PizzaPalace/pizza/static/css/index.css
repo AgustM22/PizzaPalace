@@ -261,6 +261,10 @@ footer > * > h2 {
     padding-bottom: 10em;
 }
 
+#ProductBox > a {
+    text-decoration: none;
+}
+
 .ProductElement {
     position: relative;
     background-color: var(--black);
@@ -270,15 +274,19 @@ footer > * > h2 {
     font-size: 2em;
     margin-top: 1em;
     border-radius: 25px;
+    border: var(--card-border);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
 }
 
 .ProductImg {
     position: sticky;
-    border-radius: 25px 0px 0px 25px;
+    border-radius: 22px 0px 0px 22px;
     max-width: 10em;
     left: 0;
-    border-right: 0.2em solid;
-    border-color: var(--black); 
+    border-right: var(--card-border);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
 }
 
 .ProductText {
@@ -291,6 +299,8 @@ footer > * > h2 {
 }
 
 .ProductText > h1 {
+    color: var(--PrimaryColor);
+    text-decoration: underline;
     margin-bottom: 0;
 }
 

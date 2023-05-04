@@ -10,16 +10,18 @@
     </div>
     <div id="ProductBox">
         {% for offer in offers %}
-            <div class="ProductElement">
-                <img src="{{ offer.pic }}" alt="OfferImg" class="ProductImg">
-                <div class="ProductText">
-                    <h1 class="ProductName">{{ offer.name }}</h1>
-                    <p class="ProductIngredients">{{ offer.description }}</p>
+            <a href="{{ offer.id }}/view">
+                <div class="ProductElement">
+                    <img src="{{ offer.pic }}" alt="OfferImg" class="ProductImg">
+                    <div class="ProductText">
+                        <h1 class="ProductName">{{ offer.name }}</h1>
+                        <p class="ProductIngredients">{{ offer.description }}</p>
+                    </div>
+                    <div class="ProductPrices">
+                        <p>Price: {{ offer.price|stringformat:"d" }}Kr.</p>
+                    </div>
                 </div>
-                <div class="ProductPrices">
-                    <p>Price: {{ offer.price|stringformat:"d" }}</p>
-                </div>
-            </div>
+            </a>
         {% endfor %}
     </div>
 </div>

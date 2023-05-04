@@ -25,6 +25,6 @@ def sort_data(context):
         if object.PID.name in lis:
             lis[object.PID.name]["toppings"] += ", " + object.TID.name
         else:
-            lis[object.PID.name] = {"name": object.PID.name, "toppings": object.TID.name, "pricesmall": object.PID.pricesmall, "pricemedium": object.PID.pricemedium, "pricelarge": object.PID.pricelarge, "pic": object.PID.pic}
+            lis[object.PID.name] = {"id": object.id, "name": object.PID.name, "toppings": object.TID.name, "pricesmall": object.PID.pricesmall, "pricemedium": object.PID.pricemedium, "pricelarge": object.PID.pricelarge, "pic": object.PID.pic}
     PizzaDict = {"pizzas": lis.values()}
     return PizzaDict

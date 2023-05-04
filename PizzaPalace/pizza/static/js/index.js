@@ -30,6 +30,9 @@ const SearchOfferFilter = async () => {
 const PopulateOfferBox = (pizza) => {
     const ProductBox = document.getElementById("ProductBox")
 
+    const ProductLink = document.createElement("a")
+    ProductLink.setAttribute("href", pizza.id + "/view")
+
     const ProductElement = document.createElement("div")
     const ProductText = document.createElement("div")
     const ProductPrices = document.createElement("div")
@@ -42,7 +45,7 @@ const PopulateOfferBox = (pizza) => {
     const ProductImg = document.createElement("img")
 
     const price = document.createElement("p")
-    price.innerText = "Price: " + pizza.price
+    price.innerText = "Price: " + pizza.price + "Kr."
     
     ProductName.innerText = pizza.name
     ProductName.setAttribute("class", "ProductName")
@@ -63,11 +66,15 @@ const PopulateOfferBox = (pizza) => {
     ProductPrices.appendChild(price)
     ProductElement.appendChild(ProductPrices)
 
-    ProductBox.appendChild(ProductElement)
+    ProductLink.appendChild(ProductElement)
+    ProductBox.appendChild(ProductLink)
 }
 
 const PopulateProd = (pizza) => {
     const ProductBox = document.getElementById("ProductBox")
+
+    const ProductLink = document.createElement("a")
+    ProductLink.setAttribute("href", pizza.id + "/view")
 
     const ProductElement = document.createElement("div")
     const ProductText = document.createElement("div")
@@ -83,9 +90,9 @@ const PopulateProd = (pizza) => {
     const priceSmall = document.createElement("p")
     const priceMedium = document.createElement("p")
     const PriceLarge = document.createElement("p")
-    priceSmall.innerText = "Small: " + pizza.pricesmall
-    priceMedium.innerText = "Medium: " + pizza.pricemedium
-    PriceLarge.innerText = "Large: " + pizza.pricelarge
+    priceSmall.innerText = "Small: " + pizza.pricesmall + "Kr."
+    priceMedium.innerText = "Medium: " + pizza.pricemedium + "Kr."
+    PriceLarge.innerText = "Large: " + pizza.pricelarge + "Kr."
     
     ProductName.innerText = pizza.name
     ProductName.setAttribute("class", "ProductName")
@@ -107,5 +114,6 @@ const PopulateProd = (pizza) => {
     ProductPrices.appendChild(PriceLarge)
     ProductElement.appendChild(ProductPrices)
 
-    ProductBox.appendChild(ProductElement)
+    ProductLink.appendChild(ProductElement)
+    ProductBox.appendChild(ProductLink)
 }
