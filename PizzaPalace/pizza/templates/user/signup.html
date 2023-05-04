@@ -9,58 +9,44 @@
     <form method="post">
         {% csrf_token %}
         <div class="FormInput">
-            <label for="FullName">Full Name</label>
-            <input type="text" placeholder="Full Name" id="FullName">
+            <label for="{{ form.FullName.id_for_label }}">Full Name</label>
+            {{form.FullName}}
         </div>
         <div class="FormInput">
-            <label for="Email" >Email</label>
-            <input type="text" name="Email" placeholder="Email" id="Email">
+            <label for="{{ form.UserName.id_for_label }}">User Name</label>
+            {{form.UserName}}
         </div>
         <div class="FormInput">
-            <label for="Password">Password</label>
-            <input type="password" id="Password" placeholder="Password" id="Password">
+            <label for="{{ form.Password.id_for_label }}">Password</label>
+            {{form.Password}}
         </div>
         <div class="FormInput">
-            <label for="ConfirmPassword">Confirm</label>
-            <input type="password"  placeholder="Confirm Password" id="ConfirmPassword">
+            <label for="{{ form.ConfirmPassword.id_for_label }}">Confirm</label>
+            {{form.ConfirmPassword}}
         </div>
 
         <div class="FormInput">
-            <label for="StreetName">Street Name</label>
-            <input type="text" id="StreetName" placeholder="Street Name">
+            <label for="{{ form.StreetName.id_for_label }}">Street Name</label>
+            {{form.StreetName}}
         </div>
         <div class="FormInput">
-            <label for="HouseNumber">House Number</label>
-            <input type="text" id="HouseNumber" placeholder="House Number">
+            <label for="{{ form.HouseNumber.id_for_label }}">House Number</label>
+            {{form.HouseNumber}}
         </div>
         <div class="FormInput">
-            <label for="City">City</label>
-            <input type="text" id="City" placeholder="City">
+            <label for="{{ form.City.id_for_label }}">City</label>
+            {{form.City}}
         </div>
         <div class="FormInput">
-            <label for="Country">Country</label>
-            <select name="Country" id="Country">
-                <option>select country</option>
-                <option value="Afghanistan">Afghanistan</option>
-                <option value="Albania">Albania</option>
-                <option value="Algeria">Algeria</option>
-                <option value="AmericanSamoa">American Samoa</option>
-                <option value="Andorra">Andorra</option>
-                <option value="Angola">Angola</option>
-                <option value="Anguilla">Anguilla</option>
-                <option value="Antarctica">Antarctica</option>
-                <option value="Argentina">Argentina</option>
-                <option value="Armenia">Armenia</option>
-                <option value="Aruba">Aruba</option>
-                <option value="Australia">Australia</option>
-            </select>
+            <label for="{{ form.Countrys.id_for_label }}">Country</label>
+            {{form.Countrys}}
         </div>
         <div class="FormInput">
-            <label for="PostalCode">PostalCode</label>
-            <input type="text" id="PostalCode" placeholder="PostalCode">
+            <label for="{{ form.PostalCode.id_for_label }}">PostalCode</label>
+            {{form.PostalCode}}
         </div>
         <div class="FormButtons">
-            <button type="submit" id="SignupButton">Create Account</button>
+            <input type="submit" id="SignupButton" value="Sign up"/>
         </div>
     </form>
     <a href="{% url 'login'%}">

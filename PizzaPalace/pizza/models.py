@@ -1,11 +1,7 @@
 from django.db import models
+from user.models import Users
 
-class Users(models.Model):
-    name = models.CharField(max_length=255)
-    password = models.CharField(max_length=20)
-    admin = models.BooleanField()
-    profilepic = models.CharField(max_length=9999)
-    creditcard = models.CharField(max_length=255)
+#Moved Users Model to the user folder. ;)
 
 class Tags(models.Model):
     name = models.CharField(max_length=255)
