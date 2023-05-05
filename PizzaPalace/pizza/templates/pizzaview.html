@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div style="height: 80vh;"></div>
+<div id="PizzaPage">
+    <div id="PizzaBox">
+        <img src="{{ pizza.pic }}" alt="PizzaPic" id="PizzaPic">
+        <div id="PizzaText"  name="{{ offer.id }}">
+            <h1 id="PizzaTitle">{{ pizza.name }}</h1>
+            <p class="PizzaDesc">{{ pizza.description }}</p>
+        </div>
+        <div class="PayBox">
+            <div class="PaySelect">
+                <p>Order</p>
+                <p>Quantity</p>
+            </div>
+            <div id="OrderBox">
+                <div class="OrderSelect">
+                    <p>{{ pizza.name }}</p>
+                    <p>1</p>
+                </div>
+            </div>
+            <div class="PayText">
+                <p>Total</p>
+                <p>{{ pizza.pricelarge|stringformat:"d" }}Kr.</p>
+            </div>
+            <button id="AddToCartButton">Add To Cart</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

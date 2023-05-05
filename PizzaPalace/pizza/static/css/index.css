@@ -227,13 +227,14 @@ footer > * > h2 {
     margin: auto;
 }
 
-/* Menu Stuff */
+/* Menu and Offer Stuff */
 
 #MainBlock {
     width: 80%;
     position: absolute;
     top: 20%;
     left: 10%;
+    font-family: var(--Font-Family);
 }
 
 #SearchBar {
@@ -271,7 +272,7 @@ footer > * > h2 {
     color: var(--white);
     display: flex;
     flex-direction: row;
-    font-size: 2em;
+    font-size: 1.8em;
     margin-top: 1em;
     border-radius: 25px;
     border: var(--card-border);
@@ -310,9 +311,51 @@ footer > * > h2 {
     bottom: -0.4em;
 }
 
+/* Pizza View */
+#PizzaPage {
+    font-family: var(--Font-Family);
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 90%;
+}
+
+#PizzaBox {
+    display: flex;
+    flex-direction: row;
+}
+
+#PizzaPic {
+    border: var(--card-border);
+	border-radius: var(--card-border-radius);
+    border-color: var(--black);
+    max-width: 40%;
+    max-height: 40%;
+}
+
+#PizzaText {
+	border-radius: var(--card-border-radius);
+    background-color: var(--black);
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 1.5em;
+    color: var(--white);
+    width: 45%;
+}
+
+#PizzaTitle {
+    margin: 0;
+    font-size: 4em;
+}
+
+.PizzaDesc {
+    font-size: 2em;
+}
+
 /* Offer View */
 
 #OfferPage {
+    font-family: var(--Font-Family);
     position: absolute;
     top: 20%;
     left: 5%;
@@ -350,6 +393,8 @@ footer > * > h2 {
 .OfferDesc {
     font-size: 2em;
 }
+
+/* Payment Bubble */
 
 .PayBox {
     background-color: var(--black);
