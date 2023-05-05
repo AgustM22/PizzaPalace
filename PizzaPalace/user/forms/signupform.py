@@ -7,10 +7,10 @@ class SignUpForm(forms.ModelForm):
         ('Alabama',"Alabama"),
         ('Alabama2',"Alabama2")
         ]
-    Countrys = forms.ChoiceField(choices=CountryOptions, widget=forms.Select)
+    Country = forms.ChoiceField(choices=CountryOptions, widget=forms.Select)
     class Meta:
         model = Users
-        fields = ['FullName','UserName','Password','StreetName','HouseNumber','City','Countrys','PostalCode']
+        fields = ['FullName','UserName','Password','StreetName','HouseNumber','City','Country','PostalCode']
         widget = {
             'Password': forms.PasswordInput(),
         }

@@ -10,7 +10,7 @@ def signup(request):
             form.save()
             return redirect('login')
         else:
-            print(form.is_valid())
+            print(form.data)
             return redirect('signup') #Here is possible to redirect to the error screen
     return render(request, 'user/signup.html' , {
         'form': SignUpForm()
