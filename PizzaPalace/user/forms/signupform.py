@@ -4,24 +4,29 @@ from user.models import Users
 class SignUpForm(forms.ModelForm):
     ConfirmPassword = forms.CharField(widget=forms.PasswordInput())
     CountryOptions = [
-        ('Alabama',"Alabama"),
-        ('Alabama2',"Alabama2")
+        ('US', 'United States'),
+        ('CA', 'Canada'),
+        ('MX', 'Mexico'),
+        ('GB', 'United Kingdom'),
+        ('DE', 'Germany'),
+        ('FR', 'France'),
+        ('IT', 'Italy'),
+        ('JP', 'Japan'),
+        ('CN', 'China'),
+        ('IN', 'India'),
+        ('BR', 'Brazil'),
+        ('AU', 'Australia'),
+        ('NZ', 'New Zealand'),
+        ('ZA', 'South Africa'),
+        ('NG', 'Nigeria')
         ]
     Country = forms.ChoiceField(choices=CountryOptions, widget=forms.Select)
     class Meta:
         model = Users
         fields = ['FullName','UserName','Password','StreetName','HouseNumber','City','Country','PostalCode']
-        widget = {
+        widgets = {
             'Password': forms.PasswordInput(),
         }
 
 
-    def clean(self): 
-        cleaned_data = super().clean()
-        password = cleaned_data.get('password')
-        password_confirm = cleaned_data.get('password_confirm')
-
-        if password and password_confirm and password != password_confirm:
-            raise forms.ValidationError("Passwords do not match.")
-
-        return cleaned_data
+    #Need a password confirm validation
