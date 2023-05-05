@@ -1,0 +1,11 @@
+<div class="dropdown">
+    <button class="dropbtn">Options...</button>
+    <div class="dropdown-content">
+        {% for pizza in additionalContext %}
+            <a href="#" onclick="AddPizzaToOrder('{{ pizza.name }}');">{{ pizza.name }}</a>
+        {% endfor %}    
+    </div>
+</div>
+<div class="dropdown">
+    <button class="dropbtn" onclick="ClearOrder()">Clear Options</button>
+</div>

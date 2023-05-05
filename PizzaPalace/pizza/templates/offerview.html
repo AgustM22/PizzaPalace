@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div style="height: 80vh;"></div>
+<div id="OfferPage">
+    <div id="OfferBox">
+        {% for offer in offers %}
+        <img src="{{ offer.pic }}" alt="OfferPic" id="OfferPic">
+        <div id="OfferText"  name="{{ offer.id }}">
+            <h1 id="OfferTitle">{{ offer.name }}</h1>
+            <p class="OfferDesc">{{ offer.description }}</p>
+            {% if id == 1 %}
+                {% include 'OfferTemplates/twoforone.html' with additionalContext=additionalContext %}
+            {% elif id == 2 %}
+                <p class="OfferDesc">The pizza on a discount is, {{ additionalContext.name }}!</p>
+            {% endif %}
+        </div>
+        <div class="PayBox">
+            <div class="PaySelect">
+                <p>Order</p>
+                <p>Quantity</p>
+            </div>
+            <div id="OrderBox">
+                {% if id == 2 %}
+                <div class="OrderSelect">
+                    <p>{{ additionalContext.name }}</p>
+                    <p>1</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="PayText">
+                <p>Total</p>
+                <p>{{ offer.price|stringformat:"d" }}Kr.</p>
+            </div>
+            <button id="AddToCartButton">Add To Cart</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

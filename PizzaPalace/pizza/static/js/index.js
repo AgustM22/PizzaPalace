@@ -31,7 +31,7 @@ const PopulateOfferBox = (pizza) => {
     const ProductBox = document.getElementById("ProductBox")
 
     const ProductLink = document.createElement("a")
-    ProductLink.setAttribute("href", pizza.id + "/view")
+    ProductLink.setAttribute("href", pizza.id)
 
     const ProductElement = document.createElement("div")
     const ProductText = document.createElement("div")
@@ -74,7 +74,7 @@ const PopulateProd = (pizza) => {
     const ProductBox = document.getElementById("ProductBox")
 
     const ProductLink = document.createElement("a")
-    ProductLink.setAttribute("href", pizza.id + "/view")
+    ProductLink.setAttribute("href", pizza.id)
 
     const ProductElement = document.createElement("div")
     const ProductText = document.createElement("div")
@@ -116,4 +116,35 @@ const PopulateProd = (pizza) => {
 
     ProductLink.appendChild(ProductElement)
     ProductBox.appendChild(ProductLink)
+}
+
+let TfoCount = 0 
+
+const AddPizzaToOrder = (PizzaName) => {
+    if (TfoCount != 2) {
+        TfoCount++;
+
+        const pizza = document.createElement("p")
+        const quantity = document.createElement("p")
+        const OrderSelect = document.createElement("div")
+
+        OrderSelect.setAttribute("class", "OrderSelect")
+        pizza.innerText = PizzaName
+        quantity.innerText = 1
+
+        const OrderBox = document.getElementById("OrderBox")
+
+        OrderSelect.appendChild(pizza)
+        OrderSelect.appendChild(quantity)
+        OrderBox.appendChild(OrderSelect)
+
+        // Can add more functionality to save the pizzas selected into an array and send that into cart as an object methinks
+        // Also remember to reset TfoCount on cart press
+    }
+}
+
+const ClearOrder = () => {
+    TfoCount = 0
+    const OrderBox = document.getElementById("OrderBox")
+    OrderBox.innerHTML = ""
 }
