@@ -6,14 +6,15 @@
         <img src="{% static 'images/Logo'%}" alt="Logo" id="Logo">
     </a>
     <h1>Welcome to Pizza Palace</h1>    
-    <form action="" method="post">
+    <form method="POST">
+        {% csrf_token %}
         <div class="FormInput">
-            <label for="Email" >Email</label>
-            <input type="text" name="Email" placeholder="Email">
+            {{ form.username.label_tag }}
+            {{form.username}}
         </div>
         <div class="FormInput">
-            <label for="Password">Password</label>
-            <input type="password" id="Password" placeholder="Password">
+            {{ form.password.label_tag }}
+            {{form.password}}
         </div>
         <div class="FormButtons">
             <button type="submit" id="LoginButton">Log in</button>

@@ -1,13 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Users(models.Model):
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     FullName = models.CharField(max_length=255)
-    UserName = models.CharField(max_length=255)
-    Password = models.CharField(max_length=20)
-    admin = models.BooleanField(default=False)
-    profilepic = models.CharField(max_length=9999) #Need to change
-    creditcard = models.CharField(max_length=255) #Need to change mabye credit card can be its own table with user id attached
+    profilepic = models.CharField(max_length=9999)
     StreetName = models.CharField(max_length=255)
     HouseNumber = models.CharField(max_length=255)
     City  = models.CharField(max_length=255)

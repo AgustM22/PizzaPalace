@@ -6,19 +6,47 @@
         <img src="{% static 'images/Logo'%}" alt="Logo" id="Logo">
     </a>
     <h1 id="SignUpTitle">SignUpForm</h1>    
-    <form method="post">
+    <form method="POST">
         {% csrf_token %}
         <div class="FormInput">
+            <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+            {{ form.username.label_tag }}
+            {{form.username}}
+        </div>
+        <span class="helptext">
+            <p>Please Note</p>
+            <ul>
+                <li>Your password can’t be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can’t be a commonly used password.</li>
+                <li>Your password can’t be entirely numeric.</li>
+            </ul>
+        </span>
+        <div class="FormInput">
+            {{ form.password1.label_tag }}
+            {{form.password1}}
+        </div>
+        <div class="FormInput">
+            {{ form.password2.label_tag }}
+            {{form.password2}}
+        </div>
+
+        <!-- Below is old. kept to reuse later ;)-->
+        <!--<div class="FormInput">
             <label for="{{ form.FullName.id_for_label }}">Full Name</label>
             {{form.FullName}}
         </div>
         <div class="FormInput">
-            <label for="{{ form.UserName.id_for_label }}">User Name</label>
-            {{form.UserName}}
+            <label for="{{ form.email.id_for_label }}">User Name</label>
+            {{form.email}}
         </div>
         <div class="FormInput">
-            <label for="{{ form.Password.id_for_label }}">Password</label>
-            {{form.Password}}
+            <label for="{{ form.username.id_for_label }}">User Name</label>
+            {{form.username}}
+        </div>
+        <div class="FormInput">
+            <label for="{{ form.password.id_for_label }}">Password</label>
+            {{form.password}}
         </div>
         <div class="FormInput">
             <label for="{{ form.ConfirmPassword.id_for_label }}">Confirm</label>
@@ -39,12 +67,12 @@
         </div>
         <div class="FormInput">
             <label for="{{ form.Countrys.id_for_label }}">Country</label>
-                {{form.Country}}
+            {{form.Country}}
         </div>
         <div class="FormInput">
             <label for="{{ form.PostalCode.id_for_label }}">PostalCode</label>
             {{form.PostalCode}}
-        </div>
+        </div>-->
         <div class="FormButtons">
             <input type="submit" id="SignupButton" value="Sign up"/>
         </div>

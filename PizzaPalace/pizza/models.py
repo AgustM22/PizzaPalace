@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import Users
+from user.models import UserProfile
 
 #Moved Users Model to the user folder. ;)
 
@@ -39,7 +39,7 @@ class Includes(models.Model):
 
 class Order(models.Model):
     time = models.DateTimeField() 
-    UID = models.ForeignKey(Users, on_delete=models.CASCADE)
+    UID = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     
 class PartOf1(models.Model):
     OID = models.ForeignKey(Offer, on_delete=models.CASCADE)
