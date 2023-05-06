@@ -32,7 +32,7 @@
                 <p>Total</p>
                 <p>{{ offer.price|stringformat:"d" }}Kr.</p>
             </div>
-            <button id="AddToCartButton">Add To Cart</button>
+            <button id="AddToCartButton" onclick="AddToCart(1); history.go(-1);">Add To Cart</button>
         </div>
         {% endfor %}
     </div>

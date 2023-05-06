@@ -24,7 +24,20 @@
                 <p>Total</p>
                 <p>{{ pizza.pricelarge|stringformat:"d" }}Kr.</p>
             </div>
-            <button id="AddToCartButton">Add To Cart</button>
+            <button id="AddToCartButton" onclick="AddToCart(2); history.go(-1);">Add To Cart</button>
+        </div>
+    </div>
+    <div id="SelectionBox">
+        <div id="SizeBox">
+            <!-- Made to place different pizza sizes into, might make into a very large radiobutton /shrug/ -->
+        </div>
+        <div id="ToppingBox">
+            {% for topping in toppings %}
+                <div class="Topping">
+                    <p>{{ topping.name }}</p>
+                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}"> 
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

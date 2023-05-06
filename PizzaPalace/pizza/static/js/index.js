@@ -119,7 +119,6 @@ const PopulateProd = (pizza) => {
 }
 
 let TfoCount = 0 
-
 const AddPizzaToOrder = (PizzaName) => {
     if (TfoCount != 2) {
         TfoCount++;
@@ -147,4 +146,13 @@ const ClearOrder = () => {
     TfoCount = 0
     const OrderBox = document.getElementById("OrderBox")
     OrderBox.innerHTML = ""
+}
+
+const AddToCart = (num) => {
+    if (num == 1) {
+        // Offers
+    }
+    else {
+        // Pizzas
+    }
 }
