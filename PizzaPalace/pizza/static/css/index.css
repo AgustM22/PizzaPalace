@@ -310,6 +310,8 @@ footer > * > h2 {
 
 /* Pizza View */
 #PizzaPage {
+    display: flex;
+    flex-direction: column;
     font-family: var(--Font-Family);
     position: absolute;
     top: 20%;
@@ -347,6 +349,25 @@ footer > * > h2 {
 
 .PizzaDesc {
     font-size: 2em;
+}
+
+#SelectionBox {
+    font-family: var(--Font-Family);
+}
+
+#ToppingBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.Topping {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 10px;
+    margin: 1em;
+    padding: 1em;
 }
 
 /* Offer View */
