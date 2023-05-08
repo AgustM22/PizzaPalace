@@ -1,11 +1,7 @@
 from django.db import models
+from user.models import UserProfile
 
-class Users(models.Model):
-    name = models.CharField(max_length=255)
-    password = models.CharField(max_length=20)
-    admin = models.BooleanField()
-    profilepic = models.CharField(max_length=9999)
-    creditcard = models.CharField(max_length=255)
+#Moved Users Model to the user folder. ;)
 
 class Tags(models.Model):
     name = models.CharField(max_length=255)
@@ -43,7 +39,7 @@ class Includes(models.Model):
 
 class Order(models.Model):
     time = models.DateTimeField() 
-    UID = models.ForeignKey(Users, on_delete=models.CASCADE)
+    UID = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     
 class PartOf1(models.Model):
     OID = models.ForeignKey(Offer, on_delete=models.CASCADE)

@@ -80,6 +80,12 @@ header > * {
     width: 4em;
 }
 
+main {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
 
 
 footer {
@@ -224,7 +230,20 @@ footer > * > h2 {
     margin: auto;
 }
 
-/* Menu and Offer Stuff */
+.SignUpForm {
+    max-width: 700px;
+    width: 100%;
+    background: var(--black);
+    padding: 25px 30px;
+    border-radius: 5px;
+    border-radius: 40px;
+    border: var(--border-thickness);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
+    color: var(--white);
+    font-family: var(--Font-Family);
+}
+    /* Menu Stuff */
 
 #MainBlock {
     width: 80%;
