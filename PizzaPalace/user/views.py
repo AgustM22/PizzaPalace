@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-
+from user.models import UserProfile
+from user.forms.ProfileForm import ProfileForm
 
 # Create your views here.
 
@@ -17,20 +18,16 @@ def signup(request):
     return render(request, 'user/signup.html' , {
         'form': UserCreationForm()
     })
-"""
-def login(request):
-    
+
+def profile(request):
+    profile = UserProfile.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        username = request.POST['UserName']
-        password = request.POST['Password']
-        user = MyBackend.authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-        else:
-            # Invalid login
-            return redirect('login')
-    return render(request, 'user/login.html' , {
-        'form': LoginForm()
+        form = ProfileForm(instance=profile,data=request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect(request,'user/profile.html')
+    return render(request, 'user/profile.html', {
+        'form':ProfileForm(instance=profile)
     })
-"""

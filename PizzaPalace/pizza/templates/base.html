@@ -20,7 +20,7 @@
         <div class="HeaderRight">
             <a href="/cart"><img src="{% static 'images/shopping-cart.svg'%}" alt="ShoppingCart" id="ShoppingCart"></a>
             {% if user.is_authenticated %}
-                <h1>Profile pic</h1>
+                <a href="{% url 'profile' %}"><h1>Profile pic</h1></a>
             {% else %}
                 <a href="{% url 'login' %}"><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
             {% endif %}    
