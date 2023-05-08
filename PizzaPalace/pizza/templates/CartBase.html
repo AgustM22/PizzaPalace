@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="Cart">
+        <div class="CartContents">
+            {% block CartContents %}
+            {% endblock %}
+        </div>
+        <div class="CartBalance">
+            <div class="CartBalanceContents">
+                <div class="ProductsName">
+                    <p>Product</p>
+                    {% for pizza in cart %}
+                        <p>{{ pizza.name }}</p>
+                    {% endfor %}
+                </div>
+                <div class="ProductsQuantity">
+                    <p>Quantity</p>
+                    {% for pizza in cart %}
+                        <p>{{ pizza.quantity }}</p>
+                    {% endfor %}
+                </div>
+                <div class="ProductsPrice">
+                    <p>Price</p>
+                    {% for pizza in cart %}
+                        <p>{{ pizza.price }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+                <!-- Line Here?-->
+            <div class="CartBalanceTotal">
+                <p>Total</p>
+                <p>test</p> <!--Needs a DJango block to display total-->
+            </div>
+            <button id="CheckoutButton">Checkout</button> <!--Needs functinality to remove from cart-->
+        </div>
+    </section>
+{% endblock %}

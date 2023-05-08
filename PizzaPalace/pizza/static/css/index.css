@@ -1,12 +1,13 @@
 :root {
     /* colors */
-    --black: black;
-    --white: white;
+    --BackgroundColor: black;
+    --TextColor: white;
     --PrimaryColor: #FFE600;
     --SecondaryColor: #C31E1A;
 
     /* sizes */
-    --Large-font: 2rem;
+    --LargeFont: 2rem;
+    --MediumFont: 1.5rem;
 
     --card-width: 400px;
 	--card-height: 600px;
@@ -15,7 +16,7 @@
 	--card-border-radius: 50px;
     --card-transition-duration: 500ms;
 
-    --Font-Family: sans-serif;
+    --FontFamily: sans-serif;
 
     --border-thickness: .2em;
     --border-style: solid;
@@ -39,10 +40,10 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--TextColor);
+    background-color: var(--BackgroundColor);
     margin: 0;
-    font-size: var(--Large-font);
+    font-size: var(--LargeFont);
     align-items: center;
     border-bottom: 0.2em solid;
     border-color: var(--SecondaryColor);
@@ -86,8 +87,8 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--TextColor);
+    background-color: var(--BackgroundColor);
     margin: 0;
     font-size: 1em;
     align-items: center;
@@ -107,7 +108,7 @@ footer > * {
 
 footer > * > h2 {
     align-self: center;
-    font-family: var(--Font-Family);
+    font-family: var(--FontFamily);
 }
 
 .FotterColorText {
@@ -135,7 +136,7 @@ footer > * > h2 {
 	box-sizing: border-box;
 	border: var(--card-border);
 	border-radius: var(--card-border-radius);
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -148,7 +149,7 @@ footer > * > h2 {
 
 .HomePageBody .Card h2{
     margin-bottom: 2em;
-    font-family: var(--Font-Family);
+    font-family: var(--FontFamily);
 }
 
 .HomePageBody .Card img{
@@ -158,8 +159,8 @@ footer > * > h2 {
 
 .HomePageBody a {
     text-decoration: none;
-    color: var(--white);
-    font-size: var(--Large-font);
+    color: var(--TextColor);
+    font-size: var(--LargeFont);
 }
 
 .HomePageBody .Card:hover {
@@ -174,7 +175,7 @@ footer > * > h2 {
     justify-content: center;
     align-items: center;
     width:30%;
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     border-color: var(--SecondaryColor); 
     margin: auto;
     min-height: 60vh;
@@ -182,27 +183,32 @@ footer > * > h2 {
     border: var(--border-thickness);
     border-style: var(--border-style);
     border-color: var(--SecondaryColor);
-    color: var(--white);
-    font-family: var(--Font-Family);
+    color: var(--TextColor);
+    font-family: var(--FontFamily);
 }
 
 
-.FormInput{
+.FormInput {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    border-radius: var(--pilled-shape-radius);
+    width: 100%;
+    padding: 10px;
+    height: 40px;
 }
 
 .FormInput label {
-    color: var(--white);
-    font-family: var(--Font-Family);
+    color: var(--TextColor);
+    font-family: var(--FontFamily);
+    padding-left: 20px;
 }
 
 .FormButtons {
     display:  flex;
     justify-content:space-between;
 }
-.FormButtons button{
+.FormButtons button {
     cursor: pointer;
     border: 0;
     border-radius: 4px;
@@ -212,15 +218,6 @@ footer > * > h2 {
     padding: 10px 0;
 }
 
-.FormInput input{
-    border-radius: var(--pilled-shape-radius);
-    width: 100%;
-    padding: 10px;
-    height: 40px;
-}
-.FormInput label{
-    padding-left: 20px;
-}
 
 .RegisterForm #Logo {
     width: 10em;
@@ -490,3 +487,134 @@ footer > * > h2 {
   .dropdown-content a:hover {background-color: #ddd;}
   .dropdown:hover .dropdown-content {display: block;}
   .dropdown:hover .dropbtn {background-color: #ffc400;}
+
+/* Cart */
+
+.CartBalance {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--TextColor);
+    background-color: var(--BackgroundColor);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
+    width: var(--card-width);
+	height: var(--card-height);
+    font-family: var(--FontFamily);
+    font-size: var(--MediumFont);
+    max-height: 600px;
+}
+.CartBalanceContents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.Cart {
+    display:  flex;
+    justify-content: center;
+    padding: 10px;
+    max-height: 80vh;
+}
+.CartBalanceTotal {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+#CheckoutButton {
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    width: 60%;
+    padding: 10px 0;
+}
+.ProductsQuantity {
+    text-align: center;
+}
+.ProductsPrice {
+    text-align: end;
+}
+
+.CartContents {
+    margin-right: 10px;
+    width: 50%;
+    max-height: 600px;
+    background-color: var(--BackgroundColor);
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
+    overflow-y: scroll;
+    color: var(--TextColor);
+    display: flex;
+    flex-direction: column;
+}
+
+.CartProduct {
+    color: var(--TextColor);
+    display: flex;
+    width: 100%;
+    font-size: var(--LargeFont);
+    flex-direction: row;
+    gap: 20px;
+    border-bottom-color: var(--SecondaryColor);
+    border-bottom-style: var(--border-style);
+}
+.ProductImg {
+    width: 30%;
+}
+.ProductText {
+    margin-left: 20px;
+    width: 30%;
+}
+
+
+.ProductButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+.minus, .plus{
+    border-radius:4px;
+    padding:10px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.ProductButtons input{
+    height:34px;
+    width: 100px;
+    text-align: center;
+    font-size: 26px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    display: inline-block;
+    vertical-align: middle;
+} 
+
+/* Credit Card*/
+
+.CreditCardInformation {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}
+.CreditCardSmallDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.CCSmallDetail{
+    display: flex;
+    flex-direction: column;
+}
+.CreditCardInformation input{
+    width: 100%;
+    padding: 10px;
+    height: 10px;
+}
