@@ -3,6 +3,9 @@
 
     <div class="Profile">
         <h1>Profile Settings</h1>
+        {% if user.is_authenticated %}
+            <img src="{{ user.userprofile.ProfilePic }}" alt="ProfileImage" />
+        {% endif %}
         <form method="post">
             <div class="FormInput">
                 {% csrf_token %}
@@ -14,7 +17,6 @@
                 {{form.PhoneNumber}}
             </div>
             <div class="FormInput">
-                <img src="{{ user.UserProfile.ProfilePic }}" alt="ProfileImage">
                 {{ form.ProfilePic.label_tag }}
                 {{form.ProfilePic}}
             </div>
