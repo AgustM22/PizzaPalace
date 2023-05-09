@@ -1,8 +1,11 @@
 // Stuff for Menu
 const SearchFilter = async () => {
     const Filter = document.getElementById("search").value
-    const response = await axios("/menu/filter", {params: {"filter": Filter}})
+    const VegeterianFilter = document.getElementById("VegeterianCheck").checked
+    const SpicyFilter = document.getElementById("SpicyCheck").checked
+    const SortSelect = document.getElementById("SortSelect").value
 
+    const response = await axios("/menu/filter", {params: {"filter": Filter, "veg": VegeterianFilter, "spicy": SpicyFilter, "Sort": SortSelect}})
     const Pizzadict = response.data
 
     const Main = document.getElementById("ProductBox")
@@ -79,6 +82,9 @@ const PopulateProd = (pizza) => {
     const ProductElement = document.createElement("div")
     const ProductText = document.createElement("div")
     const ProductPrices = document.createElement("div")
+    const ProductTags = document.createElement("div")
+
+    ProductTags.setAttribute("class", "TagPics")
     ProductElement.setAttribute("class", "ProductElement")
     ProductText.setAttribute("class", "ProductText")
     ProductPrices.setAttribute("class", "ProductPrices")
@@ -109,6 +115,23 @@ const PopulateProd = (pizza) => {
     ProductText.appendChild(ProductIngredients)
     ProductElement.appendChild(ProductText)
 
+    if (pizza.veg === true) {
+        const VegetarianImg = document.createElement("img")
+        VegetarianImg.setAttribute("src", "/static/images/veg.png")
+        VegetarianImg.setAttribute("class", "VegeterianPic")
+        VegetarianImg.setAttribute("alt", "Vegeterian!")
+        ProductTags.appendChild(VegetarianImg)
+    }
+    if (pizza.spicy === true) {
+        const SpicyImg = document.createElement("img")
+        SpicyImg.setAttribute("src", "/static/images/fire.png")
+        SpicyImg.setAttribute("class", "SpicyPic")
+        SpicyImg.setAttribute("alt", "Spicy!")
+        ProductTags.appendChild(SpicyImg)
+    }
+    
+    ProductElement.appendChild(ProductTags)
+
     ProductPrices.appendChild(priceSmall)
     ProductPrices.appendChild(priceMedium)
     ProductPrices.appendChild(PriceLarge)
@@ -117,6 +140,11 @@ const PopulateProd = (pizza) => {
     ProductLink.appendChild(ProductElement)
     ProductBox.appendChild(ProductLink)
 }
+
+const DisplaySettings = () => {
+
+}
+
 
 let TfoCount = 0 
 const AddPizzaToOrder = (PizzaName) => {

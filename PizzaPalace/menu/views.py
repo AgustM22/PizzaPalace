@@ -1,26 +1,45 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from pizza.models import HasP, Product, Topping, HasT
+from operator import itemgetter
 
 def main(request):
     pizzacontext = HasP.objects.all().select_related('PID').select_related('TID')
     toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
-    PizzaDict = sort_data(pizzacontext, toppingcontext, False)
+    PizzaDict = sort_data(pizzacontext, toppingcontext, "1", False)
     return render(request, "menu.html", PizzaDict)
 
 def filter(request):
     if request.method == 'GET':
         filter = request.GET['filter']
+        veg = False
+        spicy = False
+        
+        if request.GET['veg'] == "true":
+            veg = True
+        if request.GET['spicy'] == "true":
+            spicy = True
+
         pizzacontext = HasP.objects.filter().select_related('PID').select_related('TID')
         toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
-        PizzaDict = sort_data(pizzacontext, toppingcontext, False)
+        PizzaDict = sort_data(pizzacontext, toppingcontext, "request.GET['sort']", False)
+
         EditedPizzaDict = []
         for pizza in PizzaDict["pizzas"]:
             if pizza["name"].lower().find(filter.lower()) != -1:
-                EditedPizzaDict.append(pizza)
+                TagCondition = True
+                if veg:
+                    if not pizza["veg"]:
+                        TagCondition = False
+                if spicy:
+                    if not pizza["spicy"]:
+                        TagCondition = False
+                if TagCondition:                      
+                    EditedPizzaDict.append(pizza)
+            
         return JsonResponse(EditedPizzaDict, safe=False)
 
-def sort_data(context, toppingcontext, view):
+def sort_data(context, toppingcontext, sort, view):
     lis = {}
     item_name = None
 
@@ -53,6 +72,15 @@ def sort_data(context, toppingcontext, view):
         return {"pizza": value}
     else:
         PizzaDict = {"pizzas": lis.values()}
+
+
+    # Sort isn't working, will check on it later.
+
+        # if sort == "1":
+        #     PizzaDict["Pizzas"] = sorted(PizzaDict["pizzas"], key=itemgetter('name')) 
+        # if sort == "0":
+        #     PizzaDict["Pizzas"] = sorted(PizzaDict["pizzas"], key=itemgetter('pricelarge')) 
+
         return PizzaDict
 
 def pizzaview(request, pizza_id):
@@ -60,11 +88,11 @@ def pizzaview(request, pizza_id):
     if not context:
         pizzacontext = HasP.objects.filter().select_related('PID').select_related('TID')
         toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
-        PizzaDict = sort_data(pizzacontext, toppingcontext, False)
+        PizzaDict = sort_data(pizzacontext, toppingcontext, request.GET['sort'], False)
         return render(request, "menu.html", PizzaDict)
     else:
         pizzacontext = HasP.objects.all().select_related('PID').select_related('TID').filter(PID=pizza_id)
         toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
-        PizzaDict = sort_data(pizzacontext, toppingcontext, True)
+        PizzaDict = sort_data(pizzacontext, toppingcontext, 0, True)
         PizzaDict["toppings"] = Topping.objects.all()
         return render(request, "pizzaview.html", PizzaDict)
