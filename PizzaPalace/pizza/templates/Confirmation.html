@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<section class="ConfirmationPageBody">
+    <div class="Card" id="ConfirmationCard">
+        <h2>Thank You!</h2>
+        <img src="{% static 'images/Check.png'%}" alt="CheckIcon" id="CheckIcon">
+        <p>We are getting your food ready.</p>
+        <p>will be notified once your food is ready to be picked up</p>
+        <a href="/"><button id="ExploreMoreBtn">Explore More<img src="{% static 'images/search.svg'%}" alt="Search Icon" ></button></a>
+    </div>
+</section>
+
+{% endblock %}

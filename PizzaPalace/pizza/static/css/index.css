@@ -746,3 +746,60 @@ footer > * > h2 {
     padding: 10px;
     height: 10px;
 }
+
+/* Confirmation page */
+
+.ConfirmationPageBody {
+    display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+    height: 80vh;
+    flex-direction: row;
+    width: 100%;
+}
+
+#ConfirmationCard {
+    font-family: var(--FontFamily);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--TextColor);
+    background-color: var(--BackgroundColor);
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
+    border-radius: var(--card-border-radius);
+    padding: 1em;
+    min-height: 60vh;
+}
+#ConfirmationCard h2{
+    font-size: var(--LargeFont);
+    font-weight: bolder;
+}
+#ConfirmationCard p {
+    width: 70%;
+    margin: 0;
+    text-align: center;
+    font-size: var(--MediumFont);
+}
+
+#ExploreMoreBtn {
+    margin-top: 1.1em;
+    background-color: var(--SecondaryColor);
+    border-style: var(--border-style);
+    border-radius: var(--pilled-shape-radius);
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+    font-size: var(--SmallFont);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#ConfirmationCard a{
+    text-decoration: none;
+}
+#CheckIcon {
+    width: 400px;
+    height: 400px;
+}
