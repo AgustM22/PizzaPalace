@@ -5,8 +5,17 @@
 <div id="MainBlock">
     <div id="SearchBar">
         <input type="text" id="search" placeholder="Search..." oninput="SearchFilter()"></input>
+        <select id="SortSelect">
+            <option value="1">Sort By Name</option>
+            <option value="2">Sort By Price</option>
+        </select>
         <p>Pizza</p>
-        <img src="/static/images/sliders.svg" alt="Settings" id="SliderSettings">
+        <div id="SearchbarCheckbox">
+            <p>Vegeterian:</p>
+            <input type="checkbox" id="VegeterianCheck" onchange="SearchFilter()">
+            <p>Spicy:</p>
+            <input type="checkbox" class="SearchbarCheckbox" id="SpicyCheck" onchange="SearchFilter()">
+        </div>
     </div>
     <div id="ProductBox">
         {% for pizza in pizzas %}
@@ -16,6 +25,14 @@
                     <div class="ProductText">
                         <h1 class="ProductName">{{ pizza.name }}</h1>
                         <p class="ProductIngredients">{{ pizza.toppings }}</p>
+                    </div>
+                    <div class="TagPics">
+                        {% if pizza.veg == True %}
+                            <img src="/static/images/veg.png" alt="Vegeterian!" class="VegeterianPic">
+                        {% endif %}
+                        {% if pizza.spicy == True %}
+                            <img src="/static/images/fire.png" alt="Spicy!" class="SpicyPic">
+                        {% endif %}
                     </div>
                     <div class="ProductPrices">
                         <p>Small: {{ pizza.pricesmall|stringformat:"d" }}Kr.</p>
