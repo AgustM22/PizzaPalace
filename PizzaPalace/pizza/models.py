@@ -6,13 +6,17 @@ from user.models import UserProfile
 class Tags(models.Model):
     name = models.CharField(max_length=255)
 
+class Foodgroup(models.Model):
+    name = models.CharField(max_length=255)
+
 class Topping(models.Model):
     name = models.CharField(max_length=255)
     price = models.FloatField()
+    foodgroup = models.ForeignKey(Foodgroup, on_delete=models.CASCADE, null=True, blank=True)
 
 class HasT(models.Model):
     TID = models.ForeignKey(Topping, on_delete=models.CASCADE)
-    TGID = models.ForeignKey(Tags, on_delete=models.CASCADE)
+    TGID = models.ForeignKey(Tags, on_delete=models.CASCADE)    
 
 class Product(models.Model):
     name = models.CharField(max_length=255)

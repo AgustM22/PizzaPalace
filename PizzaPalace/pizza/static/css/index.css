@@ -408,6 +408,16 @@ footer > * > h2 {
     bottom: -0.4em;
 }
 
+.VegeterianPic {
+    max-width: 20%;
+    max-height: 20%;
+}
+
+.SpicyPic {
+    max-width: 20%;
+    max-height: 20%;
+}
+
 /* Pizza View */
 #PizzaPage {
     display: flex;
