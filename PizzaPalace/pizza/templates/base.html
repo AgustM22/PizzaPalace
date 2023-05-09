@@ -15,12 +15,16 @@
             <a href="/offer" class="HeaderText"><h2>Offer</h2></a>
         </div>
         <div class="HeaderMiddle">
-            <a href="/homepage"><img src="{% static 'images/Logo'%}" alt="Logo" id="Logo"></a>
+            <a href="{% url 'homepage' %}"><img src="{% static 'images/Logo'%}" alt="Logo" id="Logo"></a>
         </div>
         <div class="HeaderRight">
             <a href="/cart"><img src="{% static 'images/shopping-cart.svg'%}" alt="ShoppingCart" id="ShoppingCart"></a>
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' %}"><h1>Profile pic</h1></a>
+                {% if user.userprofile.ProfilePic %}
+                    <a href="{% url 'profile' %}"><img src="{{ user.userprofile.ProfilePic }}" alt="ProfileImage" id="ProfileImage" /></a>
+                {% else %}
+                    <a href="{% url 'profile' %}"><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
+                {% endif %}
             {% else %}
                 <a href="{% url 'login' %}"><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
             {% endif %}    
@@ -32,14 +36,14 @@
     </main>
     <footer>
         <div class="FooterLeft">
-            <h2>Menu</h2>
+            <h2>Opening Hours</h2>
             <ul>
                 <li><p>Monday - Thursday: <span class="FotterColorText">11:00-21:00</span></p></li>
                 <li><p>Friday - Sunday: <span class="FotterColorText">11:00-21:00</span></p></li>
             </ul>
         </div>
         <div class="FooterMiddle">
-            <h2>Menu</h2>
+            <h2>Locations</h2>
             <ul>
                 <li><span class="FotterColorText">Skeifan 17 108 Reykjavík</span></p></li>
                 <li><p><span class="FotterColorText">UndirHlíð 2 600 Akureyri</span></p></li>
