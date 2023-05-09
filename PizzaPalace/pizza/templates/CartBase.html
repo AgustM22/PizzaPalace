@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <section class="Cart">
         <div class="CartContents">
             {% block CartContents %}
@@ -9,29 +10,29 @@
             <div class="CartBalanceContents">
                 <div class="ProductsName">
                     <p>Product</p>
-                    {% for pizza in cart %}
+                    {% for pizza in pizzas %}
                         <p>{{ pizza.name }}</p>
                     {% endfor %}
                 </div>
                 <div class="ProductsQuantity">
                     <p>Quantity</p>
-                    {% for pizza in cart %}
-                        <p>{{ pizza.quantity }}</p>
+                    {% for pizza in pizzas %}
+                        <p>{{ pizza.qty }}</p>
                     {% endfor %}
                 </div>
                 <div class="ProductsPrice">
                     <p>Price</p>
-                    {% for pizza in cart %}
-                        <p>{{ pizza.price }}</p>
+                    {% for pizza in pizzas %}
+                        <p class="SingleElementPrice">{{ pizza.price }}</p>
                     {% endfor %}
                 </div>
             </div>
                 <!-- Line Here?-->
-            <div class="CartBalanceTotal">
+            <div class="CartBalanceTotal" onclick="DisplayCart()">
                 <p>Total</p>
-                <p>test</p> <!--Needs a DJango block to display total-->
+                <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
             </div>
-            <button id="CheckoutButton">Checkout</button> <!--Needs functinality to remove from cart-->
+            <button id="CheckoutButton" onclick="DeleteCart()">Checkout</button> <!--Needs functionality to remove from cart-->
         </div>
     </section>
 {% endblock %}

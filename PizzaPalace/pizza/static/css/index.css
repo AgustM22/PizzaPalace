@@ -51,7 +51,7 @@ header {
 }
 
 .HeaderText {
-    color: var(--white);
+    color: var(--TextColor);
     text-decoration: none;
 }
 
@@ -238,8 +238,8 @@ footer > * > h2 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--TextColor);
+    background-color: var(--BackgroundColor);
     align-items: center;
     border-radius: 15px;
     font-size: 2em;
@@ -265,8 +265,8 @@ footer > * > h2 {
 
 .ProductElement {
     position: relative;
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--BackgroundColor);
+    color: var(--TextColor);
     display: flex;
     flex-direction: row;
     font-size: 1.8em;
@@ -327,18 +327,18 @@ footer > * > h2 {
 #PizzaPic {
     border: var(--card-border);
 	border-radius: var(--card-border-radius);
-    border-color: var(--black);
+    border-color: var(--BackgroundColor);
     max-width: 40%;
     max-height: 40%;
 }
 
 #PizzaText {
 	border-radius: var(--card-border-radius);
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     margin-left: 1em;
     margin-right: 1em;
     padding: 1.5em;
-    color: var(--white);
+    color: var(--TextColor);
     width: 45%;
 }
 
@@ -363,8 +363,8 @@ footer > * > h2 {
 .Topping {
     display: flex;
     flex-direction: row;
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--BackgroundColor);
+    color: var(--TextColor);
     border-radius: 10px;
     margin: 1em;
     padding: 1em;
@@ -388,18 +388,18 @@ footer > * > h2 {
 #OfferPic {
     border: var(--card-border);
 	border-radius: var(--card-border-radius);
-    border-color: var(--black);
+    border-color: var(--BackgroundColor);
     max-width: 40%;
     max-height: 40%;
 }
 
 #OfferText {
 	border-radius: var(--card-border-radius);
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     margin-left: 1em;
     margin-right: 1em;
     padding: 1.5em;
-    color: var(--white);
+    color: var(--TextColor);
     width: 45%;
 }
 
@@ -415,9 +415,9 @@ footer > * > h2 {
 /* Payment Bubble */
 
 .PayBox {
-    background-color: var(--black);
+    background-color: var(--BackgroundColor);
     border-radius: var(--card-border-radius);
-    color: var(--white);
+    color: var(--TextColor);
     width: 20%;
 }
 
@@ -458,7 +458,7 @@ footer > * > h2 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    color: var(--black);
+    color: var(--BackgroundColor);
     background-color: var(--PrimaryColor);
     font-weight: bold;
     font-size: 1em;
@@ -473,7 +473,7 @@ footer > * > h2 {
 .dropbtn {
     border-radius: 10px;
     background-color: var(--PrimaryColor);
-    color: var(--black);
+    color: var(--BackgroundColor);
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -490,16 +490,16 @@ footer > * > h2 {
     border-radius: 10px;
     display: none;
     position: absolute;
-    background-color: var(--white);
+    background-color: var(--TextColor);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px var(--black);
+    box-shadow: 0px 8px 16px 0px var(--BackgroundColor);
     z-index: 1;
   }
   
   .dropdown-content a {
     border-radius: 10px;
     font-weight: bold;
-    color: var(--black);
+    color: var(--BackgroundColor);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -585,7 +585,7 @@ footer > * > h2 {
 .ProductImg {
     width: 30%;
 }
-.ProductText {
+.ProductPaymentText {
     margin-left: 20px;
     width: 30%;
 }

@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
-cart = [
+
+cartdata = [
     {
         "name": "Margharita",
         "ingredients": "Cheese, Sauce",
@@ -76,4 +78,50 @@ cart = [
 ]
 
 def main(request):
-    return render(request, "CreditCardDetails.html",context= {"cart":cart})
+    if not request.session.get('cart'):
+        createcart(request)
+
+    return render(request, "CreditCardDetails.html", context = request.session['cart'])
+
+def createcart(request):
+    request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
+
+def addToCart(request):
+    if not request.session.get('cart'):
+        createcart(request)
+
+    newpizza = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "additionaltoppings": str(request.GET['additionaltoppings'])}
+    if request.GET['type'] == "pizza":
+        if request.session['cart']["pizzas"] == []:
+            request.session['cart']["pizzas"] = [newpizza]
+            request.session['cart']['fullprice'] += int(newpizza['price'][0:-3])
+        else:
+            found = False
+            for item in request.session['cart']["pizzas"]:
+                if item["name"] == newpizza["name"] and item["price"] == newpizza["price"] and item["additionaltoppings"] == newpizza["additionaltoppings"]:
+                    item["qty"] += 1
+                    found  = True
+                    request.session['cart']['fullprice'] += int(newpizza['price'][0:-3])
+            if not found:
+                request.session['cart']["pizzas"].append(newpizza)
+                request.session['cart']['fullprice'] += int(newpizza['price'][0:-3])
+    else:
+        pass
+    
+    request.session.modified = True
+    return JsonResponse(100, safe=False)
+
+def getcart(request):
+    if not request.session.get('cart'):
+        createcart(request)
+
+    return JsonResponse(request.session['cart'], safe=False)
+
+def deletecart(request):
+    try:
+        del request.session['cart']
+    except KeyError:
+        pass
+
+    request.session.modified = True
+    return JsonResponse(100, safe=False)

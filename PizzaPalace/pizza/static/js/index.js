@@ -128,6 +128,8 @@ const AddPizzaToOrder = (PizzaName) => {
         const OrderSelect = document.createElement("div")
 
         OrderSelect.setAttribute("class", "OrderSelect")
+        pizza.setAttribute("class", "PizzaOrderName")
+        
         pizza.innerText = PizzaName
         quantity.innerText = 1
 
@@ -136,9 +138,6 @@ const AddPizzaToOrder = (PizzaName) => {
         OrderSelect.appendChild(pizza)
         OrderSelect.appendChild(quantity)
         OrderBox.appendChild(OrderSelect)
-
-        // Can add more functionality to save the pizzas selected into an array and send that into cart as an object methinks
-        // Also remember to reset TfoCount on cart press
     }
 }
 
@@ -148,11 +147,80 @@ const ClearOrder = () => {
     OrderBox.innerHTML = ""
 }
 
-const AddToCart = (num) => {
+const AddToCart = async (num) => {
     if (num == 1) {
         // Offers
+        const OfferId = document.getElementById("OfferText").getAttribute("name");
+        const DataDict = {}
+        DataDict["type"] = "offer"
+
+        const items = document.getElementsByClassName("PizzaOrderName")
+        const itemArray = []
+        items.forEach((item) => {
+            itemArray.push(item.innerHTML)
+        })
+        
+        DataDict["item"] = itemArray
+        DataDict["price"] = document.getElementById("FullPrice").innerHTML;
+        DataDict["name"] = document.getElementById("OfferText").innerHTML;
+        DataDict["qty"] = 1;
+        const response = await axios("/cart/addcart", {params: DataDict})
     }
     else {
         // Pizzas
+        const PizzaTitle = document.getElementById("PizzaTitle").textContent
+        const Price = document.getElementById("FullPrice").textContent
+        const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
+        let AdditionalToppings = ""
+
+        Toppings.forEach((topping) => {
+            AdditionalToppings += topping.id + ", "
+        })
+        AdditionalToppings = AdditionalToppings.slice(0, -2)
+        const response = await axios("/cart/addcart", {params: {"type": "pizza", "name": PizzaTitle, "price": Price, "qty": 1, "additionaltoppings": AdditionalToppings}})
     }
+}
+
+const DisplayCart = async () => {
+    const response = await axios("/cart/getcart")
+    console.log(response.data)
+}
+
+const DeleteCart = async () => {
+    const response = await axios("/cart/deletecart")
+    console.log(response.data)
+}
+
+const ChangePizzaTopping = (checkbox) => {
+    if (checkbox.checked) {
+        const OrderBox = document.getElementById("OrderBox")
+        const ToppingDetails = checkbox.value.split("+")
+
+        const topping = document.createElement("p")
+        topping.setAttribute("class", "AdditionalToppings")
+        topping.setAttribute("id", ToppingDetails[0])
+        topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
+
+        topping.innerHTML = "+ " + ToppingDetails[0]
+        OrderBox.appendChild(topping)
+        ChangePrice()
+    }
+    else {
+        const ToppingDetails = checkbox.value.split("+")
+        const topping = document.getElementById(ToppingDetails[0])
+        topping.parentNode.removeChild(topping)
+        ChangePrice()
+    }
+}
+
+const ChangePrice = () => {
+    const OrderBoxChildren = Array.from(document.getElementById("OrderBox").children)
+    let TotalPrice = 0
+
+    OrderBoxChildren.forEach((child) => {
+        TotalPrice += parseInt(child.attributes.value.value)    
+    })
+
+    const PriceElem = document.getElementById("FullPrice")
+    PriceElem.innerText = TotalPrice + "Kr."
 }

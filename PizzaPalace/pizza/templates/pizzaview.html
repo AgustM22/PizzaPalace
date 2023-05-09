@@ -15,14 +15,14 @@
                 <p>Quantity</p>
             </div>
             <div id="OrderBox">
-                <div class="OrderSelect">
+                <div class="OrderSelect" value="{{ pizza.pricelarge|stringformat:'d' }}">
                     <p>{{ pizza.name }}</p>
                     <p>1</p>
                 </div>
             </div>
             <div class="PayText">
                 <p>Total</p>
-                <p>{{ pizza.pricelarge|stringformat:"d" }}Kr.</p>
+                <p id="FullPrice">{{ pizza.pricelarge|stringformat:"d" }}Kr.</p>
             </div>
             <button id="AddToCartButton" onclick="AddToCart(2); history.go(-1);">Add To Cart</button>
         </div>
@@ -35,7 +35,7 @@
             {% for topping in toppings %}
                 <div class="Topping">
                     <p>{{ topping.name }}</p>
-                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}"> 
+                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)"> 
                 </div>
             {% endfor %}
         </div>
