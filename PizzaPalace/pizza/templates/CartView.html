@@ -1,18 +1,18 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
-    {% for product in cart %}
+    {% for pizza in pizzas %}
     <div class="CartProduct">
-        <img src="{{ product.picture }}" alt="PizzaImg" class="ProductImg">
+        <img src="{{ pizza.img }}" alt="PizzaImg" class="ProductImg">
         <div class="ProductPaymentText">
-            <h1 class="ProductName">{{ product.name }}</h1>
-            <p class="ProductIngredients">{{ product.ingredients }}</p>
+            <h1 class="ProductName">{{ pizza.name }}</h1>
+            <p class="ProductIngredients">{{ pizza.additionaltoppings }}</p>
         </div>
         <div class="ProductButtons">
             <!--TODO: Add Onclick Functions to adjust input Value-->
-            <button class="minus">-</button>
-            <input type="text" value="1"/>
-            <button class="plus">+</button>
-            <Button>x</Button>
+            <button class="reduce">-</button>
+            <input type="text" value="{{ pizza.qty }}"/>
+            <button class="add">+</button>
+            <Button class="remove">x</Button>
         </div>
     </div>
     {% endfor %}

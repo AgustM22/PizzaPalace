@@ -170,6 +170,7 @@ const AddToCart = async (num) => {
         // Pizzas
         const PizzaTitle = document.getElementById("PizzaTitle").textContent
         const Price = document.getElementById("FullPrice").textContent
+        const PizzaSrc = document.getElementById("PizzaPic").src;
         const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
         let AdditionalToppings = ""
 
@@ -177,7 +178,7 @@ const AddToCart = async (num) => {
             AdditionalToppings += topping.id + ", "
         })
         AdditionalToppings = AdditionalToppings.slice(0, -2)
-        const response = await axios("/cart/addcart", {params: {"type": "pizza", "name": PizzaTitle, "price": Price, "qty": 1, "additionaltoppings": AdditionalToppings}})
+        const response = await axios("/cart/addcart", {params: {"type": "pizza", "name": PizzaTitle, "price": Price, "qty": 1, "additionaltoppings": AdditionalToppings, "img": PizzaSrc}})
     }
 }
 
