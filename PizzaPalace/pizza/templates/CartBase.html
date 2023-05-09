@@ -27,12 +27,11 @@
                     {% endfor %}
                 </div>
             </div>
-                <!-- Line Here?-->
             <div class="CartBalanceTotal" onclick="DisplayCart()">
                 <p>Total</p>
                 <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
             </div>
-            <button id="CheckoutButton" onclick="DeleteCart()">Checkout</button> <!--Needs functionality to remove from cart-->
+            <button id="CheckoutButton" onclick="DeleteCart()">Checkout</button>
         </div>
     </section>
 {% endblock %}
