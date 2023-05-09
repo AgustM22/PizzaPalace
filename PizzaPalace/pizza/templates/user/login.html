@@ -16,13 +16,15 @@
             {{ form.password.label_tag }}
             {{form.password}}
         </div>
-        <div class="FormButtons">
+        <div class="FormButtons" id="LoginButton">
             <button type="submit" id="LoginButton">Log in</button>
         </div>
     </form>
-    <a href="{% url 'signup' %}" id="SignupButton">
-        <button>Sign up</button>
-    </a>
+    <div class="FormButtons" id="SignupButton">
+        <a href="{% url 'signup' %}" id="SignupButton">
+            <button>Sign up</button>
+        </a>
+    </div>
 </div>
 
 {% endblock %}

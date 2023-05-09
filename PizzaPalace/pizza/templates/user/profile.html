@@ -2,23 +2,36 @@
 {% block content %}
 
     <div class="Profile">
-        <h1>Profile Settings</h1>
-        {% if user.is_authenticated %}
-            <img src="{{ user.userprofile.ProfilePic }}" alt="ProfileImage" />
-        {% endif %}
+        <div class="ProfileHeading">
+            <a href="{% url 'logout' %}">Logout</a>
+            <h1>Profile Settings</h1>
+        </div>
+        
         <form method="post">
-            <div class="FormInput">
-                {% csrf_token %}
-                {{ form.FullName.label_tag }}
-                {{form.FullName}}
-            </div>
-            <div class="FormInput">
-                {{ form.PhoneNumber.label_tag }}
-                {{form.PhoneNumber}}
-            </div>
-            <div class="FormInput">
-                {{ form.ProfilePic.label_tag }}
-                {{form.ProfilePic}}
+            <div class="ProfileMainInfo">
+                <div class="MainInfoLeft">
+                    <div class="FormInput">
+                        {% csrf_token %}
+                        {{ form.FullName.label_tag }}
+                        {{form.FullName}}
+                    </div>
+                    <div class="FormInput">
+                        {{ form.PhoneNumber.label_tag }}
+                        {{form.PhoneNumber}}
+                    </div>
+                </div>
+                <div class="MainInfoRight">
+                    {% if user.userprofile.ProfilePic %}
+                    <img src="{{ user.userprofile.ProfilePic }}" alt="ProfileImage" id="ProfileImage" />
+                        {% else %}
+                        {% load static %}
+                    <img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon">
+                        {% endif %}
+                    <div class="FormInput">
+                        {{ form.ProfilePic.label_tag }}
+                        {{form.ProfilePic}}
+                    </div>
+                </div>
             </div>
             <div class="FormInput">
                 {{ form.StreetName.label_tag }}
@@ -33,18 +46,19 @@
                 {{form.City}}
             </div>
             <div class="FormInput">
-                {{ form.Country.label_tag }}
-                {{form.Country}}
-            </div>
-            <div class="FormInput">
                 {{ form.PostalCode.label_tag }}
                 {{form.PostalCode}}
             </div>
-
-            <div class="FormButtons">
-                <input type="submit" id="SignupButton" value="Save"/>
+            <div class="FormInput">
+                {{ form.Country.label_tag }}
+                {{form.Country}}
             </div>
-        </form>
+            <div class="FormButtons">
+                <button type="submit" id="SignupButton" >Save</button>
+            </div>
 
+            
+
+        </form>
     </div>
 {% endblock %}
