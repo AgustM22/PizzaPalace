@@ -214,6 +214,7 @@ footer > * > h2 {
     display:  flex;
     justify-content:space-between;
 }
+
 .FormButtons button {
     cursor: pointer;
     border: 0;
@@ -223,7 +224,6 @@ footer > * > h2 {
     width: 200px;
     padding: 10px 0;
 }
-
 
 .RegisterForm #Logo {
     width: 10em;

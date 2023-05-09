@@ -81,7 +81,7 @@ def main(request):
     if not request.session.get('cart'):
         createcart(request)
 
-    return render(request, "CreditCardDetails.html", context = request.session['cart'])
+    return render(request, "CartView.html", context = request.session['cart'])
 
 def createcart(request):
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
@@ -90,7 +90,8 @@ def addToCart(request):
     if not request.session.get('cart'):
         createcart(request)
 
-    newpizza = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "additionaltoppings": str(request.GET['additionaltoppings'])}
+    newpizza = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "additionaltoppings": str(request.GET['additionaltoppings']), "img": str(request.GET['img'])}
+    print(str(request.GET['img']))
     if request.GET['type'] == "pizza":
         if request.session['cart']["pizzas"] == []:
             request.session['cart']["pizzas"] = [newpizza]

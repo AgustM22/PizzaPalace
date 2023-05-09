@@ -23,8 +23,8 @@ urlpatterns = [
     path('homepage/', include('Homepage.urls')),
     path('menu/', include('menu.urls')),
     path('offer/', include('offer.urls')),
-    path('cart/', include('cart.urls'))
-    path('user/',include('user.urls')),
+    path('cart/', include('cart.urls')),
+    path('user/', include('user.urls')),
     path('menu/', include('menu.urls'))
 
 ]
