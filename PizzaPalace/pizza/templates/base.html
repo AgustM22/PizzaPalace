@@ -19,11 +19,17 @@
         </div>
         <div class="HeaderRight">
             <a href="/cart"><img src="{% static 'images/shopping-cart.svg'%}" alt="ShoppingCart" id="ShoppingCart"></a>
-            <a href="/login"><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}"><h1>Profile pic</h1></a>
+            {% else %}
+                <a href="{% url 'login' %}"><img src="{% static 'images/Profile-icon'%}" alt="Profile" id="ProfileIcon"></a>
+            {% endif %}    
         </div>
     </header>
-    {% block content %}
-    {% endblock %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
     <footer>
         <div class="FooterLeft">
             <h2>Menu</h2>

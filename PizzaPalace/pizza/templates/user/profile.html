@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="Profile">
+        <h1>Profile Settings</h1>
+        {% if user.is_authenticated %}
+            <img src="{{ user.userprofile.ProfilePic }}" alt="ProfileImage" />
+        {% endif %}
+        <form method="post">
+            <div class="FormInput">
+                {% csrf_token %}
+                {{ form.FullName.label_tag }}
+                {{form.FullName}}
+            </div>
+            <div class="FormInput">
+                {{ form.PhoneNumber.label_tag }}
+                {{form.PhoneNumber}}
+            </div>
+            <div class="FormInput">
+                {{ form.ProfilePic.label_tag }}
+                {{form.ProfilePic}}
+            </div>
+            <div class="FormInput">
+                {{ form.StreetName.label_tag }}
+                {{form.StreetName}}
+            </div>
+            <div class="FormInput">
+                {{ form.HouseNumber.label_tag }}
+                {{form.HouseNumber}}
+            </div>
+            <div class="FormInput">
+                {{ form.City.label_tag }}
+                {{form.City}}
+            </div>
+            <div class="FormInput">
+                {{ form.Country.label_tag }}
+                {{form.Country}}
+            </div>
+            <div class="FormInput">
+                {{ form.PostalCode.label_tag }}
+                {{form.PostalCode}}
+            </div>
+
+            <div class="FormButtons">
+                <input type="submit" id="SignupButton" value="Save"/>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}
