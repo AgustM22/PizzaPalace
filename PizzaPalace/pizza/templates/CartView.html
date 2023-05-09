@@ -3,38 +3,43 @@
     {% for pizza in pizzas %}
     <div class="CartProduct" id="product{{ pizza.name }}-{{ pizza.additionaltoppings }}">
         <img src="{{ pizza.img }}" alt="PizzaImg" class="ProductImg">
-        <div class="ProductPaymentText">
-            <h1 class="ProductName">{{ pizza.name }}</h1>
-            <p class="ProductIngredients">{{ pizza.additionaltoppings }}</p>
+        <div class="ProductDetails">
+            <div class="ProductPaymentText">
+                <h1 class="ProductName">{{ pizza.name }}</h1>
+                <p class="ProductIngredients">{{ pizza.additionaltoppings }}</p>
+            </div>
+            <div class="ProductButtons">
+                <button class="reduce" onclick="EditValue('reduce', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')">-</button>
+                <input type="text" value="{{ pizza.qty }}" onchange="EditValue('change', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')" id="value{{ pizza.name }}-{{ pizza.additionaltoppings }}"/>
+                <button class="add" onclick="EditValue('add', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')">+</button>
+                <Button class="Remove" onclick="EditValue('del', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')">x</Button>
+
+            </div>
         </div>
-        <div class="ProductButtons">
-            <!--TODO: Add Onclick Functions to adjust input Value-->
-            <button class="reduce" onclick="EditValue('reduce', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')">-</button>
-            <input type="text" value="{{ pizza.qty }}" onchange="EditValue('change', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')" id="value{{ pizza.name }}-{{ pizza.additionaltoppings }}"/>
-            <button class="add" onclick="EditValue('add', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')">+</button>
-            <Button class="remove" onclick="EditValue('del', '{{ pizza.name }}-{{ pizza.additionaltoppings }}')">x</Button>
-        </div>
+
     </div>
     {% endfor %}
     {% for offer in offers %}
     <div class="CartProduct" id="product{{ offer.name }}-{{ offer.item }}">
         <img src="{{ offer.img }}" alt="OfferImg" class="ProductImg">
-        <div class="ProductPaymentText">
-            <h1 class="ProductName">{{ offer.name }}</h1>
-            <p class="ProductIngredients">{{ offer.item }}</p>
+        <div class="ProductDetails">
+            <div class="ProductPaymentText">
+                <h1 class="ProductName">{{ offer.name }}</h1>
+                <p class="ProductIngredients">{{ offer.item }}</p>
+            </div>
+            <div class="ProductButtons">
+                <button class="reduce" onclick="EditValue('reduce', '{{ offer.name }}-{{ offer.item }}')">-</button>
+                <input type="text" value="{{ offer.qty }}" onchange="EditValue('change', '{{ offer.name }}-{{ offer.item }}')" id="value{{ offer.name }}-{{ offer.item }}"/>
+                <button class="add" onclick="EditValue('add', '{{ offer.name }}-{{ offer.item }}')">+</button>
+                <Button class="remove" onclick="EditValue('del', '{{ offer.name }}-{{ offer.item }}')">x</Button>
+            </div>
         </div>
-        <div class="ProductButtons">
-            <!--TODO: Add Onclick Functions to adjust input Value-->
-            <button class="reduce" onclick="EditValue('reduce', '{{ offer.name }}-{{ offer.item }}')">-</button>
-            <input type="text" value="{{ offer.qty }}" onchange="EditValue('change', '{{ offer.name }}-{{ offer.item }}')" id="value{{ offer.name }}-{{ offer.item }}"/>
-            <button class="add" onclick="EditValue('add', '{{ offer.name }}-{{ offer.item }}')">+</button>
-            <Button class="remove" onclick="EditValue('del', '{{ offer.name }}-{{ offer.item }}')">x</Button>
         </div>
-    </div>
+
     {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-<a href="/cart/checkout">
-    <button id="CheckoutButton">Overview</button> 
+<a href="/cart/checkout" id="CheckoutButton">
+    Proceed To Checkout
 </a>
 {% endblock %}

@@ -37,6 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    overflow: hidden;
 }
 
 header {
@@ -614,7 +615,6 @@ footer > * > h2 {
 #CartBalance {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     color: var(--TextColor);
     background-color: var(--BackgroundColor);
@@ -625,20 +625,19 @@ footer > * > h2 {
     font-family: var(--FontFamily);
     font-size: var(--MediumFont);
     max-height: 600px;
-}
-#CartBalanceContents {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
     overflow-x: hidden;
     overflow-y: auto;
 }
-#CartBalanceContents > * {
+
+#CartBalanceContents {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+
+}
+#CartBalanceContents > * {
+    flex-direction: column;
+    text-align: center;
     width: 100%;
 }
 
@@ -650,15 +649,10 @@ footer > * > h2 {
 }
 .CartBalanceTotal {
     display: flex;
-    width: 80%;
+    justify-content: space-around;
+    width: 100%;
 }
-#CheckoutButton {
-    border: 0;
-    border-radius: 4px;
-    font-weight: 600;
-    width: 60%;
-    padding: 10px 0;
-}
+
 .ProductsQuantity {
     text-align: center;
 }
@@ -666,9 +660,9 @@ footer > * > h2 {
     text-align: end;
 }
 
+
 .CartContents {
     margin-right: 10px;
-    width: 50%;
     max-height: 600px;
     background-color: var(--BackgroundColor);
     border-color: var(--SecondaryColor);
@@ -682,28 +676,50 @@ footer > * > h2 {
 .CartProduct {
     color: var(--TextColor);
     display: flex;
-    width: 100%;
+    width: 1000px;
     font-size: var(--LargeFont);
     flex-direction: row;
     gap: 20px;
     border-bottom-color: var(--SecondaryColor);
     border-bottom-style: var(--border-style);
 }
-.ProductImg {
+.CartProduct .ProductImg {
     width: 30%;
+    border-radius: 0;
+}
+.ProductDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 .ProductPaymentText {
-    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
     width: 30%;
 }
+.ProductPaymentText p,h1 {
+    margin: 0;
+    font-family: var(--FontFamily);
+}
 
-
+.ProductPaymentText h1 {
+    margin-top: 10px;
+    font-size: var(--LargeFont);
+    color: var(--PrimaryColor);
+    text-decoration: underline;
+}
+.ProductPaymentText p {
+    font-size: var(--SmallFont);
+}
 .ProductButtons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     justify-self: flex-end;
+    gap: 10px;
 }
 
 .minus, .plus{
@@ -714,16 +730,58 @@ footer > * > h2 {
     text-align: center;
 }
 .ProductButtons input{
-    height:34px;
-    width: 100px;
+    font-size: 2rem;
+    border-radius: 10px;
+    height: 3rem;
+    width: 5rem;
     text-align: center;
     font-size: 26px;
-    border:1px solid #ddd;
+    border:1px solid white;
     border-radius:4px;
     display: inline-block;
     vertical-align: middle;
 } 
+.Remove {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    align-self: center;
+    font-size: var(--MediumFont);
+    color: var(--BackgroundColor);
+    background-color: var(--TextColor);
+    border: none;
+    text-align: center;
+    margin-right: 30px;
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
+}
 
+.ProductButtons .reduce,.add {
+    padding: 0.5rem;
+    border-radius: 30%;
+    font-weight: bold;
+    font-size: var(--MediumFont);
+    width: 3rem;
+    background-color: var(--TextColor);
+    color: var(--BackgroundColor);
+    border-color: var(--PrimaryColor);
+}
+
+
+#CheckoutButton{
+    color: var(--BackgroundColor);
+    justify-content: center;
+    text-decoration: none;
+    border: 0;
+    border-radius: var(--pilled-shape-radius);
+    font-weight: 600;
+    width: 80%;
+    padding: 20px;
+    background-color: var(--PrimaryColor);
+    font-size: var(--MediumFont);
+    margin-bottom: 20px;
+    text-align: center;
+}
 /* Credit Card*/
 
 .CreditCardInformation {
