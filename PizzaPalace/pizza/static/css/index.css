@@ -8,6 +8,7 @@
     /* sizes */
     --LargeFont: 2rem;
     --MediumFont: 1.5rem;
+    --SmallFont: 1.3rem;
 
     --card-width: 400px;
 	--card-height: 600px;
@@ -23,6 +24,8 @@
 
     --pilled-shape-radius: 40px;
 }
+
+/* base */
 
 body {
     margin: 0;
@@ -55,7 +58,7 @@ header {
     text-decoration: none;
 }
 
-header > * {
+header * {
     display: flex;
     align-items: center;
 }
@@ -72,21 +75,17 @@ header > * {
     width: 3em;
 }
 
-#ProfileIcon {
+#ProfileIcon, #Logo {
     width: 4em;
 }
 
-#Logo {
-    width: 4em;
-}
 
 main {
     display: flex;
-    height: 100vh;
+    height: 79vh;
     justify-content: center;
     align-items: center;
 }
-
 
 footer {
     min-height: 100px;
@@ -122,7 +121,7 @@ footer > * > h2 {
     text-decoration: underline;
 }
 
-/* Homepage body */
+/* Homepage */
 
 .HomePageBody {
     display: flex;
@@ -134,9 +133,6 @@ footer > * > h2 {
 }
 
 .HomePageBody .Card {
-    /* This design comes from here: https://codepen.io/msandonini/pen/abaGKOa.
-        I have made my personal modifications to it. -Hermann Helgi
-    */
     width: var(--card-width);
 	height: var(--card-height);
 	box-sizing: border-box;
@@ -150,7 +146,6 @@ footer > * > h2 {
     transition-property: transform, background-image;
 	transition-duration: var(--card-transition-duration);
 	transition-timing-function: ease;
-
 }
 
 .HomePageBody .Card h2{
@@ -193,28 +188,31 @@ footer > * > h2 {
     font-family: var(--FontFamily);
 }
 
+.RegisterForm form{
+    width: 70%;
+}
 
 .FormInput {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    border-radius: var(--pilled-shape-radius);
-    width: 100%;
+    width: 90%;
     padding: 10px;
-    height: 40px;
+    height: 80px;
 }
 
 .FormInput label {
     color: var(--TextColor);
     font-family: var(--FontFamily);
     padding-left: 20px;
+    font-size: var(--SmallFont);
 }
 
 .FormButtons {
     display:  flex;
-    justify-content:space-between;
+    justify-content:center;
 }
-.FormButtons button {
+.FormButtons button,select {
     cursor: pointer;
     border: 0;
     border-radius: 4px;
@@ -222,6 +220,18 @@ footer > * > h2 {
     margin: 0 10px;
     width: 200px;
     padding: 10px 0;
+}
+
+#SignupButton,#CancelButton {
+    margin-top: 20px;
+}
+
+
+.FormInput input{
+    border-radius: var(--pilled-shape-radius);
+    width: 100%;
+    padding: 10px;
+    height: 40px;
 }
 
 
@@ -233,17 +243,88 @@ footer > * > h2 {
 .SignUpForm {
     max-width: 700px;
     width: 100%;
-    background: var(--black);
+    background: var(--BackgroundColor);
     padding: 25px 30px;
     border-radius: 5px;
     border-radius: 40px;
     border: var(--border-thickness);
     border-style: var(--border-style);
     border-color: var(--SecondaryColor);
-    color: var(--white);
-    font-family: var(--Font-Family);
+    color: var(--TextColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-    /* Menu Stuff */
+.SignUpForm * {
+    font-family: var(--FontFamily);
+}
+.SignUpForm #Logo {
+    width: 100px;
+}
+/* Profile */
+.Profile{
+    max-width: 700px;
+    width: 100%;
+    background: var(--BackgroundColor);
+    padding: 25px 30px;
+    border-radius: 5px;
+    border-radius: 40px;
+    border: var(--border-thickness);
+    border-style: var(--border-style);
+    border-color: var(--SecondaryColor);
+    color: var(--TextColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Profile form{
+    width: 100%;
+}
+.ProfileMainInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.MainInfoRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ProfileImage {
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+}
+
+.ProfileHeading{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.ProfileHeading a{
+    background-color: var(--TextColor);  
+    border-radius: 5px;
+    color: var(--BackgroundColor);
+    padding: .5em;
+    text-decoration: none;
+    text-align: center;
+    position: absolute;
+    top: 18%;
+    left: 38%;
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 10px;
+    width: 100px;
+    padding: 10px 0;
+}
+
+/* Menu */
 
 #MainBlock {
     width: 80%;
@@ -518,7 +599,7 @@ footer > * > h2 {
   .dropdown-content a {
     border-radius: 10px;
     font-weight: bold;
-    color: var(--BackgroundColor);
+    color: var(--TextColor);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
