@@ -6,33 +6,34 @@
             {% block CartContents %}
             {% endblock %}
         </div>
-        <div class="CartBalance">
-            <div class="CartBalanceContents">
-                <div class="ProductsName">
+        <div id="CartBalance">
+            <div id="CartBalanceContents">
+                <div class="ProductTitle">
                     <p>Product</p>
-                    {% for pizza in pizzas %}
-                        <p>{{ pizza.name }}</p>
-                    {% endfor %}
-                </div>
-                <div class="ProductsQuantity">
                     <p>Quantity</p>
-                    {% for pizza in pizzas %}
-                        <p>{{ pizza.qty }}</p>
-                    {% endfor %}
-                </div>
-                <div class="ProductsPrice">
                     <p>Price</p>
-                    {% for pizza in pizzas %}
-                        <p class="SingleElementPrice">{{ pizza.price }}</p>
-                    {% endfor %}
                 </div>
-            </div>
+                {% for pizza in pizzas %}
+                    <div class="ProductStats" id="cart{{ pizza.name }}-{{ pizza.additionaltoppings }}" value="{{ pizza.qty }}-{{ pizza.price }}">
+                        <p>{{ pizza.name }}</p>
+                        <p id="qty{{ pizza.name }}-{{ pizza.additionaltoppings }}">{{ pizza.qty }}</p>
+                        <p class="SingleElementPrice">{{ pizza.price }}Kr.</p>
+                    </div>
+                {% endfor %}
+                {% for offer in offers %}
+                    <div class="ProductStats" id="cart{{ offer.name }}-{{ offer.item }}" value="{{ offer.qty }}-{{ offer.price }}">
+                        <p>{{ offer.name }}</p>
+                        <p id="qty{{ pizza.name }}-{{ pizza.additionaltoppings }}">{{ offer.qty }}</p>
+                        <p class="SingleElementPrice">{{ offer.price }}Kr.</p>
+                    </div>
+                {% endfor %}
                 <!-- Line Here?-->
-            <div class="CartBalanceTotal" onclick="DisplayCart()">
-                <p>Total</p>
-                <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
+                <div class="CartBalanceTotal">
+                    <p>Total</p>
+                    <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
+                </div>
+                {% block CheckoutButton %}
+                {% endblock %}
             </div>
-            <button id="CheckoutButton" onclick="DeleteCart()">Checkout</button> <!--Needs functionality to remove from cart-->
-        </div>
     </section>
 {% endblock %}

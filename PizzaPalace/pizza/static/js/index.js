@@ -150,26 +150,40 @@ const ClearOrder = () => {
 const AddToCart = async (num) => {
     if (num == 1) {
         // Offers
-        const OfferId = document.getElementById("OfferText").getAttribute("name");
         const DataDict = {}
-        DataDict["type"] = "offer"
-
-        const items = document.getElementsByClassName("PizzaOrderName")
-        const itemArray = []
+        const items = Array.from(document.getElementsByClassName("PizzaOrderName"))
+        let itemString = ""
         items.forEach((item) => {
-            itemArray.push(item.innerHTML)
+            itemString += (item.innerHTML) + ", "
         })
         
-        DataDict["item"] = itemArray
-        DataDict["price"] = document.getElementById("FullPrice").innerHTML;
-        DataDict["name"] = document.getElementById("OfferText").innerHTML;
+        DataDict["type"] = "offer"
+        DataDict["item"] = itemString
+        DataDict["price"] = document.getElementById("FullPrice").innerHTML.slice(0, -3);
+        DataDict["name"] = document.getElementById("OfferTitle").innerText;
         DataDict["qty"] = 1;
-        const response = await axios("/cart/addcart", {params: DataDict})
+        DataDict["img"] = document.getElementById("OfferPic").src;
+        
+        if ((document.getElementById("OfferText").getAttribute("name")) == 1) {
+            // Two For one Offer
+            if (TfoCount === 2) {
+                const response = await axios("/cart/addcart", {params: DataDict});
+                history.go(-2);
+                }
+            else {
+                alert("You must select two pizzas!")
+                }
+            }
+        else {
+            // Hottest Pizzas Offer
+            const response = await axios("/cart/addcart", {params: DataDict});
+            history.go(-1);
+        }
     }
     else {
         // Pizzas
         const PizzaTitle = document.getElementById("PizzaTitle").textContent
-        const Price = document.getElementById("FullPrice").textContent
+        const Price = document.getElementById("FullPrice").textContent.slice(0, -3);
         const PizzaSrc = document.getElementById("PizzaPic").src;
         const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
         let AdditionalToppings = ""
@@ -180,11 +194,6 @@ const AddToCart = async (num) => {
         AdditionalToppings = AdditionalToppings.slice(0, -2)
         const response = await axios("/cart/addcart", {params: {"type": "pizza", "name": PizzaTitle, "price": Price, "qty": 1, "additionaltoppings": AdditionalToppings, "img": PizzaSrc}})
     }
-}
-
-const DisplayCart = async () => {
-    const response = await axios("/cart/getcart")
-    console.log(response.data)
 }
 
 const DeleteCart = async () => {
@@ -224,4 +233,62 @@ const ChangePrice = () => {
 
     const PriceElem = document.getElementById("FullPrice")
     PriceElem.innerText = TotalPrice + "Kr."
+}
+
+const EditValue = async (keyword, ID) => {
+    const ProductBox = document.getElementById("product" + ID)
+    const CartBox = document.getElementById("cart" + ID)
+    const Value = document.getElementById("value" + ID)
+    const Quantity = document.getElementById("qty" + ID)
+    let CartValue = CartBox.getAttribute("value").split("-")
+
+    if (keyword == 'del') {
+        ProductBox.remove()
+        CartBox.remove()
+    }
+    else if (keyword == 'reduce') {
+        if (Value.value <= 1) {
+            ProductBox.remove()
+            CartBox.remove()
+        }
+        else {
+            CartBox.setAttribute("value", (Value.value - 1) + "-" + CartValue[1])
+            Quantity.textContent = (Value.value - 1)        
+            Value.value = Value.value - 1
+            Value.setAttribute("value", (Value.value))
+        }
+    }
+    else if (keyword == 'add') {
+        CartBox.setAttribute("value", (parseInt(Value.value) + 1) + "-" + CartValue[1])
+        Quantity.textContent = (parseInt(Value.value) + 1)        
+        Value.value = (parseInt(Value.value) + 1)
+        Value.setAttribute("value", (parseInt(Value.value)))
+    }
+    else if (keyword == 'change') {
+        if (isNaN(Value.value)) {
+            // Pass
+        }
+        else if (Value.value < 1) {
+            ProductBox.remove()
+            CartBox.remove()
+        }
+        else {
+            CartBox.setAttribute("value", (Value.value) + "-" + CartValue[1])
+            Quantity.textContent = (Value.value)        
+            Value.setAttribute("value", (Value.value))
+        }
+    }
+    const FullPrice = document.getElementById("CheckoutPrice")
+    const AllPrices = Array.from(document.getElementsByClassName("ProductStats"))
+    let TotalPrice = 0
+
+    AllPrices.forEach((item) => {
+        let temp = item.getAttribute("value").split("-")
+        TotalPrice += parseInt(temp[0]) * parseInt(temp[1]) 
+    })
+
+    FullPrice.textContent = (TotalPrice + "Kr.")
+
+    const DetailArray = ID.split("-")
+    const response = await axios("/cart/editcart", {params: {"name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
 }
