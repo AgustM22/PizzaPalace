@@ -2,7 +2,7 @@
 {% block CartContents %}
     <h1>Contact Details</h1>
     {% if error == True %}
-        <h1 style="color:red">YOU FUCKED UP</h1>
+        <h1 style="color:red">One of the given input fields was blank, please retry.</h1>
     {% endif %}
     <form id="CheckoutInformation" class="CheckoutInformation" method="POST" action="/cart/deletecart">
         {% csrf_token %}
