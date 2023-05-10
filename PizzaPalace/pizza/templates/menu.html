@@ -4,20 +4,21 @@
 <div style="height: 80vh;"></div>
 <div id="MainBlock">
     <div id="SearchBar">
-        <input type="text" id="search" placeholder="Search..." oninput="SearchFilter()"></input>
-        <select id="SortSelect" onchange="SearchFilter()">
-            <option value="1">Name: First to Last</option>
-            <option value="2">Name: Last to First</option>
-            <option value="3">Price: Low to High</option>
-            <option value="4">Price: High to Low</option>
-        </select>
-        <p>Pizza</p>
+
         <div id="SearchbarCheckbox">
+            <label for="SortSelect">Sort By:</label>
+            <select id="SortSelect" onchange="SearchFilter()">
+                <option value="1">Name: First to Last</option>
+                <option value="2">Name: Last to First</option>
+                <option value="3">Price: Low to High</option>
+                <option value="4">Price: High to Low</option>
+            </select>
             <p>Vegeterian:</p>
             <input type="checkbox" id="VegeterianCheck" onchange="SearchFilter()">
             <p>Spicy:</p>
             <input type="checkbox" class="SearchbarCheckbox" id="SpicyCheck" onchange="SearchFilter()">
         </div>
+        <input type="text" id="Search" placeholder="Search" oninput="SearchFilter()"></input>
     </div>
     <div id="ProductBox">
         {% for pizza in pizzas %}
@@ -25,16 +26,16 @@
                 <div class="ProductElement">
                     <img src="{{ pizza.pic }}" alt="PizzaImg" class="ProductImg">
                     <div class="ProductText">
-                        <h1 class="ProductName">{{ pizza.name }}</h1>
-                        <p class="ProductIngredients">{{ pizza.toppings }}</p>
-                    </div>
-                    <div class="TagPics">
-                        {% if pizza.veg == True %}
+                        <div class="ProductHighLight">
+                            <h1 class="ProductName">{{ pizza.name }}</h1>
+                            {% if pizza.veg == True %}
                             <img src="/static/images/veg.png" alt="Vegeterian!" class="VegeterianPic">
-                        {% endif %}
-                        {% if pizza.spicy == True %}
-                            <img src="/static/images/fire.png" alt="Spicy!" class="SpicyPic">
-                        {% endif %}
+                            {% endif %}
+                            {% if pizza.spicy == True %}
+                                <img src="/static/images/fire.png" alt="Spicy!" class="SpicyPic">
+                            {% endif %}
+                        </div>
+                        <p class="ProductIngredients">{{ pizza.toppings }}</p>
                     </div>
                     <div class="ProductPrices">
                         <p>Small: {{ pizza.pricesmall|stringformat:"d" }}Kr.</p>

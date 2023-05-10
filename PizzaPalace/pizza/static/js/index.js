@@ -1,6 +1,6 @@
 // Stuff for Menu
 const SearchFilter = async () => {
-    const Filter = document.getElementById("search").value
+    const Filter = document.getElementById("Search").value
     const VegeterianFilter = document.getElementById("VegeterianCheck").checked
     const SpicyFilter = document.getElementById("SpicyCheck").checked
     const SortSelect = document.getElementById("SortSelect").value
@@ -83,13 +83,13 @@ const PopulateProd = (pizza) => {
 
     const ProductElement = document.createElement("div")
     const ProductText = document.createElement("div")
+    const ProductHighLight = document.createElement("div")
     const ProductPrices = document.createElement("div")
-    const ProductTags = document.createElement("div")
 
-    ProductTags.setAttribute("class", "TagPics")
     ProductElement.setAttribute("class", "ProductElement")
     ProductText.setAttribute("class", "ProductText")
     ProductPrices.setAttribute("class", "ProductPrices")
+    ProductHighLight.setAttribute("class", "ProductHighLight")
     
     const ProductName = document.createElement("h1")
     const ProductIngredients = document.createElement("p")
@@ -111,28 +111,30 @@ const PopulateProd = (pizza) => {
     ProductImg.setAttribute("class", "ProductImg")
     ProductImg.setAttribute("alt", "ProductImg")
 
-    ProductElement.appendChild(ProductImg)
 
-    ProductText.appendChild(ProductName)
+    ProductElement.appendChild(ProductImg)
+    ProductHighLight.appendChild(ProductName)
+    ProductText.appendChild(ProductHighLight)
     ProductText.appendChild(ProductIngredients)
     ProductElement.appendChild(ProductText)
+
+
 
     if (pizza.veg === true) {
         const VegetarianImg = document.createElement("img")
         VegetarianImg.setAttribute("src", "/static/images/veg.png")
         VegetarianImg.setAttribute("class", "VegeterianPic")
         VegetarianImg.setAttribute("alt", "Vegeterian!")
-        ProductTags.appendChild(VegetarianImg)
+        ProductHighLight.appendChild(VegetarianImg)
     }
     if (pizza.spicy === true) {
         const SpicyImg = document.createElement("img")
         SpicyImg.setAttribute("src", "/static/images/fire.png")
         SpicyImg.setAttribute("class", "SpicyPic")
         SpicyImg.setAttribute("alt", "Spicy!")
-        ProductTags.appendChild(SpicyImg)
+        ProductHighLight.appendChild(SpicyImg)
     }
-    
-    ProductElement.appendChild(ProductTags)
+
 
     ProductPrices.appendChild(priceSmall)
     ProductPrices.appendChild(priceMedium)
@@ -235,20 +237,20 @@ const DeleteCart = async () => {
 
 const ChangePizzaTopping = (checkbox) => {
     if (checkbox.checked) {
-        const OrderBox = document.getElementById("OrderBox")
+        const OrderSelect    = document.getElementById("OrderSelect")
         const ToppingDetails = checkbox.value.split("+")
         if (ToppingDetails[2] == "set") {
             const topping = document.getElementById(ToppingDetails[0])
             topping.parentNode.removeChild(topping)
         }
         else {    
-            const topping = document.createElement("p")
+            const topping = document.createElement("label")
             topping.setAttribute("class", "AdditionalToppings")
             topping.setAttribute("id", ToppingDetails[0])
             topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
             
             topping.innerHTML = "+ " + ToppingDetails[0]
-            OrderBox.appendChild(topping)
+            OrderSelect.appendChild(topping)
             ChangePrice()
         }
     }
@@ -260,7 +262,7 @@ const ChangePizzaTopping = (checkbox) => {
             topping.setAttribute("id", ToppingDetails[0])
             topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
             topping.innerHTML = "- " + ToppingDetails[0]
-            OrderBox.appendChild(topping)
+            OrderSelect.appendChild(topping)
         }
         else {
             const topping = document.getElementById(ToppingDetails[0])
@@ -280,10 +282,10 @@ const EditPizzaValue = (newprice) => {
 }
 
 const ChangePrice = () => {
-    const OrderBoxChildren = Array.from(document.getElementById("OrderBox").children)
+    const OrderSelectChildren = Array.from(document.getElementById("OrderSelect").children)
     let TotalPrice = 0
 
-    OrderBoxChildren.forEach((child) => {
+    OrderSelectChildren.forEach((child) => {
         TotalPrice += parseInt(child.attributes.value.value)    
     })
 

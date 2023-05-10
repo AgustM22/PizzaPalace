@@ -86,6 +86,7 @@ main {
     height: 79vh;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
 }
 
 footer {
@@ -345,18 +346,26 @@ footer > * > h2 {
     border-radius: 15px;
     font-size: 2em;
     max-height: 2em;
+    padding: 1.1rem;
 }
 
-#SearchBar > * {
-    margin: 1em;
-    border-radius: 15px;
-}
+
 
 #SearchbarCheckbox {
+    font-family: var(--FontFamily);
     display: flex;
     flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    font-size: var(--MediumFont);
 }
 
+#Search {
+    border-radius: var(--pilled-shape-radius);
+    padding: 1.1rem;
+    font-size: var(--SmallFont);
+    font-weight: bold;
+}
 #ProductBox {
     padding-bottom: 10em;
 }
@@ -377,6 +386,7 @@ footer > * > h2 {
     border: var(--card-border);
     border-style: var(--border-style);
     border-color: var(--SecondaryColor);
+    max-height: 200px;
 }
 
 .ProductImg {
@@ -396,9 +406,14 @@ footer > * > h2 {
 
 .ProductText > p {
     margin: 0;
+    font-family: var(--FontFamily);
 }
-
-.ProductText > h1 {
+.ProductHighLight{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.ProductName {
     color: var(--PrimaryColor);
     text-decoration: underline;
     margin-bottom: 0;
@@ -407,28 +422,22 @@ footer > * > h2 {
 .ProductPrices {
     position: absolute;
     right: 2%;
-    bottom: -0.4em;
+    bottom: 0;
 }
 
-.VegeterianPic {
-    max-width: 20%;
-    max-height: 20%;
+.VegeterianPic,.SpicyPic {
+    max-width: 50px;
+    max-height:50px;
 }
 
-.SpicyPic {
-    max-width: 20%;
-    max-height: 20%;
-}
 
 /* Pizza View */
 #PizzaPage {
     display: flex;
     flex-direction: column;
     font-family: var(--Font-Family);
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    width: 90%;
+    width: 80%;
+    padding-top: 500px;
 }
 
 #PizzaBox {
@@ -439,13 +448,15 @@ footer > * > h2 {
 #PizzaPic {
     border: var(--card-border);
 	border-radius: var(--card-border-radius);
-    border-color: var(--BackgroundColor);
+    border-color: --SecondaryColor;
     max-width: 40%;
-    max-height: 40%;
+    max-height: 400px;
 }
 
 #PizzaText {
 	border-radius: var(--card-border-radius);
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
     background-color: var(--BackgroundColor);
     margin-left: 1em;
     margin-right: 1em;
@@ -457,16 +468,23 @@ footer > * > h2 {
 #PizzaTitle {
     margin: 0;
     font-size: 4em;
+    font-family: var(--FontFamily);
+    color: var(--PrimaryColor);
+    text-decoration: underline;
 }
 
 .PizzaDesc {
-    font-size: 2em;
+    font-size: var(--MediumFont);
+    font-family: var(--FontFamily);
 }
 
 #SelectionBox {
     font-family: var(--Font-Family);
 }
-
+#PizzaToppings {
+    font-size: var(--SmallFont);
+    font-family: var(--FontFamily);
+}
 #ToppingPage {
     display: flex;
     flex-direction: column;
@@ -475,6 +493,8 @@ footer > * > h2 {
 .ToppingBox {
     display: flex;
     flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .Topping {
@@ -483,19 +503,24 @@ footer > * > h2 {
     background-color: var(--BackgroundColor);
     color: var(--TextColor);
     border-radius: 10px;
-    margin: 1em;
-    padding: 1em;
+    padding: 0.5em;
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
+    min-width: 100px;
+    font-size: var(--MediumFont);
+    font-family: var(--FontFamily);
+    justify-content: center;
 }
-
+.toppingcheckbox:checked + label {
+    color: var(--PrimaryColor);
+}
 input[type="radio"] {
     border-radius: 15px;
     border: 2px solid var(--BackgroundColor);
     background-color: var(--BackgroundColor);
 }  
   
-input[type="radio"]:checked ~ span:first-of-type {
-    color: var(--BackgroundColor);  
-}
+
 
 #small {
     width: 10em;
@@ -522,6 +547,21 @@ label span:first-of-type {
 label span {
     position: relative;
     top: -1em;
+}
+
+#SizeBox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10%;
+}
+.SizeOption {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--LargeFont);
+    font-weight: bold;
 }
 
 /* Offer View */
@@ -571,8 +611,17 @@ label span {
 .PayBox {
     background-color: var(--BackgroundColor);
     border-radius: var(--card-border-radius);
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
     color: var(--TextColor);
     width: 20%;
+    position: fixed;
+    left: 75%;
+    min-height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: var(--FontFamily);
 }
 
 .PaySelect {
@@ -583,17 +632,25 @@ label span {
     padding-left: 10%;
     padding-right: 10%;  
 }
-
+#PayBoxPizzaName {
+    text-align: center;
+}
 #OrderBox {
     display: flex;
-    flex-direction: column;   
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: var(--MediumFont);
+    font-family: var(--FontFamily);
+    gap: 20px;
 }
 
 #OrderSelect {
-    font-size: 1.5em;
+    font-size: var(--MediumFont);
     justify-content: space-between;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5%;
     padding-left: 10%;
     padding-right: 10%;  
 }
@@ -616,9 +673,11 @@ label span {
     background-color: var(--PrimaryColor);
     font-weight: bold;
     font-size: 1em;
+    border-color: var(--BackgroundColor);
+    border-style: var(--border-style);
     border-radius: 10px;
     width: 80%;
-    height: 15%;
+    height: 60px;
 }
 
 /* Offer Templates */
