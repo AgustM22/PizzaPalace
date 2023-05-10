@@ -21,9 +21,10 @@ def checkout(request):
         return render(request, "Homepage.html")
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)
+        temp = profile.ProfilePic
         if form.is_valid():
-            print("Made it here")
             profile = form.save(commit=False)
+            profile.ProfilePic = temp
             profile.user = request.user
             profile.save()
     return render(request, "CreditCardDetails.html",context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
@@ -68,11 +69,14 @@ def getcart(request):
     return JsonResponse(request.session['cart'], safe=False)
 
 def deletecart(request):
-    try:
-        del request.session['cart']
-    except KeyError:
-        pass
-
+    profile = UserProfile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile,data=request.POST)
+        if form.is_valid():
+            try:
+                del request.session['cart']
+            except KeyError:
+                pass
     request.session.modified = True
     return HttpResponse("")
 

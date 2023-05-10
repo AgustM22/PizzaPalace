@@ -44,7 +44,9 @@
     {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-<a href="/confirmation" onclick="DeleteCart()" id="CheckoutButton">
-    Checkout
-</a>
+    <form method="post">
+        <a href="/confirmation" onclick="DeleteCart()" id="CheckoutButton" type="submit">
+            Checkout
+        </a>
+    </form>
 {% endblock %}
