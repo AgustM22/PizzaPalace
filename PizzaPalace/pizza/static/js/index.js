@@ -214,19 +214,18 @@ const AddToCart = async (num) => {
         const Price = document.getElementById("FullPrice").textContent.slice(0, -3);
         const PizzaSrc = document.getElementById("PizzaPic").src;
         const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
-        let AdditionalToppings = PizzaSize + ", "
+        let AdditionalToppings = PizzaSize + ". "
 
         Toppings.forEach((topping) => {
-            AdditionalToppings += topping.id + ", "
+            AdditionalToppings += topping.innerText + " "
         })
-        AdditionalToppings = AdditionalToppings.slice(0, -2)
         const response = await axios("/cart/addcart", {params: {"type": "pizza", "name": PizzaTitle, "price": Price, "qty": 1, "additionaltoppings": AdditionalToppings, "img": PizzaSrc}})
     }
 }
 
 const ChangePizzaTopping = (checkbox) => {
     if (checkbox.checked) {
-        const OrderSelect    = document.getElementById("OrderSelect")
+        const OrderSelect = document.getElementById("OrderSelect")
         const ToppingDetails = checkbox.value.split("+")
         if (ToppingDetails[2] == "set") {
             const topping = document.getElementById(ToppingDetails[0])
@@ -246,7 +245,7 @@ const ChangePizzaTopping = (checkbox) => {
     else {
         const ToppingDetails = checkbox.value.split("+")
         if (ToppingDetails[2] == "set") {
-            const topping = document.createElement("p")
+            const topping = document.createElement("label")
             topping.setAttribute("class", "AdditionalToppings")
             topping.setAttribute("id", ToppingDetails[0])
             topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
@@ -272,7 +271,7 @@ const EditPizzaValue = (newprice) => {
 
 const ChangePrice = () => {
     const OrderSelectChildren = Array.from(document.getElementById("OrderSelect").children)
-    let TotalPrice = 0
+    let TotalPrice = parseInt(document.getElementById("OrderSelect").getAttribute("value"))
 
     OrderSelectChildren.forEach((child) => {
         TotalPrice += parseInt(child.attributes.value.value)    
@@ -288,8 +287,8 @@ const EditValue = async (keyword, ID) => {
     const PriceBox = document.getElementById("price" + ID)
     const Value = document.getElementById("value" + ID)
     const Quantity = document.getElementById("qty" + ID)
-    const DetailArray = ID.split("-")
-    let CartValue = CartBox.getAttribute("value").split("-")
+    const DetailArray = ID.split("=")
+    let CartValue = CartBox.getAttribute("value").split("=")
 
     if (keyword == 'del') {
         ProductBox.remove()
@@ -309,14 +308,14 @@ const EditValue = async (keyword, ID) => {
             return await axios("/cart/editcart", {params: {"remove": true, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
         }
         else {
-            CartBox.setAttribute("value", (Value.value - 1) + "-" + CartValue[1])
+            CartBox.setAttribute("value", (Value.value - 1) + "=" + CartValue[1])
             Quantity.textContent = (Value.value - 1)        
             Value.value = Value.value - 1
             Value.setAttribute("value", (Value.value))
         }
     }
     else if (keyword == 'add') {
-        CartBox.setAttribute("value", (parseInt(Value.value) + 1) + "-" + CartValue[1])
+        CartBox.setAttribute("value", (parseInt(Value.value) + 1) + "=" + CartValue[1])
         Quantity.textContent = (parseInt(Value.value) + 1)        
         Value.value = (parseInt(Value.value) + 1)
         Value.setAttribute("value", (parseInt(Value.value)))
@@ -334,7 +333,7 @@ const EditValue = async (keyword, ID) => {
             return await axios("/cart/editcart", {params: {"remove": true, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
         }
         else {
-            CartBox.setAttribute("value", (Value.value) + "-" + CartValue[1])
+            CartBox.setAttribute("value", (Value.value) + "=" + CartValue[1])
             Quantity.textContent = (Value.value)        
             Value.setAttribute("value", (Value.value))
         }
