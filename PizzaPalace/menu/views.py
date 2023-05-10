@@ -46,7 +46,7 @@ def sort_data(context, toppingcontext, sort, view):
     toppinglis = {}
     for topping in toppingcontext:
         if topping.TID.name in toppinglis:
-            toppinglis[topping.TID.name].append(topping.TGID.name)
+            toppinglis[topping.TID.name].append(topping.TGID.name) # Not pointless code, sorting Toppings by Tags
         else:   
             toppinglis[topping.TID.name] = [topping.TGID.name]
 
@@ -82,7 +82,6 @@ def sort_data(context, toppingcontext, sort, view):
     if sort == "4":
         PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['pricelarge'], reverse=True)
  
- 
     return PizzaDict
 
 def pizzaview(request, pizza_id):
@@ -96,5 +95,5 @@ def pizzaview(request, pizza_id):
         pizzacontext = HasP.objects.all().select_related('PID').select_related('TID').filter(PID=pizza_id)
         toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
         PizzaDict = sort_data(pizzacontext, toppingcontext, 0, True)
-        PizzaDict["toppings"] = Topping.objects.all()
+        PizzaDict["toppings"] = Topping.objects.all().select_related('FID')
         return render(request, "pizzaview.html", PizzaDict)

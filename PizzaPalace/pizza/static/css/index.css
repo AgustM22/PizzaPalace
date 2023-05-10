@@ -467,7 +467,12 @@ footer > * > h2 {
     font-family: var(--Font-Family);
 }
 
-#ToppingBox {
+#ToppingPage {
+    display: flex;
+    flex-direction: column;
+}
+
+.ToppingBox {
     display: flex;
     flex-direction: row;
 }
@@ -480,6 +485,43 @@ footer > * > h2 {
     border-radius: 10px;
     margin: 1em;
     padding: 1em;
+}
+
+input[type="radio"] {
+    border-radius: 15px;
+    border: 2px solid var(--BackgroundColor);
+    background-color: var(--BackgroundColor);
+}  
+  
+input[type="radio"]:checked ~ span:first-of-type {
+    color: var(--BackgroundColor);  
+}
+
+#small {
+    width: 10em;
+    height: 10em;
+}
+
+#medium {
+    width: 13em;
+    height: 13em;
+}
+
+#large {
+    width: 17em;
+    height: 17em;
+}
+
+label span:first-of-type {
+    position: relative;
+    left: -1.8em;
+    font-size: 3em;
+    color: var(--BackgroundColor);
+}
+
+label span {
+    position: relative;
+    top: -1em;
 }
 
 /* Offer View */
@@ -547,7 +589,7 @@ footer > * > h2 {
     flex-direction: column;   
 }
 
-.OrderSelect {
+#OrderSelect {
     font-size: 1.5em;
     justify-content: space-between;
     display: flex;

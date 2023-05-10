@@ -12,7 +12,7 @@ class Foodgroup(models.Model):
 class Topping(models.Model):
     name = models.CharField(max_length=255)
     price = models.FloatField()
-    foodgroup = models.ForeignKey(Foodgroup, on_delete=models.CASCADE, null=True, blank=True)
+    FID = models.ForeignKey(Foodgroup, on_delete=models.CASCADE, null=True, blank=True)
 
 class HasT(models.Model):
     TID = models.ForeignKey(Topping, on_delete=models.CASCADE)
