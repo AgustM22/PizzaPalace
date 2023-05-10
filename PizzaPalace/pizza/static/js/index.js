@@ -212,7 +212,7 @@ const AddToCart = async (num) => {
         const Price = document.getElementById("FullPrice").textContent.slice(0, -3);
         const PizzaSrc = document.getElementById("PizzaPic").src;
         const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
-        let AdditionalToppings = PizzaSize + " - "
+        let AdditionalToppings = PizzaSize + ", "
 
         Toppings.forEach((topping) => {
             AdditionalToppings += topping.id + ", "
