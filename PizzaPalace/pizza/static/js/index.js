@@ -145,11 +145,6 @@ const PopulateProd = (pizza) => {
     ProductBox.appendChild(ProductLink)
 }
 
-const DisplaySettings = () => {
-
-}
-
-
 let TfoCount = 0 
 const AddPizzaToOrder = (PizzaName) => {
     if (TfoCount != 2) {
@@ -216,7 +211,6 @@ const AddToCart = async (num) => {
         // Pizzas
         const PizzaTitle = document.getElementById("PizzaTitle").textContent
         const PizzaSize = document.getElementById("SizeBox").getAttribute("value")
-        console.log(PizzaSize)
         const Price = document.getElementById("FullPrice").textContent.slice(0, -3);
         const PizzaSrc = document.getElementById("PizzaPic").src;
         const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
@@ -228,11 +222,6 @@ const AddToCart = async (num) => {
         AdditionalToppings = AdditionalToppings.slice(0, -2)
         const response = await axios("/cart/addcart", {params: {"type": "pizza", "name": PizzaTitle, "price": Price, "qty": 1, "additionaltoppings": AdditionalToppings, "img": PizzaSrc}})
     }
-}
-
-const DeleteCart = async () => {
-    const response = await axios("/cart/deletecart")
-    console.log(response.data)
 }
 
 const ChangePizzaTopping = (checkbox) => {
@@ -296,18 +285,28 @@ const ChangePrice = () => {
 const EditValue = async (keyword, ID) => {
     const ProductBox = document.getElementById("product" + ID)
     const CartBox = document.getElementById("cart" + ID)
+    const PriceBox = document.getElementById("price" + ID)
     const Value = document.getElementById("value" + ID)
     const Quantity = document.getElementById("qty" + ID)
+    const DetailArray = ID.split("-")
     let CartValue = CartBox.getAttribute("value").split("-")
 
     if (keyword == 'del') {
         ProductBox.remove()
         CartBox.remove()
+        PriceBox.remove()
+        Quantity.remove()
+        FixPrice()
+        return await axios("/cart/editcart", {params: {"remove": true, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
     }
     else if (keyword == 'reduce') {
         if (Value.value <= 1) {
             ProductBox.remove()
-            CartBox.remove()
+            CartBox.remove()            
+            PriceBox.remove()
+            Quantity.remove()
+            FixPrice()
+            return await axios("/cart/editcart", {params: {"remove": true, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
         }
         else {
             CartBox.setAttribute("value", (Value.value - 1) + "-" + CartValue[1])
@@ -329,6 +328,10 @@ const EditValue = async (keyword, ID) => {
         else if (Value.value < 1) {
             ProductBox.remove()
             CartBox.remove()
+            PriceBox.remove()
+            Quantity.remove()
+            FixPrice()
+            return await axios("/cart/editcart", {params: {"remove": true, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
         }
         else {
             CartBox.setAttribute("value", (Value.value) + "-" + CartValue[1])
@@ -336,17 +339,21 @@ const EditValue = async (keyword, ID) => {
             Value.setAttribute("value", (Value.value))
         }
     }
+    FixPrice()
+    return await axios("/cart/editcart", {params: {"remove": false, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
+}
+
+const FixPrice = () => {
     const FullPrice = document.getElementById("CheckoutPrice")
-    const AllPrices = Array.from(document.getElementsByClassName("ProductStats"))
+    const AllPrices = Array.from(document.getElementsByClassName("SingleElementPrice"))
+    const AllQuantities = Array.from(document.getElementsByClassName("SingleElementQuantity"))
     let TotalPrice = 0
 
-    AllPrices.forEach((item) => {
-        let temp = item.getAttribute("value").split("-")
-        TotalPrice += parseInt(temp[0]) * parseInt(temp[1]) 
+    AllPrices.forEach((item, index) => {
+        let text = item.textContent
+        let temp = parseInt(text.slice(0, -3)) * parseInt(AllQuantities[index].textContent)
+        TotalPrice += temp
     })
 
     FullPrice.textContent = (TotalPrice + "Kr.")
-
-    const DetailArray = ID.split("-")
-    const response = await axios("/cart/editcart", {params: {"name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
 }
