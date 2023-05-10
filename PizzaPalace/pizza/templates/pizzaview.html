@@ -15,7 +15,7 @@
                 <p>Quantity</p>
             </div>
             <div id="OrderBox">
-                <div class="OrderSelect" value="{{ pizza.pricelarge|stringformat:'d' }}">
+                <div id="OrderSelect" value="{{ pizza.pricelarge|stringformat:'d' }}">
                     <p>{{ pizza.name }}</p>
                     <p>1</p>
                 </div>
@@ -28,16 +28,89 @@
         </div>
     </div>
     <div id="SelectionBox">
-        <div id="SizeBox">
-            <!-- Made to place different pizza sizes into, might make into a very large radiobutton /shrug/ -->
+        <div id="SizeBox" value="Large">
+            <label>
+                <input type="radio" id="small" name="options" onchange="EditPizzaValue('Small+{{ pizza.pricesmall }}')"/>
+                <span>9'</span><span>Small Pizza - {{ pizza.pricesmall|stringformat:"d" }}Kr.</span>
+            </label>
+            <label>
+                <input type="radio" id="medium" name="options" onchange="EditPizzaValue('Medium+{{ pizza.pricemedium }}')"/>
+                <span>12'</span><span>Medium Pizza - {{ pizza.pricemedium|stringformat:"d" }}Kr.</span>
+            </label>
+            <label>
+                <input type="radio" id="large" name="options" onchange="EditPizzaValue('Large+{{ pizza.pricelarge }}')" checked/>
+                <span>16'</span><span>Large Pizza - {{ pizza.pricelarge|stringformat:"d" }}Kr.</span>
+            </label>
         </div>
-        <div id="ToppingBox">
-            {% for topping in toppings %}
-                <div class="Topping">
-                    <p>{{ topping.name }}</p>
-                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)"> 
+        <div id="ToppingPage">
+            <div id="Cheeses" class="Foodgroup">
+                <h1>Cheeses</h1>
+                <div class="ToppingBox">
+                    {% for topping in toppings %}
+                        {% if topping.FID.name == "Cheeses" %}
+                        <div class="Topping">
+                            <p>{{ topping.name }}</p>
+                            {% if topping.name in pizza.toppings %}
+                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                            {% else %}
+                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
+            <div id="Meats" class="Foodgroup">
+                <h1>Meats</h1>
+                <div class="ToppingBox">
+                {% for topping in toppings %}
+                    {% if topping.FID.name == "Meats" %}
+                        <div class="Topping">
+                            <p>{{ topping.name }}</p>
+                            {% if topping.name in pizza.toppings %}
+                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                            {% else %}
+                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                            {% endif %}                        
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            <div id="Vegetables" class="Foodgroup">
+                <h1>Vegetables</h1>
+                <div class="ToppingBox">
+                    {% for topping in toppings %}
+                        {% if topping.FID.name == "Vegetables" %}
+                            <div class="Topping">
+                                <p>{{ topping.name }}</p>
+                                {% if topping.name in pizza.toppings %}
+                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                                {% else %}
+                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                                {% endif %} 
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="Sauces and spices" class="Foodgroup">
+                <h1>Sauces and spices</h1>
+                <div class="ToppingBox">
+                    {% for topping in toppings %}
+                        {% if topping.FID.name == "Sauces and spices" %}
+                            <div class="Topping">
+                                <p>{{ topping.name }}</p>
+                                {% if topping.name in pizza.toppings %}
+                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                                {% else %}
+                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                                {% endif %} 
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

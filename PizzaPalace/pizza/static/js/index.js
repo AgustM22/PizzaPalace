@@ -213,10 +213,12 @@ const AddToCart = async (num) => {
     else {
         // Pizzas
         const PizzaTitle = document.getElementById("PizzaTitle").textContent
+        const PizzaSize = document.getElementById("SizeBox").getAttribute("value")
+        console.log(PizzaSize)
         const Price = document.getElementById("FullPrice").textContent.slice(0, -3);
         const PizzaSrc = document.getElementById("PizzaPic").src;
         const Toppings = Array.from(document.getElementsByClassName("AdditionalToppings"))
-        let AdditionalToppings = ""
+        let AdditionalToppings = PizzaSize + " - "
 
         Toppings.forEach((topping) => {
             AdditionalToppings += topping.id + ", "
@@ -235,22 +237,46 @@ const ChangePizzaTopping = (checkbox) => {
     if (checkbox.checked) {
         const OrderBox = document.getElementById("OrderBox")
         const ToppingDetails = checkbox.value.split("+")
-
-        const topping = document.createElement("p")
-        topping.setAttribute("class", "AdditionalToppings")
-        topping.setAttribute("id", ToppingDetails[0])
-        topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
-
-        topping.innerHTML = "+ " + ToppingDetails[0]
-        OrderBox.appendChild(topping)
-        ChangePrice()
+        if (ToppingDetails[2] == "set") {
+            const topping = document.getElementById(ToppingDetails[0])
+            topping.parentNode.removeChild(topping)
+        }
+        else {    
+            const topping = document.createElement("p")
+            topping.setAttribute("class", "AdditionalToppings")
+            topping.setAttribute("id", ToppingDetails[0])
+            topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
+            
+            topping.innerHTML = "+ " + ToppingDetails[0]
+            OrderBox.appendChild(topping)
+            ChangePrice()
+        }
     }
     else {
         const ToppingDetails = checkbox.value.split("+")
-        const topping = document.getElementById(ToppingDetails[0])
-        topping.parentNode.removeChild(topping)
-        ChangePrice()
+        if (ToppingDetails[2] == "set") {
+            const topping = document.createElement("p")
+            topping.setAttribute("class", "AdditionalToppings")
+            topping.setAttribute("id", ToppingDetails[0])
+            topping.setAttribute("value", ToppingDetails[1].slice(0, -2))
+            topping.innerHTML = "- " + ToppingDetails[0]
+            OrderBox.appendChild(topping)
+        }
+        else {
+            const topping = document.getElementById(ToppingDetails[0])
+            topping.parentNode.removeChild(topping)
+            ChangePrice()
+        }
     }
+}
+
+const EditPizzaValue = (newprice) => {
+    const SizeBox = document.getElementById("SizeBox")
+    const PizzaValue = document.getElementById("OrderSelect")
+    const Values = newprice.split('+')
+    SizeBox.setAttribute("value", Values[0])
+    PizzaValue.setAttribute("value", parseInt(Values[1]))
+    ChangePrice()
 }
 
 const ChangePrice = () => {
