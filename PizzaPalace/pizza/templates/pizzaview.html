@@ -1,46 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<div style="height: 80vh;"></div>
 <div id="PizzaPage">
     <div id="PizzaBox">
         <img src="{{ pizza.pic }}" alt="PizzaPic" id="PizzaPic">
         <div id="PizzaText"  name="{{ offer.id }}">
             <h1 id="PizzaTitle">{{ pizza.name }}</h1>
             <p class="PizzaDesc">{{ pizza.description }}</p>
+            <p id="PizzaToppings">{{ pizza.toppings }}</p>
         </div>
-        <div class="PayBox">
-            <div class="PaySelect">
-                <p>Order</p>
-                <p>Quantity</p>
-            </div>
-            <div id="OrderBox">
-                <div id="OrderSelect" value="{{ pizza.pricelarge|stringformat:'d' }}">
-                    <p>{{ pizza.name }}</p>
-                    <p>1</p>
-                </div>
-            </div>
-            <div class="PayText">
-                <p>Total</p>
-                <p id="FullPrice">{{ pizza.pricelarge|stringformat:"d" }}Kr.</p>
-            </div>
-            <button id="AddToCartButton" onclick="AddToCart(2); history.go(-1);">Add To Cart</button>
-        </div>
+        
     </div>
+    
     <div id="SelectionBox">
         <div id="SizeBox" value="Large">
-            <label>
+            <div class="SizeOption">
+                <label for="small">Small 9"</label>
+                <p>{{ pizza.pricesmall|stringformat:"d" }}Kr</p>
                 <input type="radio" id="small" name="options" onchange="EditPizzaValue('Small+{{ pizza.pricesmall }}')"/>
-                <span>9'</span><span>Small Pizza - {{ pizza.pricesmall|stringformat:"d" }}Kr.</span>
-            </label>
-            <label>
+            </div>
+            <div class="SizeOption">
+                <label for="medium">Medium 12"</label>
+                <p>{{ pizza.pricemedium|stringformat:"d" }}Kr</p>
                 <input type="radio" id="medium" name="options" onchange="EditPizzaValue('Medium+{{ pizza.pricemedium }}')"/>
-                <span>12'</span><span>Medium Pizza - {{ pizza.pricemedium|stringformat:"d" }}Kr.</span>
-            </label>
-            <label>
+            </div>
+            <div class="SizeOption">
+                <label for="large">Large 16"</label>
+                <p>{{ pizza.pricelarge|stringformat:"d" }}Kr</p>
                 <input type="radio" id="large" name="options" onchange="EditPizzaValue('Large+{{ pizza.pricelarge }}')" checked/>
-                <span>16'</span><span>Large Pizza - {{ pizza.pricelarge|stringformat:"d" }}Kr.</span>
-            </label>
+            </div>
         </div>
         <div id="ToppingPage">
             <div id="Cheeses" class="Foodgroup">
@@ -49,11 +37,11 @@
                     {% for topping in toppings %}
                         {% if topping.FID.name == "Cheeses" %}
                         <div class="Topping">
-                            <p>{{ topping.name }}</p>
+                            <label for="{{ topping.name }}">{{ topping.name }}</label>
                             {% if topping.name in pizza.toppings %}
-                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                                <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
                             {% else %}
-                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                                <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
                             {% endif %}
                         </div>
                         {% endif %}
@@ -66,11 +54,11 @@
                 {% for topping in toppings %}
                     {% if topping.FID.name == "Meats" %}
                         <div class="Topping">
-                            <p>{{ topping.name }}</p>
+                            <label for="{{ topping.name }}">{{ topping.name }}</label>
                             {% if topping.name in pizza.toppings %}
-                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                                <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
                             {% else %}
-                                <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                                <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
                             {% endif %}                        
                         </div>
                     {% endif %}
@@ -83,11 +71,11 @@
                     {% for topping in toppings %}
                         {% if topping.FID.name == "Vegetables" %}
                             <div class="Topping">
-                                <p>{{ topping.name }}</p>
+                                <label  for="{{ topping.name }}">{{ topping.name }}</label>
                                 {% if topping.name in pizza.toppings %}
-                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                                    <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
                                 {% else %}
-                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                                    <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
                                 {% endif %} 
                             </div>
                         {% endif %}
@@ -100,11 +88,11 @@
                     {% for topping in toppings %}
                         {% if topping.FID.name == "Sauces and spices" %}
                             <div class="Topping">
-                                <p>{{ topping.name }}</p>
+                                <label for="{{ topping.name }}">{{ topping.name }}</label>
                                 {% if topping.name in pizza.toppings %}
-                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
+                                    <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}+set" onchange="ChangePizzaTopping(this)" checked>
                                 {% else %}
-                                    <input type="checkbox" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
+                                    <input type="checkbox" id="{{ topping.name }}" class="toppingcheckbox" value="{{ topping.name }}+{{ topping.price }}" onchange="ChangePizzaTopping(this)">
                                 {% endif %} 
                             </div>
                         {% endif %}
@@ -113,5 +101,22 @@
             </div>
         </div>
     </div>
+</div>
+<div class="PayBox">
+    <h1 id="PayBoxPizzaName">{{ pizza.name }}</h1>
+    <div class="PayBoxDetails">
+        <div id="OrderBox">
+            <div id="OrderSelect" value="{{ pizza.pricelarge|stringformat:'d' }}">
+            </div>
+        </div>
+    </div>
+    <div class="PayBoxPayment">
+        <div class="PayText">
+            <p>Total</p>
+            <p id="FullPrice">{{ pizza.pricelarge|stringformat:"d" }}Kr.</p>
+        </div>
+        <button id="AddToCartButton" onclick="AddToCart(2); history.go(-1);">Add To Cart</button>
+    </div>
+
 </div>
 {% endblock %}

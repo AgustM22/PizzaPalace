@@ -4,14 +4,16 @@
 <div style="height: 80vh;"></div>
 <div id="MainBlock">
     <div id="SearchBar">
-        <input type="text" id="search" placeholder="Search..." oninput="SearchOfferFilter()"></input>
-        <select id="SortOfferSelect" onchange="SearchOfferFilter()">
-            <option value="1">Name: First to Last</option>
-            <option value="2">Name: Last to First</option>
-            <option value="3">Price: Low to High</option>
-            <option value="4">Price: High to Low</option>
-        </select>
-        <p>Offers</p>
+        <div id="SearchbarCheckbox">
+            <label for="SortSelect">Sort By:</label>
+            <select id="SortOfferSelect" onchange="SearchOfferFilter()">
+                <option value="1">Name: First to Last</option>
+                <option value="2">Name: Last to First</option>
+                <option value="3">Price: Low to High</option>
+                <option value="4">Price: High to Low</option>
+            </select>
+        </div>
+        <input type="text" id="Search" placeholder="Search" oninput="SearchOfferFilter()"></input>
     </div>
     <div id="ProductBox">
         {% for offer in offers %}
