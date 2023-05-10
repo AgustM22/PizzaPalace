@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from pizza.models import HasP, Product, Topping, HasT
-from operator import itemgetter
 
 def main(request):
     pizzacontext = HasP.objects.all().select_related('PID').select_related('TID')
@@ -12,6 +11,7 @@ def main(request):
 def filter(request):
     if request.method == 'GET':
         filter = request.GET['filter']
+        sort = request.GET['sort']
         veg = False
         spicy = False
         
@@ -22,7 +22,7 @@ def filter(request):
 
         pizzacontext = HasP.objects.filter().select_related('PID').select_related('TID')
         toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
-        PizzaDict = sort_data(pizzacontext, toppingcontext, "request.GET['sort']", False)
+        PizzaDict = sort_data(pizzacontext, toppingcontext, sort, False)
 
         EditedPizzaDict = []
         for pizza in PizzaDict["pizzas"]:
@@ -73,15 +73,17 @@ def sort_data(context, toppingcontext, sort, view):
     else:
         PizzaDict = {"pizzas": lis.values()}
 
-
-    # Sort isn't working, will check on it later.
-
-        # if sort == "1":
-        #     PizzaDict["Pizzas"] = sorted(PizzaDict["pizzas"], key=itemgetter('name')) 
-        # if sort == "0":
-        #     PizzaDict["Pizzas"] = sorted(PizzaDict["pizzas"], key=itemgetter('pricelarge')) 
-
-        return PizzaDict
+    if sort == "1":
+        PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['name'])
+    if sort == "2":
+        PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['name'], reverse=True)
+    if sort == "3":
+        PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['pricelarge'])
+    if sort == "4":
+        PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['pricelarge'], reverse=True)
+ 
+ 
+    return PizzaDict
 
 def pizzaview(request, pizza_id):
     context = Product.objects.filter(id=pizza_id)

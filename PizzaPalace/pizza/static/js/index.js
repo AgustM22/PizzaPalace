@@ -5,7 +5,7 @@ const SearchFilter = async () => {
     const SpicyFilter = document.getElementById("SpicyCheck").checked
     const SortSelect = document.getElementById("SortSelect").value
 
-    const response = await axios("/menu/filter", {params: {"filter": Filter, "veg": VegeterianFilter, "spicy": SpicyFilter, "Sort": SortSelect}})
+    const response = await axios("/menu/filter", {params: {"filter": Filter, "veg": VegeterianFilter, "spicy": SpicyFilter, "sort": SortSelect}})
     const Pizzadict = response.data
 
     const Main = document.getElementById("ProductBox")
@@ -18,7 +18,9 @@ const SearchFilter = async () => {
 
 const SearchOfferFilter = async () => {
     const Filter = document.getElementById("search").value
-    const response = await axios("/offer/filter", {params: {"filter": Filter}})
+    const SortSelect = document.getElementById("SortOfferSelect").value
+
+    const response = await axios("/offer/filter", {params: {"filter": Filter, "sort": SortSelect}})
 
     const Offerdict = response.data
 
