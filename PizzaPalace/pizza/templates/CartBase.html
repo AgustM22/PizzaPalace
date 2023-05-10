@@ -10,13 +10,36 @@
             <div id="CartBalanceContents">
                 <div class="ProductTitle">
                     <p>Product</p>
-                    <p>Quantity</p>
-                    <p>Price</p>
+                    {% for pizza in pizzas %}
+                        <p>{{ pizza.name }}</p>
+                    {% endfor %}
+                    {% for offer in offers %}
+                        <p>{{ offer.name }}</p>
+                    {% endfor %}
                 </div>
+                <div class="ProductQuantity">
+                    <p>Quantity</p>
+                    {% for pizza in pizzas %}
+                        <p id="qty{{ pizza.name }}-{{ pizza.additionaltoppings }}">{{ pizza.qty }}</p>
+                    {% endfor %}
+                    {% for offer in offers %}
+                        <p id="qty{{ pizza.name }}-{{ pizza.additionaltoppings }}">{{ offer.qty }}</p>
+                    {% endfor %}
+                </div>
+                <div class="ProductPrice">
+                    <p>Price</p>
+                    {% for pizza in pizzas %}
+                        <p class="SingleElementPrice">{{ pizza.price }}Kr.</p>
+                    {% endfor %}
+                    {% for offer in offers %}
+                        <p class="SingleElementPrice">{{ offer.price }}Kr.</p>
+                    {% endfor %}
+                </div>
+                <!--
                 {% for pizza in pizzas %}
                     <div class="ProductStats" id="cart{{ pizza.name }}-{{ pizza.additionaltoppings }}" value="{{ pizza.qty }}-{{ pizza.price }}">
                         <p>{{ pizza.name }}</p>
-                        <p id="qty{{ pizza.name }}-{{ pizza.additionaltoppings }}">{{ pizza.qty }}</p>
+                        <p id="qty{{ pizza.name }}-{{ pizza.additionaltoppings }}" class="ProductQuantity">{{ pizza.qty }}</p>
                         <p class="SingleElementPrice">{{ pizza.price }}Kr.</p>
                     </div>
                 {% endfor %}
@@ -27,13 +50,14 @@
                         <p class="SingleElementPrice">{{ offer.price }}Kr.</p>
                     </div>
                 {% endfor %}
-                <!-- Line Here?-->
+                -->
+            </div>
+
                 <div class="CartBalanceTotal">
                     <p>Total</p>
                     <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
                 </div>
                 {% block CheckoutButton %}
                 {% endblock %}
-            </div>
     </section>
 {% endblock %}
