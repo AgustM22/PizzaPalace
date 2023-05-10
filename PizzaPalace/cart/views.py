@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from user.forms.ProfileForm import ProfileForm
 from user.models import UserProfile
@@ -17,8 +17,6 @@ def checkout(request):
     pizzas = cart['pizzas']
     offers = cart['offers']
     fullprice = cart['fullprice']
-    if not request.session.get('cart'):
-        return render(request, "Homepage.html")
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)
         temp = profile.ProfilePic
@@ -27,7 +25,14 @@ def checkout(request):
             profile.ProfilePic = temp
             profile.user = request.user
             profile.save()
-    return render(request, "CreditCardDetails.html",context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
+        return render(request, "Homepage.html")
+    
+    check = request.GET.get('e' , '')
+    if check != '':
+        return render(request, "CreditCardDetails.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+
+    return render(request, "CreditCardDetails.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 def createcart(request):
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
@@ -73,15 +78,33 @@ def deletecart(request):
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)
         if form.is_valid():
-            try:
-                del request.session['cart']
-            except KeyError:
-                pass
-    request.session.modified = True
-    return HttpResponse("")
-
+            del request.session['cart']
+            request.session.modified = True
+            return HttpResponseRedirect('/confirmation')
+        else:
+            return HttpResponseRedirect('/cart/checkout?e=1')
+    
 def editcart(request):
     newproduct = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "extra": str(request.GET['extra'])}
+
+    if request.GET['remove'] == "true":
+        for item in request.session['cart']["pizzas"]:
+            if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["additionaltoppings"] == newproduct["extra"]:
+                request.session['cart']["pizzas"].remove(item)
+        for item in request.session['cart']["offers"]:
+            if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["item"] == newproduct["extra"]:
+                request.session['cart']["offers"].remove(item)
+        
+        FullPrice = 0
+        for item in request.session['cart']["pizzas"]:
+            FullPrice += int(item["price"]) * int(item["qty"])
+        for item in request.session['cart']["offers"]:
+            FullPrice += int(item["price"]) * int(item["qty"])
+        request.session['cart']["fullprice"] = FullPrice
+
+        request.session.modified = True
+        return HttpResponse("")
+    
     for item in request.session['cart']["offers"]:
         if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["item"] == newproduct["extra"]:
             request.session['cart']['fullprice'] += (int(newproduct["qty"]) - int(item["qty"])) * int(newproduct["price"])

@@ -1,7 +1,10 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
     <h1>Contact Details</h1>
-    <form class="CheckoutInformation" method="POST">
+    {% if error == True %}
+        <h1 style="color:red">YOU FUCKED UP</h1>
+    {% endif %}
+    <form id="CheckoutInformation" class="CheckoutInformation" method="POST" action="/cart/deletecart">
         {% csrf_token %}
         <div class="CheckoutInfoLeft">
             <div class="FormInput">
@@ -44,8 +47,8 @@
     {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-    <form method="post">
-        <a href="/confirmation" onclick="DeleteCart()" id="CheckoutButton" type="submit">
+    <form method="post" action="/cart/deletecart">
+        <a href="#" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
             Checkout
         </a>
     </form>
