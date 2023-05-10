@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from user.models import UserProfile
 from user.forms.ProfileForm import ProfileForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 from django.contrib.auth.forms import UserCreationForm
@@ -19,6 +19,7 @@ def signup(request):
         'form': UserCreationForm()
     })
 
+@login_required
 def profile(request):
     profile = UserProfile.objects.filter(user=request.user).first()
     if request.method == 'POST':

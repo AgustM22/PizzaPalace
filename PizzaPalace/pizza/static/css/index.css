@@ -682,6 +682,7 @@ footer > * > h2 {
     color: var(--TextColor);
     display: flex;
     flex-direction: column;
+    min-width: 1000px;
 }
 
 .CartProduct {
@@ -793,8 +794,18 @@ footer > * > h2 {
     margin-bottom: 20px;
     text-align: center;
 }
-/* Credit Card*/
-
+/* Checkout/Contact Details*/
+.CheckoutInformation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.CheckoutInfoLeft {
+    width: 50%;
+}
+.CheckoutInfoRight {
+    width: 50%;
+}
 .CreditCardInformation {
     display: flex;
     flex-direction: column;

@@ -1,27 +1,50 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
-    <form action="" class="CreditCardInformation">
-        <h1>Payment Details</h1>
-
-        <label for="CardHolderName">Card Holder Name</label>
-        <input type="text" id="CardHolderName">
-        <label for="CardNumber">Card Number</label>
-        <input type="text" id="CardNumber" maxlength="16">
-        <div class="CreditCardSmallDetails">
-            <div class="CCSmallDetail">
-                <label for="ExpirationDate">Expiration Date</label>
-                <input type="month" id="ExpirationDate" min="2000-01">
+    <h1>Contact Details</h1>
+    <form class="CheckoutInformation" method="POST">
+        {% csrf_token %}
+        <div class="CheckoutInfoLeft">
+            <div class="FormInput">
+                {{ form.FullName.label_tag }}
+                {{form.FullName}}
             </div>
-            <div class="CCSmallDetial">
-                <label for="CVC">CVC</label>
-                <input type="tel"  id="CVC" maxlength="3">
+            <div class="FormInput">
+                {{ form.PhoneNumber.label_tag }}
+                {{form.PhoneNumber}}
+            </div>
+            <div class="FormInput">
+                {{ form.StreetName.label_tag }}
+                {{form.StreetName}}
+            </div>
+            <div class="FormInput">
+                {{ form.HouseNumber.label_tag }}
+                {{form.HouseNumber}}
+            </div>
+        </div>
+        <div class="CheckoutInfoRight">
+            <div class="FormInput">
+                {{ form.City.label_tag }}
+                {{form.City}}
+            </div>
+            <div class="FormInput">
+                {{ form.PostalCode.label_tag }}
+                {{form.PostalCode}}
+            </div>
+            <div class="FormInput">
+                {{ form.Country.label_tag }}
+                {{form.Country}}
+            </div>
+            <div class="FormButtons">
+                <button type="submit" id="SignupButton" >Save</button>
             </div>
         </div>
     </form>
-    
+    {% for pizza in cart.pizzas %}
+    <p>{{ pizza}}</p>
+    {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-<a href="/confirmation">
-    <button id="CheckoutButton" onclick="DeleteCart()">Checkout</button> 
+<a href="/confirmation" onclick="DeleteCart()" id="CheckoutButton">
+    Checkout
 </a>
 {% endblock %}

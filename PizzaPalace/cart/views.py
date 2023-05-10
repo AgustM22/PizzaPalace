@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.decorators import login_required
+from user.forms.ProfileForm import ProfileForm
+from user.models import UserProfile
 
 def main(request):
     if not request.session.get('cart'):
@@ -7,11 +10,23 @@ def main(request):
 
     return render(request, "CartView.html", context = request.session['cart'])
 
+@login_required
 def checkout(request):
+    profile = UserProfile.objects.filter(user=request.user).first()
+    cart = request.session['cart']
+    pizzas = cart['pizzas']
+    offers = cart['offers']
+    fullprice = cart['fullprice']
     if not request.session.get('cart'):
         return render(request, "Homepage.html")
-
-    return render(request, "CreditCardDetails.html", context = request.session['cart'])
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile,data=request.POST)
+        if form.is_valid():
+            print("Made it here")
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+    return render(request, "CreditCardDetails.html",context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 def createcart(request):
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
