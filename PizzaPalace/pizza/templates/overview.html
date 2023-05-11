@@ -1,0 +1,35 @@
+{% extends 'CartBase.html' %}
+{% block CartContents %}
+    {% for pizza in pizzas %}
+    <div class="CartProduct">
+        <img src="{{ pizza.img }}" alt="PizzaImg" class="ProductImg">
+        <div class="ProductDetails">
+            <div class="ProductPaymentText">
+                <h1 class="ProductName">{{ pizza.name }}</h1>
+                <p class="ProductIngredients">{{ pizza.additionaltoppings }}</p>
+            </div>
+            <div>
+                <p>{{ pizza.qty }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% for offer in offers %}
+    <div class="CartProduct">
+        <img src="{{ offer.img }}" alt="OfferImg" class="ProductImg">
+        <div class="ProductDetails">
+            <div class="ProductPaymentText">
+                <h1 class="ProductName">{{ offer.name }}</h1>
+                <p class="ProductIngredients">{{ offer.item }}</p>
+            </div>
+            <div>
+                <p>{{ offer.qty }}</p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+{% block CheckoutButton %}
+<a href="/confirmation" id="CheckoutButton" type="submit">
+    Make Order
+</a>
+{% endblock %}
