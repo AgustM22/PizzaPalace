@@ -446,7 +446,7 @@ footer > * > h2 {
     flex-direction: column;
     font-family: var(--Font-Family);
     width: 80%;
-    padding-top: 500px;
+    padding-top: 20em;
 }
 
 #PizzaBox {
@@ -488,7 +488,16 @@ footer > * > h2 {
 }
 
 #SelectionBox {
+    background-color: var(--BackgroundColor);
+    color: var(--TextColor);
     font-family: var(--Font-Family);
+    border-radius: var(--card-border-radius);
+    border-color: var(--SecondaryColor);
+    border-style: var(--border-style);
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 9%;
+    padding: 2em;
 }
 
 #PizzaToppings {
@@ -521,6 +530,10 @@ footer > * > h2 {
     font-size: var(--MediumFont);
     font-family: var(--FontFamily);
     justify-content: center;
+}
+
+.Foodgroup {
+    margin-top: 1em;
 }
 
 .toppingcheckbox:checked + label {
@@ -643,9 +656,11 @@ label span {
     padding-left: 10%;
     padding-right: 10%;  
 }
+
 #PayBoxPizzaName {
     text-align: center;
 }
+
 #OrderBox {
     display: flex;
     flex-direction: row;
@@ -702,7 +717,6 @@ label span {
 
 /* Offer Templates */
 
-/* Stolen SO HARD from w3schools lol */
 .dropbtn {
     border-radius: 10px;
     background-color: var(--PrimaryColor);
