@@ -1017,6 +1017,8 @@ label span {
     width: 80%;
 }
 #ErrorMessage {
+    font-size: var(--SmallFont);
+    text-align: center;
     color: red;
 }
 
