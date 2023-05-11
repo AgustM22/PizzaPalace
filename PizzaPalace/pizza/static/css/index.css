@@ -916,6 +916,21 @@ label span {
     text-align: center;
 }
 
+#CheckoutButtonRed{
+    color: var(--BackgroundColor);
+    justify-content: center;
+    text-decoration: none;
+    border: 0;
+    border-radius: var(--pilled-shape-radius);
+    font-weight: 600;
+    width: 80%;
+    padding: 20px;
+    background-color: var(--SecondaryColor);
+    font-size: var(--MediumFont);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 /* Checkout/Contact Details*/
 .CheckoutInformation {
     display: flex;
