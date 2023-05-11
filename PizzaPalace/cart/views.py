@@ -85,8 +85,13 @@ def deletecart(request):
             return HttpResponseRedirect('/cart/checkout?e=1')
     
 def editcart(request):
-    newproduct = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "extra": str(request.GET['extra'])}
+    wipecheck = request.GET.get('wipe', False)
+    if wipecheck == "true":
+        request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
+        request.session.modified = True
+        return HttpResponse("")
 
+    newproduct = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "extra": str(request.GET['extra'])}
     if request.GET['remove'] == "true":
         for item in request.session['cart']["pizzas"]:
             if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["additionaltoppings"] == newproduct["extra"]:

@@ -11,10 +11,10 @@
                 <div class="ProductTitle">
                     <p>Product</p>
                     {% for pizza in pizzas %}
-                        <p id="cart{{ pizza.name }}={{ pizza.additionaltoppings }}" value="{{ pizza.qty }}={{ pizza.price }}">{{ pizza.name }}</p>
+                        <p id="cart{{ pizza.name }}={{ pizza.additionaltoppings }}" value="{{ pizza.qty }}={{ pizza.price }}" class="SingleElementName">{{ pizza.name }}</p>
                     {% endfor %}
                     {% for offer in offers %}
-                        <p id="cart{{ offer.name }}={{ offer.item }}" value="{{ offer.qty }}={{ offer.price }}">{{ offer.name }}</p>
+                        <p id="cart{{ offer.name }}={{ offer.item }}" value="{{ offer.qty }}={{ offer.price }}" class="SingleElementName">{{ offer.name }}</p>
                     {% endfor %}
                 </div>
                 <div class="ProductQuantity">

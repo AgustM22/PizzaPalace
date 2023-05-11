@@ -17,7 +17,7 @@ const SearchFilter = async () => {
 }
 
 const SearchOfferFilter = async () => {
-    const Filter = document.getElementById("search").value
+    const Filter = document.getElementById("Search").value
     const SortSelect = document.getElementById("SortOfferSelect").value
 
     const response = await axios("/offer/filter", {params: {"filter": Filter, "sort": SortSelect}})
@@ -355,4 +355,31 @@ const FixPrice = () => {
     })
 
     FullPrice.textContent = (TotalPrice + "Kr.")
+}
+
+const ClearCart = async () => {
+    const AllNames = document.getElementsByClassName("SingleElementName")
+    const AllQuantities = document.getElementsByClassName("SingleElementQuantity")
+    const AllPrices = document.getElementsByClassName("SingleElementPrice")
+    const FullPrice = document.getElementById("CheckoutPrice")
+    const AllProducts = document.getElementsByClassName("CartProduct")
+
+    while(AllNames.length > 0){
+        AllNames[0].parentNode.removeChild(AllNames[0]);
+    }
+
+    while(AllQuantities.length > 0){
+        AllQuantities[0].parentNode.removeChild(AllQuantities[0]);
+    }
+
+    while(AllPrices.length > 0){
+        AllPrices[0].parentNode.removeChild(AllPrices[0]);
+    }
+
+    while(AllProducts.length > 0){
+        AllProducts[0].parentNode.removeChild(AllProducts[0]);
+    }
+
+    FullPrice.textContent = ("0Kr.")
+    return await axios("/cart/editcart", {params: {"wipe": true}})
 }
