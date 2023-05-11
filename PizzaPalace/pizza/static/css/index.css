@@ -214,6 +214,7 @@ footer > * > h2 {
     display:  flex;
     justify-content:center;
 }
+
 .FormButtons button,select {
     cursor: pointer;
     border: 0;
@@ -258,12 +259,15 @@ footer > * > h2 {
     align-items: center;
     flex-direction: column;
 }
+
 .SignUpForm * {
     font-family: var(--FontFamily);
 }
+
 .SignUpForm #Logo {
     width: 100px;
 }
+
 /* Profile */
 .Profile{
     max-width: 700px;
@@ -281,15 +285,18 @@ footer > * > h2 {
     align-items: center;
     flex-direction: column;
 }
+
 .Profile form{
     width: 100%;
 }
+
 .ProfileMainInfo{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
 }
+
 .MainInfoRight {
     display: flex;
     flex-direction: column;
@@ -307,6 +314,7 @@ footer > * > h2 {
     display: flex;
     justify-content: center;
 }
+
 .ProfileHeading a{
     background-color: var(--TextColor);  
     border-radius: 5px;
@@ -349,8 +357,6 @@ footer > * > h2 {
     padding: 1.1rem;
 }
 
-
-
 #SearchbarCheckbox {
     font-family: var(--FontFamily);
     display: flex;
@@ -366,6 +372,7 @@ footer > * > h2 {
     font-size: var(--SmallFont);
     font-weight: bold;
 }
+
 #ProductBox {
     padding-bottom: 10em;
 }
@@ -408,11 +415,13 @@ footer > * > h2 {
     margin: 0;
     font-family: var(--FontFamily);
 }
+
 .ProductHighLight{
     display: flex;
     align-items: center;
     gap: 20px;
 }
+
 .ProductName {
     color: var(--PrimaryColor);
     text-decoration: underline;
@@ -481,10 +490,12 @@ footer > * > h2 {
 #SelectionBox {
     font-family: var(--Font-Family);
 }
+
 #PizzaToppings {
     font-size: var(--SmallFont);
     font-family: var(--FontFamily);
 }
+
 #ToppingPage {
     display: flex;
     flex-direction: column;
@@ -511,17 +522,17 @@ footer > * > h2 {
     font-family: var(--FontFamily);
     justify-content: center;
 }
+
 .toppingcheckbox:checked + label {
     color: var(--PrimaryColor);
 }
+
 input[type="radio"] {
     border-radius: 15px;
     border: 2px solid var(--BackgroundColor);
     background-color: var(--BackgroundColor);
 }  
   
-
-
 #small {
     width: 10em;
     height: 10em;
@@ -691,15 +702,15 @@ label span {
     font-size: 16px;
     border: none;
     font-weight: bold;
-  }
+}
   
-  .dropdown {
+.dropdown {
     margin-right: 9%;
     position: relative;
     display: inline-block;
-  }
+}
   
-  .dropdown-content {
+.dropdown-content {
     border-radius: 10px;
     display: none;
     position: absolute;
@@ -707,20 +718,20 @@ label span {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px var(--BackgroundColor);
     z-index: 1;
-  }
+}
   
-  .dropdown-content a {
+.dropdown-content a {
     border-radius: 10px;
     font-weight: bold;
     color: var(--BackgroundColor);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
+    }
   
-  .dropdown-content a:hover {background-color: #ddd;}
-  .dropdown:hover .dropdown-content {display: block;}
-  .dropdown:hover .dropbtn {background-color: #ffc400;}
+.dropdown-content a:hover {background-color: #ddd;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #ffc400;}
 
 /* Cart */
 
@@ -747,6 +758,7 @@ label span {
     flex-direction: row;
 
 }
+
 #CartBalanceContents > * {
     flex-direction: column;
     text-align: center;
@@ -759,6 +771,7 @@ label span {
     padding: 10px;
     max-height: 80vh;
 }
+
 .CartBalanceTotal {
     display: flex;
     justify-content: space-around;
@@ -768,10 +781,10 @@ label span {
 .ProductsQuantity {
     text-align: center;
 }
+
 .ProductsPrice {
     text-align: end;
 }
-
 
 .CartContents {
     margin-right: 10px;
@@ -796,22 +809,26 @@ label span {
     border-bottom-color: var(--SecondaryColor);
     border-bottom-style: var(--border-style);
 }
+
 .CartProduct .ProductImg {
     width: 30%;
     border-radius: 0;
 }
+
 .ProductDetails {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
+
 .ProductPaymentText {
     display: flex;
     flex-direction: column;
     text-align: left;
     width: 30%;
 }
+
 .ProductPaymentText p,h1 {
     margin: 0;
     font-family: var(--FontFamily);
@@ -823,9 +840,11 @@ label span {
     color: var(--PrimaryColor);
     text-decoration: underline;
 }
+
 .ProductPaymentText p {
     font-size: var(--SmallFont);
 }
+
 .ProductButtons {
     display: flex;
     flex-direction: row;
@@ -842,6 +861,7 @@ label span {
     vertical-align: middle;
     text-align: center;
 }
+
 .ProductButtons input{
     font-size: 2rem;
     border-radius: 10px;
@@ -854,6 +874,7 @@ label span {
     display: inline-block;
     vertical-align: middle;
 } 
+
 .Remove {
     border-radius: 50%;
     width: 40px;
@@ -880,7 +901,6 @@ label span {
     border-color: var(--PrimaryColor);
 }
 
-
 #CheckoutButton{
     color: var(--BackgroundColor);
     justify-content: center;
@@ -895,33 +915,40 @@ label span {
     margin-bottom: 20px;
     text-align: center;
 }
+
 /* Checkout/Contact Details*/
 .CheckoutInformation {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
+
 .CheckoutInfoLeft {
     width: 50%;
 }
+
 .CheckoutInfoRight {
     width: 50%;
 }
+
 .CreditCardInformation {
     display: flex;
     flex-direction: column;
     width: 80%;
     margin: auto;
 }
+
 .CreditCardSmallDetails {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .CCSmallDetail{
     display: flex;
     flex-direction: column;
 }
+
 .CreditCardInformation input{
     width: 100%;
     padding: 10px;
@@ -955,10 +982,12 @@ label span {
     padding: 1em;
     min-height: 60vh;
 }
+
 #ConfirmationCard h2{
     font-size: var(--LargeFont);
     font-weight: bolder;
 }
+
 #ConfirmationCard p {
     width: 70%;
     margin: 0;
@@ -979,9 +1008,11 @@ label span {
     align-items: center;
     justify-content: space-around;
 }
+
 #ConfirmationCard a{
     text-decoration: none;
 }
+
 #CheckIcon {
     width: 400px;
     height: 400px;
