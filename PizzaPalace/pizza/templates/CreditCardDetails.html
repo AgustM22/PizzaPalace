@@ -1,8 +1,10 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
-
-    <form method="post" class="CheckoutInformation">
-        <h1>Payment Details</h1>
+    <h1>Payment Details</h1>
+    {% if error == True %}
+        <h1 id="ErrorMessage">One of the given input fields was blank, please retry.</h1>
+    {% endif %}
+    <form method="post" id="CheckoutInformation" class="CheckoutInformation" action="/cart/deletecart">
         {% csrf_token %}
         <div class="FormInput">
             {{ form.NameCardholder.label_tag }}
@@ -22,12 +24,11 @@
                 {{form.CVC}}
             </div>
         </div>
-        <button type="submit">save?</button>
     </form>
 {% endblock %}
 {% block CheckoutButton %}
-    <form method="post" >
-        <a href="" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
+    <form method="post" action="/cart/deletecart">
+        <a href="#" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
             Checkout
         </a>
     </form>

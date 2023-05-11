@@ -11,7 +11,7 @@ def main(request):
     return render(request, "CartView.html", context = request.session['cart'])
 
 @login_required
-def checkout(request):
+def contactinformation(request):
     profile = UserProfile.objects.filter(user=request.user).first()
     cart = request.session['cart']
     pizzas = cart['pizzas']
@@ -33,6 +33,15 @@ def checkout(request):
         return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
 
     return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+
+def checkcontactinformation(request):
+    profile = UserProfile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile,data=request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/cart/creditcard')
+        else:
+            return HttpResponseRedirect('/cart/checkout?e=1')
 
 def createcart(request):
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
@@ -72,17 +81,6 @@ def getcart(request):
         createcart(request)
 
     return JsonResponse(request.session['cart'], safe=False)
-
-def deletecart(request):
-    profile = UserProfile.objects.filter(user=request.user).first()
-    if request.method == 'POST':
-        form = ProfileForm(instance=profile,data=request.POST)
-        if form.is_valid():
-            del request.session['cart']
-            request.session.modified = True
-            return HttpResponseRedirect('/confirmation')
-        else:
-            return HttpResponseRedirect('/cart/checkout?e=1')
     
 def editcart(request):
     wipecheck = request.GET.get('wipe', False)
@@ -121,6 +119,18 @@ def editcart(request):
 
     request.session.modified = True
     return HttpResponse("")
+
+def deletecart(request):
+    profile = CreditCard.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = CreditCardForm(instance=profile,data=request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            del request.session['cart']
+            request.session.modified = True
+            return HttpResponseRedirect('/confirmation')
+        else:
+            return HttpResponseRedirect('/cart/creditcard?e=1')
 
 @login_required
 def creditcard(request):

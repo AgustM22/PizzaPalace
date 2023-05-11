@@ -4,7 +4,7 @@
     {% if error == True %}
         <h1 id="ErrorMessage">One of the given input fields was blank, please retry.</h1>
     {% endif %}
-    <form id="CheckoutInformation" class="CheckoutInformation" method="POST" >
+    <form id="CheckoutInformation" class="CheckoutInformation" method="POST" action="/cart/checkcontactinformation">
         {% csrf_token %}
         <div class="CheckoutInfoLeft">
             <div class="FormInput">
@@ -44,8 +44,8 @@
     {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-    <form method="post" >
-        <a href="/cart/creditcard" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
+    <form method="post" action="/cart/checkcontactinformation">
+        <a href="#" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
             Checkout
         </a>
     </form>
