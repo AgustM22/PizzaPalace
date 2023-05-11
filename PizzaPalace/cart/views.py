@@ -39,14 +39,14 @@ def contactinformation(request):
             profile.save()
             return redirect('creditcard')
         
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}: 
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}: 
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
     if check != '': # On error...
-        return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+        return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True,"isprepaid":False})
 
-    return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice,"isprepaid":False})
 
 def checkcontactinformation(request):
     """
@@ -64,7 +64,7 @@ def createcart(request):
     """
     Creates a cookie cart.
     """
-    request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
+    request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}
 
 def addToCart(request):
     """
@@ -183,16 +183,18 @@ def creditcard(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            cart["isprepaid"] = True
+            request.session.modified = True
             return redirect('overview')
         
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}: # If the user ever calls the page through URL manually, then this check should redirect them to the homepage. 
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}: # If the user ever calls the page through URL manually, then this check should redirect them to the homepage. 
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
     if check != '': # On error... (Is only ever called if the checkcreditcart notices an empty field)
-        return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+        return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True,"isprepaid":False})
     
-    return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice,"isprepaid":False})
 
 @login_required
 def overview(request):
@@ -210,10 +212,10 @@ def overview(request):
     pizzas = cart['pizzas']
     offers = cart['offers']
     fullprice = cart['fullprice']
-
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
+    isprepaid = cart["isprepaid"]
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}: #If cart is empty
         return render(request, "Homepage.html")
-    return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice,"isprepaid":isprepaid})
 
 def deletecart(request):
     """

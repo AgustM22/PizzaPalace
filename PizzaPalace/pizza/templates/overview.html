@@ -8,22 +8,16 @@
                 <p>Name: {{ profileform.FullName.value }}</p>
                 <p>Phone: {{ profileform.PhoneNumber.value }}</p>
                 <p>Street Name: {{ profileform.StreetName.value }}</p>
+                {% if isprepaid == True %}
+                <p>Payment Type: Prepaid</p>
+                {% else %}
+                <p>Payment Type: OnPickup</p>
+                {% endif %}
             </div>
             <div class="OverviewContactDetailsRight">
                 <p>City: {{ profileform.City.value }}</p>
                 <p>PostalCode: {{ profileform.PostalCode.value }}</p>
                 <p>Country: {{ profileform.Country.value }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="CartProduct" id="OverviewCreditcard">
-        <h1 class="ProductName">Credit Card details</h1>
-        <div class="OverviewCreditcardDetails">
-            <p>Card Holder: {{ creditcardform.NameCardholder.value }}</p>
-            <p>Card Number: {{ creditcardform.CardNumber.value }}</p>
-            <div class="OverviewCreditcardSmallDetails">
-                <p>Expiration Date: {{ creditcardform.ExpirationDate.value }}</p>
-                <p>CVC: {{ creditcardform.CVC.value }}</p>
             </div>
         </div>
 
