@@ -30,9 +30,9 @@ def checkout(request):
     
     check = request.GET.get('e' , '')
     if check != '':
-        return render(request, "CreditCardDetails.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+        return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
 
-    return render(request, "CreditCardDetails.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 def createcart(request):
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
@@ -116,3 +116,6 @@ def editcart(request):
 
     request.session.modified = True
     return HttpResponse("")
+
+def creditcard(request):
+     return render(request, "CreditCardDetails.html")

@@ -1,53 +1,31 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
-    <h1>Contact Details</h1>
-    {% if error == True %}
-        <h1 style="color:red">One of the given input fields was blank, please retry.</h1>
-    {% endif %}
-    <form id="CheckoutInformation" class="CheckoutInformation" method="POST" action="/cart/deletecart">
-        {% csrf_token %}
-        <div class="CheckoutInfoLeft">
-            <div class="FormInput">
-                {{ form.FullName.label_tag }}
-                {{form.FullName}}
-            </div>
-            <div class="FormInput">
-                {{ form.PhoneNumber.label_tag }}
-                {{form.PhoneNumber}}
-            </div>
-            <div class="FormInput">
-                {{ form.StreetName.label_tag }}
-                {{form.StreetName}}
-            </div>
-            <div class="FormInput">
-                {{ form.HouseNumber.label_tag }}
-                {{form.HouseNumber}}
-            </div>
+
+    <form method="post" class="CheckoutInformation">
+        <h1>Payment Details</h1>
+
+        <div class="FormInput">
+            {{ form.CardHolderName.label_tag }}
+            {{form.CardHolderName}}
         </div>
-        <div class="CheckoutInfoRight">
+        <div class="FormInput">
+            {{ form.FullName.label_tag }}
+            {{form.FullName}}
+        </div>
+        <div class="CreditCardSmallDetails">
             <div class="FormInput">
-                {{ form.City.label_tag }}
-                {{form.City}}
-            </div>
+                {{ form.ExpiryDate.label_tag }}
+                {{form.ExpiryDate}}
+            </div>            
             <div class="FormInput">
-                {{ form.PostalCode.label_tag }}
-                {{form.PostalCode}}
-            </div>
-            <div class="FormInput">
-                {{ form.Country.label_tag }}
-                {{form.Country}}
-            </div>
-            <div class="FormButtons">
-                <button type="submit" id="SignupButton" >Save</button>
+                {{ form.CVC.label_tag }}
+                {{form.CVC}}
             </div>
         </div>
     </form>
-    {% for pizza in cart.pizzas %}
-    <p>{{ pizza}}</p>
-    {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-    <form method="post" action="/cart/deletecart">
+    <form method="post" >
         <a href="#" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
             Checkout
         </a>

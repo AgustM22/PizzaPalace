@@ -9,7 +9,6 @@ from django.contrib.auth.forms import UserCreationForm
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
-        print(form)
         if form.is_valid(): #Checks if all feilds were provided
             form.save() #Saves to the database
             return redirect('login')

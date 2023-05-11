@@ -927,7 +927,9 @@ label span {
     padding: 10px;
     height: 10px;
 }
-
+#ErrorMessage {
+    color: red;
+}
 /* Confirmation page */
 
 .ConfirmationPageBody {

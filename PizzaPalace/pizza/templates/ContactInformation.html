@@ -1,0 +1,52 @@
+{% extends 'CartBase.html' %}
+{% block CartContents %}
+    <h1>Contact Details</h1>
+    {% if error == True %}
+        <h1 id="ErrorMessage">One of the given input fields was blank, please retry.</h1>
+    {% endif %}
+    <form id="CheckoutInformation" class="CheckoutInformation" method="POST" >
+        {% csrf_token %}
+        <div class="CheckoutInfoLeft">
+            <div class="FormInput">
+                {{ form.FullName.label_tag }}
+                {{form.FullName}}
+            </div>
+            <div class="FormInput">
+                {{ form.PhoneNumber.label_tag }}
+                {{form.PhoneNumber}}
+            </div>
+            <div class="FormInput">
+                {{ form.StreetName.label_tag }}
+                {{form.StreetName}}
+            </div>
+            <div class="FormInput">
+                {{ form.HouseNumber.label_tag }}
+                {{form.HouseNumber}}
+            </div>
+        </div>
+        <div class="CheckoutInfoRight">
+            <div class="FormInput">
+                {{ form.City.label_tag }}
+                {{form.City}}
+            </div>
+            <div class="FormInput">
+                {{ form.PostalCode.label_tag }}
+                {{form.PostalCode}}
+            </div>
+            <div class="FormInput">
+                {{ form.Country.label_tag }}
+                {{form.Country}}
+            </div>
+        </div>
+    </form>
+    {% for pizza in cart.pizzas %}
+    <p>{{ pizza}}</p>
+    {% endfor %}
+{% endblock %}
+{% block CheckoutButton %}
+    <form method="post" >
+        <a href="/cart/creditcard" onclick="document.forms['CheckoutInformation'].submit();" id="CheckoutButton" type="submit">
+            Checkout
+        </a>
+    </form>
+{% endblock %}
