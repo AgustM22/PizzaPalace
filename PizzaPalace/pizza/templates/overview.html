@@ -27,9 +27,10 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+    {% endfor %}
+{% endblock %}
 {% block CheckoutButton %}
-<a href="/confirmation" id="CheckoutButton" type="submit">
+<a href="/cart/deletecart" id="CheckoutButton">
     Make Order
 </a>
 {% endblock %}

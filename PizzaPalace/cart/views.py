@@ -13,6 +13,9 @@ def main(request):
 @login_required
 def contactinformation(request):
     profile = UserProfile.objects.filter(user=request.user).first()
+
+    if not request.session.get('cart'):
+        createcart(request)
     cart = request.session['cart']
     pizzas = cart['pizzas']
     offers = cart['offers']
@@ -132,6 +135,9 @@ def checkcreditcard(request):
 @login_required
 def creditcard(request):
     profile = CreditCard.objects.filter(user=request.user).first()
+    if not request.session.get('cart'):
+        createcart(request)
+
     cart = request.session['cart']
     pizzas = cart['pizzas']
     offers = cart['offers']
@@ -155,15 +161,20 @@ def creditcard(request):
 def overview(request):
     profile = UserProfile.objects.filter(user=request.user).first()
     creditcard = CreditCard.objects.filter(user=request.user).first()
+    if not request.session.get('cart'):
+        createcart(request)
+
     cart = request.session['cart']
     pizzas = cart['pizzas']
     offers = cart['offers']
     fullprice = cart['fullprice']
 
-    print(creditcard)
-    print(profile)
-
     if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
         return render(request, "Homepage.html")
     
-    return render(request, "CreditCardDetails.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+
+def deletecart(request):
+    del request.session['cart']
+    request.session.modified = True
+    return HttpResponseRedirect('/confirmation')
