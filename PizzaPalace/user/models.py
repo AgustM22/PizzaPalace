@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class CreditCard(models.Model):
+    NameCardholder = models.CharField(max_length=255)
+    CardNumber = models.CharField(max_length=255)
+    ExpirationDate = models.DateField()
+    CVC = models.CharField(max_length=10)
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     FullName = models.CharField(max_length=255,)
@@ -12,4 +18,4 @@ class UserProfile(models.Model):
     Country = models.CharField(max_length=255)
     PostalCode = models.CharField(max_length=255)
     PhoneNumber = models.CharField(max_length=255)
-    
+    CIP = models.ForeignKey(CreditCard, on_delete=models.CASCADE,blank=True,null=True)
