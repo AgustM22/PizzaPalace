@@ -1,47 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <section class="Cart">
-        <div class="CartContents">
-            {% block CartContents %}
-            {% endblock %}
-        </div>
-        <div id="CartBalance">
-            <div id="CartBalanceContents">
-                <div class="ProductTitle">
-                    <p>Product</p>
-                    {% for pizza in pizzas %}
-                        <p id="cart{{ pizza.name }}={{ pizza.additionaltoppings }}" value="{{ pizza.qty }}={{ pizza.price }}" class="SingleElementName">{{ pizza.name }}</p>
-                    {% endfor %}
-                    {% for offer in offers %}
-                        <p id="cart{{ offer.name }}={{ offer.item }}" value="{{ offer.qty }}={{ offer.price }}" class="SingleElementName">{{ offer.name }}</p>
-                    {% endfor %}
-                </div>
-                <div class="ProductQuantity">
-                    <p>Quantity</p>
-                    {% for pizza in pizzas %}
-                        <p id="qty{{ pizza.name }}={{ pizza.additionaltoppings }}" class="SingleElementQuantity">{{ pizza.qty }}</p>
-                    {% endfor %}
-                    {% for offer in offers %}
-                        <p id="qty{{ offer.name }}={{ offer.item }}" class="SingleElementQuantity">{{ offer.qty }}</p>
-                    {% endfor %}
-                </div>
-                <div class="ProductPrice">
-                    <p>Price</p>
-                    {% for pizza in pizzas %}
-                        <p id="price{{ pizza.name }}={{ pizza.additionaltoppings }}" class="SingleElementPrice">{{ pizza.price }}Kr.</p>
-                    {% endfor %}
-                    {% for offer in offers %}
-                        <p id="price{{ offer.name }}={{ offer.item }}" class="SingleElementPrice">{{ offer.price }}Kr.</p>
-                    {% endfor %}
-                </div>
+    <form method="post">
+        {% csrf_token%}
+        <section class="Cart">
+            <div class="CartContents">
+                {% block CartContents %}
+                {% endblock %}
             </div>
-
+            <div id="CartBalance">
+                <div id="CartBalanceContents">
+                    <div class="ProductTitle">
+                        <p>Product</p>
+                        {% for pizza in pizzas %}
+                            <p id="cart{{ pizza.name }}={{ pizza.additionaltoppings }}" value="{{ pizza.qty }}={{ pizza.price }}" class="SingleElementName">{{ pizza.name }}</p>
+                        {% endfor %}
+                        {% for offer in offers %}
+                            <p id="cart{{ offer.name }}={{ offer.item }}" value="{{ offer.qty }}={{ offer.price }}" class="SingleElementName">{{ offer.name }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="ProductQuantity">
+                        <p>Quantity</p>
+                        {% for pizza in pizzas %}
+                            <p id="qty{{ pizza.name }}={{ pizza.additionaltoppings }}" class="SingleElementQuantity">{{ pizza.qty }}</p>
+                        {% endfor %}
+                        {% for offer in offers %}
+                            <p id="qty{{ offer.name }}={{ offer.item }}" class="SingleElementQuantity">{{ offer.qty }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="ProductPrice">
+                        <p>Price</p>
+                        {% for pizza in pizzas %}
+                            <p id="price{{ pizza.name }}={{ pizza.additionaltoppings }}" class="SingleElementPrice">{{ pizza.price }}Kr.</p>
+                        {% endfor %}
+                        {% for offer in offers %}
+                            <p id="price{{ offer.name }}={{ offer.item }}" class="SingleElementPrice">{{ offer.price }}Kr.</p>
+                        {% endfor %}
+                    </div>
+                </div>
                 <div class="CartBalanceTotal">
                     <p>Total</p>
                     <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
                 </div>
                 {% block CheckoutButton %}
                 {% endblock %}
-    </section>
+        </section>
+</form>
 {% endblock %}
