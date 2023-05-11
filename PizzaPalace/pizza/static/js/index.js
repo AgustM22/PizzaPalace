@@ -154,7 +154,7 @@ const AddPizzaToOrder = (PizzaName) => {
         const quantity = document.createElement("p")
         const OrderSelect = document.createElement("div")
 
-        OrderSelect.setAttribute("class", "OrderSelect")
+        OrderSelect.setAttribute("class", "OfferSelect")
         pizza.setAttribute("class", "PizzaOrderName")
         
         pizza.innerText = PizzaName
@@ -185,7 +185,7 @@ const AddToCart = async (num) => {
         })
         
         DataDict["type"] = "offer"
-        DataDict["item"] = itemString
+        DataDict["item"] = itemString.slice(0, -2)
         DataDict["price"] = document.getElementById("FullPrice").innerHTML.slice(0, -3);
         DataDict["name"] = document.getElementById("OfferTitle").innerText;
         DataDict["qty"] = 1;

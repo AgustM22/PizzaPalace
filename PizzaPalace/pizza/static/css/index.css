@@ -691,6 +691,15 @@ label span {
     height: 60px;
 }
 
+.OfferSelect {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;  
+}
+
 /* Offer Templates */
 
 /* Stolen SO HARD from w3schools lol */
