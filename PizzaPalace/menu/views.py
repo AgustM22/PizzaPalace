@@ -3,12 +3,19 @@ from django.http import JsonResponse
 from pizza.models import HasP, Product, Topping, HasT
 
 def main(request):
+    """
+    Collects all the required information for the menu page before displaying it.
+    """
     pizzacontext = HasP.objects.all().select_related('PID').select_related('TID')
     toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
     PizzaDict = sort_data(pizzacontext, toppingcontext, "1", False)
     return render(request, "menu.html", PizzaDict)
 
 def filter(request):
+    """
+    This view is refrenced whenever any new filters are added, such as tags or search any string in the menu.
+    It takes in any new filters, sorts the total data from those filters, before sending it back to the same page.
+    """
     if request.method == 'GET':
         filter = request.GET['filter']
         sort = request.GET['sort']
@@ -25,7 +32,7 @@ def filter(request):
         PizzaDict = sort_data(pizzacontext, toppingcontext, sort, False)
 
         EditedPizzaDict = []
-        for pizza in PizzaDict["pizzas"]:
+        for pizza in PizzaDict["pizzas"]: # checks if all pizzas have the requested filtered tags
             if pizza["name"].lower().find(filter.lower()) != -1:
                 TagCondition = True
                 if veg:
@@ -40,17 +47,20 @@ def filter(request):
         return JsonResponse(EditedPizzaDict, safe=False)
 
 def sort_data(context, toppingcontext, sort, view):
+    """
+    Partial function of filter. Takes in main contexts before breaking down the given querylists by required values and sorts.
+    """
     lis = {}
     item_name = None
 
     toppinglis = {}
     for topping in toppingcontext:
-        if topping.TID.name in toppinglis:
-            toppinglis[topping.TID.name].append(topping.TGID.name) # Not pointless code, sorting Toppings by Tags
+        if topping.TID.name in toppinglis: # First creates a list of tags from all toppings
+            toppinglis[topping.TID.name].append(topping.TGID.name)
         else:   
             toppinglis[topping.TID.name] = [topping.TGID.name]
 
-    for object in context:
+    for object in context: # Creates a list of pizzas, with all their toppings in one dictionary instead of multiple querylists
         if object.PID.name in lis:
             lis[object.PID.name]["toppings"] += ", " + object.TID.name
         else:
@@ -59,7 +69,7 @@ def sort_data(context, toppingcontext, sort, view):
             if view:
                 item_name = object.PID.name
 
-        if object.TID.name in toppinglis:
+        if object.TID.name in toppinglis: # Gives each pizza appropriate tags 
             if "Vegeterian" not in toppinglis[object.TID.name] :
                 lis[object.PID.name]["veg"] = False
             if "Spicy" in toppinglis[object.TID.name]:
@@ -67,13 +77,13 @@ def sort_data(context, toppingcontext, sort, view):
         else:
             lis[object.PID.name]["veg"] = False
 
-    if view:
+    if view: # If you're viewing a pizza, you only need one.
         value = lis.pop(item_name)
         return {"pizza": value}
     else:
         PizzaDict = {"pizzas": lis.values()}
 
-    if sort == "1":
+    if sort == "1": # Sorts the dictionary of pizzas depending on the sort given.
         PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['name'])
     if sort == "2":
         PizzaDict["pizzas"] = sorted(PizzaDict["pizzas"], key=lambda x: x['name'], reverse=True)
@@ -85,8 +95,13 @@ def sort_data(context, toppingcontext, sort, view):
     return PizzaDict
 
 def pizzaview(request, pizza_id):
+    """
+    This view is for viewing individual pizzas. It first checks whether the given id exists, before displaying it with all the necessary context.
+
+    If it cannot find the given pizza id, it redirects to the menu.
+    """    
     context = Product.objects.filter(id=pizza_id)
-    if not context:
+    if not context: # If the pizza
         pizzacontext = HasP.objects.filter().select_related('PID').select_related('TID')
         toppingcontext = HasT.objects.select_related('TGID').select_related('TID')
         PizzaDict = sort_data(pizzacontext, toppingcontext, request.GET['sort'], False)

@@ -7,9 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 def signup(request):
+    """
+    This view creates a new user from the forms filled.
+    """
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
-        if form.is_valid(): #Checks if all feilds were provided
+        if form.is_valid(): #Checks if all fields were provided
             form.save() #Saves to the database
             return redirect('login')
         else:
@@ -20,6 +23,9 @@ def signup(request):
 
 @login_required
 def profile(request):
+    """
+    This view redirects the user to their profile page if they are logged in.
+    """
     profile = UserProfile.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)

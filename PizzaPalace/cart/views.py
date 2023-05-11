@@ -5,6 +5,9 @@ from user.forms.ProfileForm import ProfileForm,CreditCardForm
 from user.models import UserProfile, CreditCard
 
 def main(request):
+    """
+    The main view for rendering the cart.
+    """
     if not request.session.get('cart'):
         createcart(request)
 
@@ -12,6 +15,10 @@ def main(request):
 
 @login_required
 def contactinformation(request):
+    """
+    This view renders all the necessary information for the contact information step of purchasing.
+    If there occurs an error from "checkcontactinformation", it is re-rendered with an error message.
+    """
     profile = UserProfile.objects.filter(user=request.user).first()
 
     if not request.session.get('cart'):
@@ -32,12 +39,15 @@ def contactinformation(request):
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
-    if check != '':
+    if check != '': # On error...
         return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
 
     return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 def checkcontactinformation(request):
+    """
+    This view checks if all the forms of "contactinformation" are filled. If so, redirects to checkout, if not, then it re-renders contactinformation with an error message.
+    """
     profile = UserProfile.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)
@@ -47,13 +57,19 @@ def checkcontactinformation(request):
             return HttpResponseRedirect('/cart/checkout?e=1')
 
 def createcart(request):
+    """
+    Creates a cookie cart.
+    """
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
 
 def addToCart(request):
+    """
+    Adds a product to the cart and maintains the correct information, such as full price.
+    """
     if not request.session.get('cart'):
         createcart(request)
 
-    if request.GET['type'] == "pizza":
+    if request.GET['type'] == "pizza": # Adding pizza to cart
         newpizza = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "additionaltoppings": str(request.GET['additionaltoppings']), "img": str(request.GET['img'])}
         found = False
         for item in request.session['cart']["pizzas"]:
@@ -64,7 +80,7 @@ def addToCart(request):
         if not found:
             request.session['cart']["pizzas"].append(newpizza)
             request.session['cart']['fullprice'] += int(newpizza['price'])
-    else:
+    else: # Adding offer to cart
         newoffer = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "item": (request.GET['item']), "img": str(request.GET['img'])}
         found = False
         for item in request.session['cart']["offers"]:
@@ -80,12 +96,18 @@ def addToCart(request):
     return HttpResponse("")
 
 def getcart(request):
+    """
+    Returns all information in cart.
+    """
     if not request.session.get('cart'):
         createcart(request)
 
     return JsonResponse(request.session['cart'], safe=False)
     
 def editcart(request):
+    """
+    This function edits the values of the product sent through. Maintains fullprice and qty and saves it to the cart. 
+    """
     wipecheck = request.GET.get('wipe', False)
     if wipecheck == "true":
         request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
@@ -93,7 +115,7 @@ def editcart(request):
         return HttpResponse("")
 
     newproduct = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "extra": str(request.GET['extra'])}
-    if request.GET['remove'] == "true":
+    if request.GET['remove'] == "true": # If a product needs to be removed.
         for item in request.session['cart']["pizzas"]:
             if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["additionaltoppings"] == newproduct["extra"]:
                 request.session['cart']["pizzas"].remove(item)
@@ -101,7 +123,7 @@ def editcart(request):
             if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["item"] == newproduct["extra"]:
                 request.session['cart']["offers"].remove(item)
         
-        FullPrice = 0
+        FullPrice = 0 # Calculates full price on removal
         for item in request.session['cart']["pizzas"]:
             FullPrice += int(item["price"]) * int(item["qty"])
         for item in request.session['cart']["offers"]:
@@ -111,9 +133,9 @@ def editcart(request):
         request.session.modified = True
         return HttpResponse("")
     
-    for item in request.session['cart']["offers"]:
+    for item in request.session['cart']["offers"]: # If the quantity of a product has been changed.
         if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["item"] == newproduct["extra"]:
-            request.session['cart']['fullprice'] += (int(newproduct["qty"]) - int(item["qty"])) * int(newproduct["price"])
+            request.session['cart']['fullprice'] += (int(newproduct["qty"]) - int(item["qty"])) * int(newproduct["price"]) # Edits fullprice on quantity change
             item["qty"] = newproduct["qty"]
     for item in request.session['cart']["pizzas"]:
         if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["additionaltoppings"] == newproduct["extra"]:
@@ -124,6 +146,9 @@ def editcart(request):
     return HttpResponse("")
 
 def checkcreditcard(request):
+    """
+    This view checks if all the forms of "creditcard" are filled. If so, redirects to the overview step, if not, then it re-renders creditcard with an error message.
+    """
     profile = CreditCard.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = CreditCardForm(instance=profile,data=request.POST)
@@ -134,6 +159,10 @@ def checkcreditcard(request):
 
 @login_required
 def creditcard(request):
+    """
+    This view renders all the necessary information for the credit card information step of purchasing.
+    If there occurs an error from "checkcreditcard", it is re-rendered with an error message.
+    """
     profile = CreditCard.objects.filter(user=request.user).first()
     if not request.session.get('cart'):
         createcart(request)
@@ -152,13 +181,16 @@ def creditcard(request):
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
-    if check != '':
+    if check != '': # On error...
         return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
     
     return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 @login_required
 def overview(request):
+    """
+    This view renders all the necessary information for the overview information step of purchasing.
+    """
     profile = UserProfile.objects.filter(user=request.user).first()
     creditcard = CreditCard.objects.filter(user=request.user).first()
     if not request.session.get('cart'):
@@ -175,6 +207,9 @@ def overview(request):
     return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 def deletecart(request):
+    """
+    Deletes the cart completely.
+    """
     del request.session['cart']
     request.session.modified = True
     return HttpResponseRedirect('/confirmation')

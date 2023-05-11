@@ -36,7 +36,6 @@ class Offer(models.Model):
     price = models.FloatField()
     pic = models.CharField(max_length=9999)
 
-
 class Includes(models.Model):
     OID = models.ForeignKey(Offer, on_delete=models.CASCADE)
     PID = models.ForeignKey(Product, on_delete=models.CASCADE)
