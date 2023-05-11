@@ -303,7 +303,7 @@ const EditValue = async (keyword, ID) => {
     const DetailArray = ID.split("=")
     let CartValue = CartBox.getAttribute("value").split("=")
 
-    if (keyword == 'del') {
+    if (keyword == 'del') { // If a product is deleted.
         ProductBox.remove()
         CartBox.remove()
         PriceBox.remove()
@@ -311,7 +311,7 @@ const EditValue = async (keyword, ID) => {
         FixPrice()
         return await axios("/cart/editcart", {params: {"remove": true, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
     }
-    else if (keyword == 'reduce') {
+    else if (keyword == 'reduce') { // If a product is reduced via button.
         if (Value.value <= 1) {
             ProductBox.remove()
             CartBox.remove()            
@@ -327,13 +327,13 @@ const EditValue = async (keyword, ID) => {
             Value.setAttribute("value", (Value.value))
         }
     }
-    else if (keyword == 'add') {
+    else if (keyword == 'add') { // If a product is increased via button.
         CartBox.setAttribute("value", (parseInt(Value.value) + 1) + "=" + CartValue[1])
         Quantity.textContent = (parseInt(Value.value) + 1)        
         Value.value = (parseInt(Value.value) + 1)
         Value.setAttribute("value", (parseInt(Value.value)))
     }
-    else if (keyword == 'change') {
+    else if (keyword == 'change') { // If a product's value is changed from the input field.
         if (isNaN(Value.value)) {
             // Pass
         }
