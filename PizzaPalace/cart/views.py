@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from user.forms.ProfileForm import ProfileForm
-from user.models import UserProfile
+from user.forms.ProfileForm import ProfileForm,CreditCardForm
+from user.models import UserProfile, CreditCard
 
 def main(request):
     if not request.session.get('cart'):
@@ -122,5 +122,24 @@ def editcart(request):
     request.session.modified = True
     return HttpResponse("")
 
+@login_required
 def creditcard(request):
-     return render(request, "CreditCardDetails.html")
+    profile = CreditCard.objects.filter(user=request.user).first()
+    cart = request.session['cart']
+    pizzas = cart['pizzas']
+    offers = cart['offers']
+    fullprice = cart['fullprice']
+    if request.method == 'POST':
+        form = CreditCardForm(instance=profile,data=request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
+        return render(request, "Homepage.html")
+    
+    check = request.GET.get('e' , '')
+    if check != '':
+        return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+    
+    return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, widgets
-from user.models import UserProfile
+from user.models import UserProfile,CreditCard
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -31,4 +31,15 @@ class ProfileForm(ModelForm):
             'Country':widgets.Select(choices=COUNTRIES),
             'PostalCode':widgets.TextInput(),
             'PhoneNumber':widgets.TextInput()
+        }
+
+class CreditCardForm(ModelForm):
+    class Meta:
+        model = CreditCard
+        exclude = ['id','user']
+        widgets = {
+            'NameCardholder':widgets.TextInput(),
+            'CardNumber':widgets.TextInput(),
+            'ExpirationDate':widgets.DateInput(),
+            'CVC':widgets.TextInput(),
         }

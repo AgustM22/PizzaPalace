@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class CreditCard(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     NameCardholder = models.CharField(max_length=255)
     CardNumber = models.CharField(max_length=255)
     ExpirationDate = models.DateField()
