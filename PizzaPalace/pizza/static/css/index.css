@@ -995,6 +995,43 @@ label span {
 #ErrorMessage {
     color: red;
 }
+
+/* Overview/Review step */
+#OverviewContact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.OverviewContactDetails {
+    display: flex;
+    flex-direction: row;
+    gap: 300px;
+    font-size: var(--LargeFont);
+    font-family: var(--FontFamily);
+    font-weight: bold;
+}
+.OverviewContactDetailsLeft,.OverviewContactDetailsRight {
+    display: flex;
+    flex-direction: column;
+}
+
+#OverviewCreditcard {
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--LargeFont);
+    font-family: var(--FontFamily);
+    font-weight: bold;
+}
+.OverviewCreditcardSmallDetails {
+    display: flex;
+    gap: 50px;
+}
+
+#CartProductHeading {
+    justify-content: center;
+}
 /* Confirmation page */
 
 .ConfirmationPageBody {

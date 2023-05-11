@@ -1,5 +1,36 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
+    
+    <div class="CartProduct" id="OverviewContact">
+        <h1 class="ProductName">Contact Details</h1>
+        <div class="OverviewContactDetails">
+            <div class="OverviewContactDetailsLeft">
+                <p>Name: {{ profileform.FullName.value }}</p>
+                <p>Phone: {{ profileform.PhoneNumber.value }}</p>
+                <p>Street Name: {{ profileform.StreetName.value }}</p>
+            </div>
+            <div class="OverviewContactDetailsRight">
+                <p>City: {{ profileform.City.value }}</p>
+                <p>PostalCode: {{ profileform.PostalCode.value }}</p>
+                <p>Country: {{ profileform.Country.value }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="CartProduct" id="OverviewCreditcard">
+        <h1 class="ProductName">Credit Card details</h1>
+        <div class="OverviewCreditcardDetails">
+            <p>Card Holder: {{ creditcardform.NameCardholder.value }}</p>
+            <p>Card Number: {{ creditcardform.CardNumber.value }}</p>
+            <div class="OverviewCreditcardSmallDetails">
+                <p>Expiration Date: {{ creditcardform.ExpirationDate.value }}</p>
+                <p>CVC: {{ creditcardform.CVC.value }}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="CartProduct" id="CartProductHeading">
+        <h1 class="ProductName">Pizzas:</h1>
+    </div>
     {% for pizza in pizzas %}
     <div class="CartProduct">
         <img src="{{ pizza.img }}" alt="PizzaImg" class="ProductImg">
@@ -7,9 +38,8 @@
             <div class="ProductPaymentText">
                 <h1 class="ProductName">{{ pizza.name }}</h1>
                 <p class="ProductIngredients">{{ pizza.additionaltoppings }}</p>
-            </div>
-            <div>
-                <p>{{ pizza.qty }}</p>
+                <p class="ProductIngredients">{{ pizza.toppings }}</p>
+                <p>Quantity: {{ pizza.qty }}</p>
             </div>
         </div>
     </div>
@@ -32,5 +62,8 @@
 {% block CheckoutButton %}
 <a href="/cart/deletecart" id="CheckoutButton">
     Make Order
+</a>
+<a href="/cart/creditcard" id="CheckoutButtonRed">
+    Back
 </a>
 {% endblock %}

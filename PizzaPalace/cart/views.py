@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from user.forms.ProfileForm import ProfileForm,CreditCardForm
@@ -21,12 +21,14 @@ def contactinformation(request):
     """
     profile = UserProfile.objects.filter(user=request.user).first()
 
+    #We need all the information about what products are in the cart
     if not request.session.get('cart'):
         createcart(request)
     cart = request.session['cart']
     pizzas = cart['pizzas']
     offers = cart['offers']
     fullprice = cart['fullprice']
+
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)
         temp = profile.ProfilePic
@@ -35,7 +37,9 @@ def contactinformation(request):
             profile.ProfilePic = temp
             profile.user = request.user
             profile.save()
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
+            return redirect('creditcard')
+        
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}: 
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
@@ -164,24 +168,28 @@ def creditcard(request):
     If there occurs an error from "checkcreditcard", it is re-rendered with an error message.
     """
     profile = CreditCard.objects.filter(user=request.user).first()
+    
+    #We need to get the cart from the session
     if not request.session.get('cart'):
         createcart(request)
-
     cart = request.session['cart']
     pizzas = cart['pizzas']
     offers = cart['offers']
     fullprice = cart['fullprice']
+
     if request.method == 'POST':
         form = CreditCardForm(instance=profile,data=request.POST)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
+            return redirect('overview')
+        
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}: # If the user ever calls the page through URL manually, then this check should redirect them to the homepage. 
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
-    if check != '': # On error...
+    if check != '': # On error... (Is only ever called if the checkcreditcart notices an empty field)
         return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
     
     return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
@@ -189,8 +197,10 @@ def creditcard(request):
 @login_required
 def overview(request):
     """
-    This view renders all the necessary information for the overview information step of purchasing.
+    This view is read only. here we only want to display all the information for the user such as what is in their cart and all of their information.
+    then when the user sends a post request we wipe the cart.
     """
+
     profile = UserProfile.objects.filter(user=request.user).first()
     creditcard = CreditCard.objects.filter(user=request.user).first()
     if not request.session.get('cart'):
@@ -203,12 +213,11 @@ def overview(request):
 
     if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
         return render(request, "Homepage.html")
-    
     return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
 
 def deletecart(request):
     """
-    Deletes the cart completely.
+    Wipes the cart and redirects to the confirmation page
     """
     del request.session['cart']
     request.session.modified = True
