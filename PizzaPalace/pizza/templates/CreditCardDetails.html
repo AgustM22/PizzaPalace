@@ -1,29 +1,31 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
-    <h1>Payment Details</h1>
-    {% if error == True %}
-        <h1 id="ErrorMessage">One of the given input fields was blank, please retry.</h1>
-    {% endif %}
-    <!--<form method="post" id="CheckoutInformation" class="CheckoutInformation" action="/cart/checkcreditcard">-->
-        {% csrf_token %}
-        <div class="FormInput">
-            {{ form.NameCardholder.label_tag }}
-            {{ form.NameCardholder }}
-        </div>
-        <div class="FormInput">
-            {{ form.CardNumber.label_tag }}
-            {{ form.CardNumber}}
-        </div>
-        <div class="CreditCardSmallDetails">
+    <div class="CreditCardInformation">
+        <h1>Payment Details</h1>
+        {% if error == True %}
+            <h1 id="ErrorMessage">One of the given input fields was blank, please retry.</h1>
+        {% endif %}
+        <!--<form method="post" id="CheckoutInformation" class="CheckoutInformation" action="/cart/checkcreditcard">-->
+            {% csrf_token %}
             <div class="FormInput">
-                {{ form.ExpirationDate.label_tag }}
-                {{form.ExpirationDate}}
-            </div>            
-            <div class="FormInput">
-                {{ form.CVC.label_tag }}
-                {{form.CVC}}
+                {{ form.NameCardholder.label_tag }}
+                {{ form.NameCardholder }}
             </div>
-        </div>
+            <div class="FormInput">
+                {{ form.CardNumber.label_tag }}
+                {{ form.CardNumber}}
+            </div>
+            <div class="CreditCardSmallDetails">
+                <div class="FormInput">
+                    {{ form.ExpirationDate.label_tag }}
+                    {{form.ExpirationDate}}
+                </div>            
+                <div class="FormInput">
+                    {{ form.CVC.label_tag }}
+                    {{form.CVC}}
+                </div>
+            </div>
+    </div>
     <!--</form>-->
 {% endblock %}
 {% block CheckoutButton %}

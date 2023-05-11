@@ -18,6 +18,7 @@
                         {% for offer in offers %}
                             <p id="cart{{ offer.name }}={{ offer.item }}" value="{{ offer.qty }}={{ offer.price }}" class="SingleElementName">{{ offer.name }}</p>
                         {% endfor %}
+                        <p class="CartTotalText">Total</p>
                     </div>
                     <div class="ProductQuantity">
                         <p>Quantity</p>
@@ -36,14 +37,14 @@
                         {% for offer in offers %}
                             <p id="price{{ offer.name }}={{ offer.item }}" class="SingleElementPrice">{{ offer.price }}Kr.</p>
                         {% endfor %}
+                        <p id="CheckoutPrice" class="CartTotalText">{{ fullprice }}Kr.</p>
                     </div>
                 </div>
-                <div class="CartBalanceTotal">
-                    <p>Total</p>
-                    <p id="CheckoutPrice">{{ fullprice }}Kr.</p>
-                </div>
+                <div class="CheckoutButtons">
                 {% block CheckoutButton %}
                 {% endblock %}
+                </div>
+
         </section>
 </form>
 {% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
-    <h1>Contact Details</h1>
+    <h1 class="ContactInfoHeadingText">Contact Details</h1>
     {% if error == True %}
-        <h1 id="ErrorMessage">One of the given input fields was blank, please retry.</h1>
+        <h1 id="ErrorMessage" class="ContactInfoHeadingText">One of the given input fields was blank, please retry.</h1>
     {% endif %}
     <!--<form id="CheckoutInformation" class="CheckoutInformation" method="POST" action="/cart/checkcontactinformation">-->
+    <div class="CheckoutInformation">
         {% csrf_token %}
         <div class="CheckoutInfoLeft">
             <div class="FormInput">
@@ -38,6 +39,8 @@
                 {{form.Country}}
             </div>
         </div>
+</div>
+
     <!--</form>-->
     {% for pizza in cart.pizzas %}
     <p>{{ pizza}}</p>

@@ -773,6 +773,8 @@ label span {
     max-height: 600px;
     overflow-x: hidden;
     overflow-y: auto;
+    justify-content: space-between;
+
 }
 
 #CartBalanceContents {
@@ -837,7 +839,9 @@ label span {
     width: 30%;
     border-radius: 0;
 }
-
+.CartTotalText {
+    font-weight: bold;
+}
 .ProductDetails {
     display: flex;
     flex-direction: row;
@@ -925,20 +929,26 @@ label span {
 }
 
 #CheckoutButton{
+    cursor: pointer;
     color: var(--BackgroundColor);
     justify-content: center;
     text-decoration: none;
     border: 0;
     border-radius: var(--pilled-shape-radius);
     font-weight: 600;
-    width: 80%;
+    width: 300px;
     padding: 20px;
     background-color: var(--PrimaryColor);
     font-size: var(--MediumFont);
     margin-bottom: 20px;
     text-align: center;
 }
-
+.CheckoutButtons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
 #CheckoutButtonRed{
     color: var(--BackgroundColor);
     justify-content: center;
@@ -946,7 +956,7 @@ label span {
     border: 0;
     border-radius: var(--pilled-shape-radius);
     font-weight: 600;
-    width: 80%;
+    width: 300px;
     padding: 20px;
     background-color: var(--SecondaryColor);
     font-size: var(--MediumFont);
@@ -960,13 +970,22 @@ label span {
     flex-direction: row;
     justify-content: space-evenly;
 }
+.ContactInfoHeadingText {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.CheckoutInformation input {
+    font-size: var(--MediumFont);
+    font-family: var(--FontFamily);
 
+}
 .CheckoutInfoLeft {
-    width: 50%;
+    width: 30%;
 }
 
 .CheckoutInfoRight {
-    width: 50%;
+    width: 30%;
 }
 
 .CreditCardInformation {
@@ -975,22 +994,27 @@ label span {
     width: 80%;
     margin: auto;
 }
-
+.CreditCardInformation h1{
+    text-align: center;
+}
 .CreditCardSmallDetails {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 50px;
 }
 
-.CCSmallDetail{
-    display: flex;
-    flex-direction: column;
-}
+
 
 .CreditCardInformation input{
-    width: 100%;
+    width:100%;
     padding: 10px;
-    height: 10px;
+    height: 50px;
+    font-family: var(--FontFamily);
+    font-size: var(--MediumFont);
+}
+.CreditCardSmallDetails input {
+    width: 80%;
 }
 #ErrorMessage {
     color: red;
