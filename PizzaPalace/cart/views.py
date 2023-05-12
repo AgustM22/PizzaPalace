@@ -113,10 +113,13 @@ def editcart(request):
     This function edits the values of the product sent through. Maintains fullprice and qty and saves it to the cart. 
     """
     wipecheck = request.GET.get('wipe', False)
+    print(wipecheck)
+
     if wipecheck == "true":
+        print("I AM IN")
         request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
         request.session.modified = True
-        return HttpResponse("")
+        return HttpResponse("", status=200)
 
     newproduct = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "extra": str(request.GET['extra'])}
     if request.GET['remove'] == "true": # If a product needs to be removed.
@@ -135,7 +138,7 @@ def editcart(request):
         request.session['cart']["fullprice"] = FullPrice
 
         request.session.modified = True
-        return HttpResponse("")
+        return HttpResponse("", status=200)
     
     for item in request.session['cart']["offers"]: # If the quantity of a product has been changed.
         if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["item"] == newproduct["extra"]:

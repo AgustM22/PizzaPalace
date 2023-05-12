@@ -1,5 +1,7 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
+<form method="post">
+    {% csrf_token%}
     <div class="CreditCardInformation">
         <h1>Payment Details</h1>
         {% if error == True %}
@@ -26,7 +28,6 @@
                 </div>
             </div>
     </div>
-    <!--</form>-->
 {% endblock %}
 {% block CheckoutButton %}
 <!--onclick="document.forms['CheckoutInformation'].submit();"-->
@@ -36,4 +37,5 @@
         <a href="/cart/contactinformation" id="CheckoutButtonRed">
             Back
         </a>
+    </form>
 {% endblock %}
