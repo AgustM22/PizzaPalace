@@ -22,6 +22,16 @@
         </div>
 
     </div>
+    {% if isprepaid == True %}
+        <div class="CartProduct" id="OverviewCreditcard">
+            <p>Card Holder: {{ creditcardform.NameCardholder.value }}</p>
+            <p>Card Number: {{ creditcardform.CardNumber.value }}</p>
+            <div class="OverviewCreditcardSmallDetails">
+                <p>Expiration Date: {{ creditcardform.ExpirationDate.value }}</p>
+                <p>CVC: {{ creditcardform.CVC.value }}</p>
+            </div>
+        </div>
+    {% endif %}
     <div class="CartProduct" id="CartProductHeading">
         <h1 class="ProductName">Pizzas:</h1>
     </div>

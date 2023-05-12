@@ -385,6 +385,7 @@ footer > * > h2 {
     font-size: 2em;
     max-height: 2em;
     padding: 1.1rem;
+    margin-top: 1em;
 }
 
 #SearchbarCheckbox {
