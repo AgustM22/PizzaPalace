@@ -18,6 +18,7 @@ const SearchFilter = async () => {
     })
 }
 
+
 const PopulateProd = (pizza) => {
     // This function creates a new menu pizza element, adds in all the required info and variables, and places it onto the menu.
     const ProductBox = document.getElementById("ProductBox")
@@ -87,6 +88,7 @@ const PopulateProd = (pizza) => {
     ProductBox.appendChild(ProductLink)
 }
 
+
 // Offer stuff
 const SearchOfferFilter = async () => {
     // This function takes in all the offer menu filters (such as tags, certain sorting styles and search strings) 
@@ -105,6 +107,7 @@ const SearchOfferFilter = async () => {
         PopulateOfferBox(offer)
     })
 }
+
 
 const PopulateOfferBox = (pizza) => {
     // This function creates a new offer element, adds in all the required info and variables, and places it onto the menu.
@@ -150,6 +153,7 @@ const PopulateOfferBox = (pizza) => {
     ProductBox.appendChild(ProductLink)
 }
 
+
 let TfoCount = 0 
 const AddPizzaToOrder = (PizzaName) => {
     // This function is used by the Two for One offer and adds pizzas to the payment bubble.
@@ -174,12 +178,14 @@ const AddPizzaToOrder = (PizzaName) => {
     }
 }
 
+
 const ClearOrder = () => {
     // This function is used by the Two for One offer and clears pizzas from the payment bubble. 
     TfoCount = 0
     const OrderBox = document.getElementById("OrderBox")
     OrderBox.innerHTML = ""
 }
+
 
 const AddToCart = async (num) => {
     // This function is used to add pizzas or offers to the cart.
@@ -231,6 +237,7 @@ const AddToCart = async (num) => {
     }
 }
 
+
 const ChangePizzaTopping = (checkbox) => {
     // This function is used to add and remove toppings from a pizza in pizzaview. Changes price accordingly.
     if (checkbox.checked) {
@@ -269,6 +276,7 @@ const ChangePizzaTopping = (checkbox) => {
     }
 }
 
+
 const EditPizzaValue = (newprice) => {
     // this funciton changes the value of a pizza depending on what size is selected.
     const SizeBox = document.getElementById("SizeBox")
@@ -278,6 +286,7 @@ const EditPizzaValue = (newprice) => {
     PizzaValue.setAttribute("value", parseInt(Values[1]))
     ChangePrice()
 }
+
 
 const ChangePrice = () => {
     // This function calculates the price of a pizza from it's toppings and size and updates its full price.
@@ -291,6 +300,7 @@ const ChangePrice = () => {
     const PriceElem = document.getElementById("FullPrice")
     PriceElem.innerText = TotalPrice + "Kr."
 }
+
 
 const EditValue = async (keyword, ID) => {
     // This function is used during the cart view. If a product's quantity is ever changed, 
@@ -355,6 +365,7 @@ const EditValue = async (keyword, ID) => {
     return await axios("/cart/editcart", {params: {"remove": false, "name": DetailArray[0], "qty": Value.value, "price": CartValue[1], "extra":DetailArray[1]}})
 }
 
+
 const FixPrice = () => {
     // This function calculates and changes the price of cartview when called upon.
     const FullPrice = document.getElementById("CheckoutPrice")
@@ -370,6 +381,7 @@ const FixPrice = () => {
 
     FullPrice.textContent = (TotalPrice + "Kr.")
 }
+
 
 const ClearCart = async () => {
     // When the clear cart button is pressed, this function is called and clears the entire cart.

@@ -975,13 +975,16 @@ label span {
     margin-bottom: 20px;
     text-align: center;
 }
+
 .CheckoutButtons {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
 }
+
 #CheckoutButtonRed{
+    cursor: pointer;
     color: var(--BackgroundColor);
     justify-content: center;
     text-decoration: none;

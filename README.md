@@ -43,6 +43,17 @@ Here below is a basic description of all folders and their purpose:
     - offer: This is the app that handles all things related to the offer page and the closer inspection of offers.
     - user: This is the app that handles all logins and sign ups and everything related to customer profiles.
 
+## Rules 
+
+In a previous design report we had stated we would use snake_case when naming our python functions as well as javascript functions, however this has changed. All python functions have instead been changed to all lowercaps, whilst javascript functions have become CamelCase.
+Aditionally there are only singular empty newlines between python functions, instead of two.
+
+The reason for these changes are quite simple. We believed ourselves to be using classes much more frequently than functions, and therefore believed we needed a way to indicate between them. But as the Django wireframe is usually more function heavy (at least in our instance) we ended up simply switching to all lowercase for ease of typing.
+
+## Notes for grading
+
+If you wish to see an example of a product with a long description please select the Margharita in the menu.
+
 ## Creators
 
 This project was developed By Ágúst Máni Þorsteinsson, Hermann Helgi Þrastarsson og Aleksander Milenkoski.
