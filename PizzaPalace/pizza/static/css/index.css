@@ -362,10 +362,8 @@ footer > * > h2 {
 
 #MainBlock {
     width: 80%;
-    position: absolute;
-    top: 20%;
-    left: 10%;
     font-family: var(--Font-Family);
+    align-self: flex-start;
 }
 
 #SearchBar {
