@@ -397,6 +397,7 @@ footer > * > h2 {
 }
 
 .ProductImg {
+    min-height: 200px;
     position: sticky;
     border-radius: 22px 0px 0px 22px;
     max-width: 10em;

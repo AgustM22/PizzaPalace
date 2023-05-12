@@ -97,7 +97,7 @@ def addToCart(request):
             request.session['cart']['fullprice'] += int(newoffer['price'])
 
     request.session.modified = True
-    return HttpResponse("")
+    return HttpResponse("", status=200)
 
 def getcart(request):
     """
@@ -113,10 +113,8 @@ def editcart(request):
     This function edits the values of the product sent through. Maintains fullprice and qty and saves it to the cart. 
     """
     wipecheck = request.GET.get('wipe', False)
-    print(wipecheck)
 
     if wipecheck == "true":
-        print("I AM IN")
         request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
         request.session.modified = True
         return HttpResponse("", status=200)
@@ -150,7 +148,7 @@ def editcart(request):
             item["qty"] = newproduct["qty"]
 
     request.session.modified = True
-    return HttpResponse("")
+    return HttpResponse("", status=206)
 
 def checkcreditcard(request):
     """
