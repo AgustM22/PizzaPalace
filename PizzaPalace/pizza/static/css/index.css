@@ -123,6 +123,14 @@ footer > * > h2 {
     text-decoration: underline;
 }
 
+.FooterLeft {
+    padding-left: 4em;
+}
+
+.FooterRight {
+    padding-right: 4em;
+}
+
 /* Homepage */
 
 .HomePageBody {
@@ -1079,8 +1087,14 @@ label span {
 }
 
 #CartProductHeading {
+    width: 100%;
     justify-content: center;
 }
+
+#CartProductPizza {
+    width: 100%;
+}
+
 /* Confirmation page */
 
 .ConfirmationPageBody {
