@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class CreditCard(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     NameCardholder = models.CharField(max_length=255)
-    CardNumber = models.CharField(max_length=255)
+    CardNumber = models.PositiveIntegerField(validators=[MaxValueValidator(9999999999999999)])
     ExpirationDate = models.DateField()
-    CVC = models.CharField(max_length=10)
+    CVC = models.PositiveIntegerField(validators=[MaxValueValidator(999)])
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

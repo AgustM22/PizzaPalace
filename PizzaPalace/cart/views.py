@@ -39,14 +39,14 @@ def contactinformation(request):
             profile.save()
             return redirect('creditcard')
         
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}: 
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}: 
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
     if check != '': # On error...
-        return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+        return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True,"isprepaid":False})
 
-    return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "ContactInformation.html", context={'form':ProfileForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice,"isprepaid":False})
 
 def checkcontactinformation(request):
     """
@@ -62,9 +62,9 @@ def checkcontactinformation(request):
 
 def createcart(request):
     """
-    Creates a cookie cart.
+    Creates a cookie for cart.
     """
-    request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
+    request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}
 
 def addToCart(request):
     """
@@ -97,7 +97,7 @@ def addToCart(request):
             request.session['cart']['fullprice'] += int(newoffer['price'])
 
     request.session.modified = True
-    return HttpResponse("")
+    return HttpResponse("", status=200)
 
 def getcart(request):
     """
@@ -113,10 +113,11 @@ def editcart(request):
     This function edits the values of the product sent through. Maintains fullprice and qty and saves it to the cart. 
     """
     wipecheck = request.GET.get('wipe', False)
+
     if wipecheck == "true":
         request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0}
         request.session.modified = True
-        return HttpResponse("")
+        return HttpResponse("", status=200)
 
     newproduct = {"name": str(request.GET['name']), "price": str(request.GET['price']), "qty": int(request.GET['qty']), "extra": str(request.GET['extra'])}
     if request.GET['remove'] == "true": # If a product needs to be removed.
@@ -135,7 +136,7 @@ def editcart(request):
         request.session['cart']["fullprice"] = FullPrice
 
         request.session.modified = True
-        return HttpResponse("")
+        return HttpResponse("", status=200)
     
     for item in request.session['cart']["offers"]: # If the quantity of a product has been changed.
         if item["name"] == newproduct["name"] and item["price"] == newproduct["price"] and item["item"] == newproduct["extra"]:
@@ -147,7 +148,17 @@ def editcart(request):
             item["qty"] = newproduct["qty"]
 
     request.session.modified = True
-    return HttpResponse("")
+    return HttpResponse("", status=206)
+
+def payonpickup(request):
+    """
+    Makes sure when user selects pay on pickup that in the overview, 'payment type' apears as pay on pick.
+    """
+    cart = request.session.get('cart')
+    cart["isprepaid"] = False
+    request.session.modified = True
+    return redirect('overview')
+
 
 def checkcreditcard(request):
     """
@@ -183,16 +194,18 @@ def creditcard(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            cart["isprepaid"] = True
+            request.session.modified = True
             return redirect('overview')
         
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}: # If the user ever calls the page through URL manually, then this check should redirect them to the homepage. 
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}: # If the user ever calls the page through URL manually, then this check should redirect them to the homepage. 
         return render(request, "Homepage.html")
     
     check = request.GET.get('e' , '')
     if check != '': # On error... (Is only ever called if the checkcreditcart notices an empty field)
-        return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True})
+        return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice, "error": True,"isprepaid":False})
     
-    return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "CreditCardDetails.html", context={'form':CreditCardForm(instance=profile),'pizzas':pizzas,'offers':offers,'fullprice':fullprice,"isprepaid":False})
 
 @login_required
 def overview(request):
@@ -210,10 +223,10 @@ def overview(request):
     pizzas = cart['pizzas']
     offers = cart['offers']
     fullprice = cart['fullprice']
-
-    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0}:
+    isprepaid = cart["isprepaid"]
+    if request.session['cart'] == {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}: #If cart is empty
         return render(request, "Homepage.html")
-    return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice})
+    return render(request, "overview.html", context={'profileform': ProfileForm(instance=profile), 'creditcardform': CreditCardForm(instance=creditcard), 'pizzas':pizzas,'offers':offers,'fullprice':fullprice,"isprepaid":isprepaid})
 
 def deletecart(request):
     """

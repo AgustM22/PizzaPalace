@@ -39,7 +39,7 @@ class CreditCardForm(ModelForm):
         exclude = ['id','user']
         widgets = {
             'NameCardholder':widgets.TextInput(),
-            'CardNumber':widgets.TextInput(),
+            'CardNumber':widgets.NumberInput(),
             'ExpirationDate':widgets.DateInput(),
-            'CVC':widgets.TextInput(),
+            'CVC':widgets.NumberInput(),
         }

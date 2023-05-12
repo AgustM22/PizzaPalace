@@ -57,3 +57,42 @@ UPDATE pizza_product SET pricesmall = 2000, pricemedium = 2200, pricelarge = 240
 INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(3, 1);
 INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(10, 1);
 INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(7, 1);
+
+UPDATE pizza_product SET pricesmall = 1900, pricemedium = 2000, pricelarge = 2200, name='Hawaiian', pic='https://st2.depositphotos.com/1699440/8512/i/600/depositphotos_85123738-stock-photo-hawaiian-pizza.jpg' WHERE id = 2;
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(10, 2);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(3, 2);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(1, 2);
+
+DELETE FROM pizza_hasp WHERE id=2;
+DELETE FROM pizza_hast WHERE id=5;
+DELETE FROM pizza_topping WHERE id=8;
+
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Pineapple', 299, 3);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(11, 2);
+
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Bacon Bits', 299, 4);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Salami', 299, 4);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Cream Cheese', 299, 1);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Chili Mayo', 299, 2);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Barbecue', 299, 2);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Black Pepper', 99, 2);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Onion', 299, 3);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Spinach', 299, 3);
+INSERT INTO pizza_topping (name, price, "FID_id") VALUES('Dates', 299, 3);
+
+INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(15, 2);
+INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(18, 1);
+INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(19, 1);
+INSERT INTO pizza_hast ("TID_id", "TGID_id") VALUES(20, 1);
+
+INSERT INTO pizza_product (name, description, pic, pricesmall, pricemedium, pricelarge) VALUES('Meat Lovers', 'The pizza for the carnivores', 'https://www.perfectitaliano.com.au/content/dam/perfectitaliano-aus/recipe/0_desktop/Desktop-MeatLovers-Pizza.jpg', 2200, 2400, 2600);
+
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(12, 4);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(1, 4);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(2, 4);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(3, 4);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(17, 4);
+INSERT INTO pizza_hasp ("TID_id", "PID_id") VALUES(10, 4);
+
+UPDATE pizza_product SET pic='https://st2.depositphotos.com/1699440/8512/i/600/depositphotos_85123738-stock-photo-hawaiian-pizza.jpg' WHERE id = 2;
+UPDATE pizza_product SET pic='https://cdn.shopify.com/s/files/1/0300/0985/2037/articles/Vegan_BBQ_Tofu_Pizza_600x.jpg?v=1605270116' WHERE id = 3;

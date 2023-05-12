@@ -11,5 +11,6 @@ urlpatterns = [
     path("creditcard", views.creditcard, name="creditcard"),
     path("checkcreditcard", views.checkcreditcard, name="checkcreditcard"),
     path("overview", views.overview, name="overview"),
+    path("payonpickup", views.payonpickup, name="payonpickup"),
     path("deletecart", views.deletecart, name="deletecart")
 ]

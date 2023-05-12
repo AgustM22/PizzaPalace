@@ -3,7 +3,6 @@
 
     <div class="Profile">
         <div class="ProfileHeading">
-            <a href="{% url 'logout' %}">Logout</a>
             <h1>Profile Settings</h1>
         </div>
         
@@ -54,6 +53,7 @@
                 {{form.Country}}
             </div>
             <div class="FormButtons">
+                <a href="{% url 'logout' %}" id="LogoutButton">Logout</a>
                 <button type="submit" id="SignupButton" >Save</button>
             </div>
 

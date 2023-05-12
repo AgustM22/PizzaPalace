@@ -22,7 +22,7 @@ def filter(request):
         context = Offer.objects.filter(name__icontains=filter)
         Offerlis = create_offer_list(context, sort)
 
-        return JsonResponse(Offerlis, safe=False)
+        return JsonResponse(Offerlis, safe=False, status=200)
 
 def create_offer_list(context, sort):
     """

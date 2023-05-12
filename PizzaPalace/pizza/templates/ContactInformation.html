@@ -1,12 +1,12 @@
 {% extends 'CartBase.html' %}
 {% block CartContents %}
+<form method="post">
+    {% csrf_token%}
     <h1 class="ContactInfoHeadingText">Contact Details</h1>
     {% if error == True %}
         <h1 id="ErrorMessage" class="ContactInfoHeadingText">One of the given input fields was blank, please retry.</h1>
     {% endif %}
-    <!--<form id="CheckoutInformation" class="CheckoutInformation" method="POST" action="/cart/checkcontactinformation">-->
     <div class="CheckoutInformation">
-        {% csrf_token %}
         <div class="CheckoutInfoLeft">
             <div class="FormInput">
                 {{ form.FullName.label_tag }}
@@ -41,19 +41,16 @@
         </div>
 </div>
 
-    <!--</form>-->
     {% for pizza in cart.pizzas %}
     <p>{{ pizza}}</p>
     {% endfor %}
 {% endblock %}
 {% block CheckoutButton %}
-    <!--<form method="post" action="/cart/checkcontactinformation">-->
-        <!--onclick="document.forms['CheckoutInformation'].submit();"-->
         <button id="CheckoutButton" type="submit">
              Checkout
         </button>
         <a href="/cart" id="CheckoutButtonRed">
             Back
         </a>
-    <!--</form>-->
+</form>
 {% endblock %}
