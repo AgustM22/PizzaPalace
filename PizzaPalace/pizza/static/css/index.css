@@ -289,7 +289,9 @@ footer > * > h2 {
 .Profile form{
     width: 100%;
 }
-
+.Profile form .FormInput input {
+    font-size: var(--MediumFont);
+}
 .ProfileMainInfo{
     display: flex;
     flex-direction: row;
@@ -333,7 +335,29 @@ footer > * > h2 {
     width: 100px;
     padding: 10px 0;
 }
-
+#LogoutButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--TextColor);
+    color: var(--BackgroundColor);
+    font-size: var(--MediumFont);
+    font-family: var(--FontFamily);
+    width: 30%;
+    border-radius: var(--pilled-shape-radius);
+    height: 50px;
+}
+.Profile form .FormButtons {
+    justify-content: space-between;
+    align-items: center;
+}
+.Profile form .FormButtons button {
+    border-radius: var(--pilled-shape-radius);
+    font-size: var(--MediumFont);
+    font-family: var(--FontFamily);
+}
 /* Menu */
 
 #MainBlock {

@@ -62,7 +62,7 @@ def checkcontactinformation(request):
 
 def createcart(request):
     """
-    Creates a cookie cart.
+    Creates a cookie for cart.
     """
     request.session['cart'] = {"pizzas": [], "offers": [], "fullprice": 0,"isprepaid":False}
 
@@ -151,6 +151,16 @@ def editcart(request):
 
     request.session.modified = True
     return HttpResponse("")
+
+def payonpickup(request):
+    """
+    Makes sure when user selects pay on pickup that in the overview, 'payment type' apears as pay on pick.
+    """
+    cart = request.session.get('cart')
+    cart["isprepaid"] = False
+    request.session.modified = True
+    return redirect('overview')
+
 
 def checkcreditcard(request):
     """
