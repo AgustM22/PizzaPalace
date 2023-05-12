@@ -44,7 +44,7 @@ def filter(request):
                 if TagCondition:                      
                     EditedPizzaDict.append(pizza)
             
-        return JsonResponse(EditedPizzaDict, safe=False)
+        return JsonResponse(EditedPizzaDict, safe=False, status=200)
 
 def sort_data(context, toppingcontext, sort, view):
     """
