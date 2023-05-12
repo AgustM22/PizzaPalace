@@ -31,7 +31,10 @@ def contactinformation(request):
 
     if request.method == 'POST':
         form = ProfileForm(instance=profile,data=request.POST)
-        temp = profile.ProfilePic
+        try:
+            temp = profile.ProfilePic
+        except:
+            temp = ""
         if form.is_valid():
             profile = form.save(commit=False)
             profile.ProfilePic = temp
